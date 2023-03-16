@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:49:39 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/14 20:13:09 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/17 02:05:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,25 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	unsigned char	*uc_src;
 	unsigned char	*uc_dst;
-	size_t			i;
 
 	uc_dst = (unsigned char *)dst;
 	uc_src = (unsigned char *)src;
 	if (uc_dst < uc_src)
 	{
-		i = len - 1;
-		while (i >= 0)
+		while (len > 0)
 		{
-			uc_dst[i] = uc_src[i];
-			i--;
+			uc_dst[len - 1] = uc_src[len - 1];
+			len--;
 		}
 	}
 	else if (uc_dst > uc_src)
 	{
-		i = 0;
-		while (i < len)
+		while (len > 0)
 		{
-			uc_dst[i] = uc_src[i];
-			i++;
+			*uc_dst = *uc_src;
+			uc_dst++;
+			uc_src++;
+			len--;
 		}
 	}
 	return (dst);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:26:54 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/15 13:38:47 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/17 02:00:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 int	ft_atoi(const char *str)
 {
-	int	i;
 	int	sign;
 	int	res;
 
 	sign = 1;
-	i = 0;
 	res = 0;
 	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
