@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 11:49:39 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/14 17:48:35 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/03/17 02:26:59 by marvin            #+#    #+#             */
+/*   Updated: 2023/03/17 02:29:09 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,8 @@
 void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	*uc_s;
-	size_t			i;
 
 	uc_s = (unsigned char *)s;
-	i = 0;
-	while (i < n)
-	{
-		uc_s[i] = 0;
-		i++;
-	}
+	while (n--)
+		*uc_s++ = 0;
 }

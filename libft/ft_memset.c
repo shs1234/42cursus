@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:49:39 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/14 17:47:58 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/17 02:33:31 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,9 @@
 void	*ft_memset(void *b, int c, size_t len)
 {
 	unsigned char	*uc_b;
-	size_t			i;
 
 	uc_b = (unsigned char *)b;
-	i = 0;
-	while (i < len)
-	{
-		uc_b[i] = c;
-		i++;
-	}
+	while (len--)
+		*uc_b++ = c;
 	return (b);
 }
