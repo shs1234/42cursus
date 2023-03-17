@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 22:35:26 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/17 14:23:08 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/03/17 16:02:03 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/03/17 19:11:23 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strchr2(const char *s, int c)
+t_list	*ft_lstlast(t_list *lst)
 {
-	while (*s)
+	if (lst->next)
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		while (lst)
+		{
+			if (!lst->next)
+				return (lst);
+			lst = lst->next;
+		}
 	}
-	return (0);
-}
-
-char	*ft_strtrim(char const *s1, char const *set)
-{
-	size_t	start;
-	size_t	end;
-
-	start = 0;
-	end = ft_strlen(s1);
-	while (ft_strchr2(set, s1[start]))
-		start++;
-	while (ft_strchr2(set, s1[end - 1]))
-		end--;
-	if (start >= end)
-		return (ft_substr(s1, start, 0));
-	return (ft_substr(s1, start, end - start));
+	return (lst);
 }

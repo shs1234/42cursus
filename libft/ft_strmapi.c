@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 22:35:26 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/17 14:23:08 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/03/17 14:40:38 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/03/17 15:01:22 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strchr2(const char *s, int c)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	while (*s)
+	unsigned int	len;
+	unsigned int	i;
+	char			*new_str;
+
+	len = ft_strlen(s);
+	i = 0;
+	new_str = (char *)malloc(sizeof(char) * len + 1);
+	while (i < len)
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		new_str[i] = f(i, s[i]);
+		i++;
 	}
-	return (0);
-}
-
-char	*ft_strtrim(char const *s1, char const *set)
-{
-	size_t	start;
-	size_t	end;
-
-	start = 0;
-	end = ft_strlen(s1);
-	while (ft_strchr2(set, s1[start]))
-		start++;
-	while (ft_strchr2(set, s1[end - 1]))
-		end--;
-	if (start >= end)
-		return (ft_substr(s1, start, 0));
-	return (ft_substr(s1, start, end - start));
+	new_str[i] = 0;
+	return (new_str);
 }
