@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 08:59:07 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/15 10:18:41 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/17 20:36:35 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	i = 0;
 	if (n == 0)
 		return (0);
-	while (uc_s1[i] && uc_s2[i] && i < n)
+	while (i < n)
 	{
 		if (uc_s1[i] == uc_s2[i])
 			i++;

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 10:21:24 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/15 13:26:29 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/17 22:40:39 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	size_t	ndl_len;
 	size_t	end;
 
-	if (!needle)
+	if (!*needle || !needle)
 		return ((char *)haystack);
 	i = 0;
 	ndl_len = ft_strlen(needle);
