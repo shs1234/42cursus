@@ -6,14 +6,14 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 14:34:05 by hoseoson          #+#    #+#              #
-#    Updated: 2023/03/20 03:40:59 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/03/20 05:47:25 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libft.a
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
-LIB		=	ar rc
+AR		=	ar r
 RM		=	rm -rf
 
 SRCS	=	ft_strchr.c ft_split.c ft_strtrim.c ft_bzero.c ft_strnstr.c \
@@ -32,7 +32,7 @@ OBJS	=	$(SRCS:.c=.o)
 OBJS_B	=	$(SRCS_B:.c=.o)
 
 ifdef WITH_BONUS
-	OBJ_SWITCH = $(OBJS_B) 
+	OBJ_SWITCH = $(OBJS) $(OBJS_B) 
 else
 	OBJ_SWITCH = $(OBJS)
 endif
@@ -40,7 +40,7 @@ endif
 all : $(NAME)
 
 $(NAME) : $(OBJ_SWITCH)
-	$(LIB) $(NAME) $^
+	$(AR) $@ $^
 
 bonus :
 	$(MAKE) WITH_BONUS=1 $(NAME)
