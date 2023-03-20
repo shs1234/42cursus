@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 12:47:49 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/17 14:22:18 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:17:03 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ char	*ft_itoa(int n)
 	numlen = ft_numlen(n);
 	lln = n;
 	num = (char *)malloc(sizeof(char) * numlen + 1);
+	if (!num)
+		return (0);
 	if (lln == 0)
 		num[0] = '0';
 	if (lln < 0)

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:26:22 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/20 03:05:36 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:46:08 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	t_list	*start;
 	t_list	*tmp;
 
+	if (!lst || !del)
+		return ;
 	start = *lst;
 	while (start)
 	{

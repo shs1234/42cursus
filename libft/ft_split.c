@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 11:41:56 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/20 17:26:46 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:16:15 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ char	**ft_split(char const *s, char c)
 	char	**split;
 	size_t	count;
 
+	if (!s)
+		return (0);
 	count = ft_countword(s, c);
 	split = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!split)

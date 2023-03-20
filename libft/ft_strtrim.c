@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 22:35:26 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/20 19:15:59 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:15:38 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	start;
 	size_t	end;
 
+	if (!s1 || !set)
+		return (0);
 	start = 0;
 	end = ft_strlen(s1);
 	while (ft_strchr_null(set, s1[start]))
