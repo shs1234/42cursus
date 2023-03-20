@@ -6,13 +6,13 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 22:35:26 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/17 14:23:08 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/20 19:15:59 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strchr2(const char *s, int c)
+static char	*ft_strchr_null(const char *s, int c)
 {
 	while (*s)
 	{
@@ -30,9 +30,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	start = 0;
 	end = ft_strlen(s1);
-	while (ft_strchr2(set, s1[start]))
+	while (ft_strchr_null(set, s1[start]))
 		start++;
-	while (ft_strchr2(set, s1[end - 1]))
+	while (end > 0 && ft_strchr_null(set, s1[end - 1]))
 		end--;
 	if (start >= end)
 		return (ft_substr(s1, start, 0));
