@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: alelievr <alelievr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/04/04 19:22:36 by alelievr          #+#    #+#              #
-#    Updated: 2023/03/18 17:19:15 by hoseoson         ###   ########.fr        #
+#    Created  2015/04/04 19:22:36 by alelievr          #+#    #+#              #
+#    Updated: 2022/10/28 14:06:58 by ladloff          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ FRAMEWORK	=
 CFLAGS		=	-Werror -Wall -Wextra# -g3 -fsanitize=address
 CSOFLAGS	=	-shared -fPIC
 CSOFLAGS2	=	
-CC			=	gcc
+CC			=	clang
 CC_SO		=	$(CC)
 
 #	Optimization

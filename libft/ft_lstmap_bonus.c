@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:48:43 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/20 03:31:07 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:37:22 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	ft_makenewlst(t_list **lst, int size)
 	t_list	*new_lst;
 
 	i = 0;
-	if ((*lst = ft_lstnew(0)))
+	*lst = ft_lstnew(0);
+	if (*lst)
 		i++;
 	while (i < size)
 	{
