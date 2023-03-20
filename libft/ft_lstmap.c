@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:48:43 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/21 02:16:58 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/21 07:36:57 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 			}
 		}
 		else
-			ft_lstiter(new_lst, del);
+			ft_lstclear(&new_lst, del);
 	}
 	return (new_lst_start);
 }

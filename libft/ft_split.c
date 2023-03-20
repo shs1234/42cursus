@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 11:41:56 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/20 21:16:15 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/21 07:23:07 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static size_t	ft_splitword(char **split, char const *s, char c)
 		while (s[end] != c && s[end])
 			end++;
 		word = ft_substr(s, start, end - start);
-		if (!word)
-			return (i);
 		split[i++] = word;
+		if (!word)
+			return (--i);
 		start = end;
 	}
 	split[i] = 0;
@@ -69,6 +69,7 @@ char	**ft_split(char const *s, char c)
 {
 	char	**split;
 	size_t	count;
+	size_t	i;
 
 	if (!s)
 		return (0);
@@ -78,8 +79,9 @@ char	**ft_split(char const *s, char c)
 		return (0);
 	if (ft_splitword(split, s, c) < count)
 	{
-		while (*split)
-			free(*split++);
+		i = 0;
+		while (split[i])
+			free(split[i++]);
 		free(split);
 		split = 0;
 	}
