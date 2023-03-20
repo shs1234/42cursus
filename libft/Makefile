@@ -6,7 +6,7 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 14:34:05 by hoseoson          #+#    #+#              #
-#    Updated: 2023/03/20 05:47:25 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/03/21 02:25:34 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,9 @@ SRCS	=	ft_strchr.c ft_split.c ft_strtrim.c ft_bzero.c ft_strnstr.c \
 	ft_putstr_fd.c ft_isalpha.c ft_strncmp.c ft_isalnum.c ft_memcpy.c \
 	ft_memmove.c ft_strjoin.c
 
-SRCS_B	=	ft_lstadd_front_bonus.c ft_lstnew_bonus.c ft_lstmap_bonus.c \
-	ft_lstclear_bonus.c ft_lstadd_back_bonus.c ft_lstsize_bonus.c \
-	ft_lstlast_bonus.c ft_lstdelone_bonus.c ft_lstiter_bonus.c
+SRCS_B	=	ft_lstadd_front.c ft_lstnew.c ft_lstmap.c \
+	ft_lstclear.c ft_lstadd_back.c ft_lstsize.c \
+	ft_lstlast.c ft_lstdelone.c ft_lstiter.c
 
 OBJS	=	$(SRCS:.c=.o)
 OBJS_B	=	$(SRCS_B:.c=.o)
@@ -38,6 +38,7 @@ else
 endif
 
 all : $(NAME)
+	sleep 1
 
 $(NAME) : $(OBJ_SWITCH)
 	$(AR) $@ $^
