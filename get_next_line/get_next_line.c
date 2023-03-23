@@ -6,41 +6,93 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:35:50 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/21 00:23:18 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/24 00:59:09 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_get_next_line_len(int fd)
+int	ft_has_newline(char *buf)
 {
-	size_t	len;
-	char	buf;
+	size_t	i;
 
-	len = 0;
-	while(read(fd, &buf, 1))
+	i = 0;
+	while(i < BUFFER_SIZE)
 	{
-		if (buf == '\n')
-			return (len);
-		len++;
+		if(buf[i] == '\n')
+			return (i);
+		i++;
 	}
-	return (len);
+	return (0);
+}
+char *ft_linejoin(t_list *lst)
+{
+	char *line;
+
+	line = (char *)malloc(sizeof(char) * ft_lstsize(lst) * BUFFER_SIZE + 1);
+	if (!line)
+		return (0);
+	line[0] = 0;
+	while (lst)
+	{
+		ft_strlcat(line, lst->content, BUFFER_SIZE + 1);
+		lst = lst->next;
+	}
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	char	*line;
-	size_t	len;
-
-	len = ft_get_next_line_len(fd);
-	if (len)
+	static char *line;
+	static char	buf[BUFFER_SIZE];
+	t_list		*lst;
+	static int	len;
+	
+	// 처음 함수 호출했을 경우.
+	if (!line)
 	{
-		line = (char *)malloc(sizeof(char) * len + 1);
-		if (!line)
-			return (0);
-		
+		// EOF를 못만났을 경우.
+		len = read(fd, buf, BUFFER_SIZE);
+		if (len == BUFFER_SIZE)
+		{
+			line = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+			if (!line)
+				return (0);
+			// 개행이 없을 경우.
+			ft_strcpy(line, buf);
+			len = ft_has_newline(line);
+			if (len == BUFFER_SIZE)
+				lst = ft_lstnew(line);
+			else
+			{
+				line[len] = 0;
+				return (line);
+			}
+		}
+		else
+		{
+			line[len] = 0;
+			return (line);
+		}
 	}
-	return (line);
+	// 두번째 이상 호출일 경우
+	while (len == BUFFER_SIZE)
+	{
+		len = read(fd, buf, BUFFER_SIZE);
+		if (len == BUFFER_SIZE) // EOF 아님.
+		{
+			line = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+			if (!line)
+				return (0);
+			ft_strcpy(line, buf);
+			ft_lstadd_back(&lst, ft_lstnew(line));
+			len = ft_has_newline(line);
+			if (len == BUFFER_SIZE)
+				continue ;
+			else
+				return (ft_linejoin(lst));
+		}
+	}
 }
 
 int	main(int ac, char **av)

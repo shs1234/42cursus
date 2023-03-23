@@ -6,7 +6,7 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 14:34:05 by hoseoson          #+#    #+#              #
-#    Updated: 2023/03/21 09:31:11 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/03/22 21:51:22 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
 AR		=	ar r
 RM		=	rm -rf
+HEADER	=	libft.h
 
 SRCS	=	ft_strchr.c ft_split.c ft_strtrim.c ft_bzero.c ft_strnstr.c \
 	ft_strmapi.c ft_isprint.c ft_atoi.c ft_strdup.c ft_tolower.c ft_toupper.c \
@@ -45,7 +46,7 @@ $(NAME) : $(OBJ_SWITCH)
 bonus :
 	$(MAKE) WITH_BONUS=1 $(NAME)
 
-%.o : %.c libft.h
+%.o : %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean : 
