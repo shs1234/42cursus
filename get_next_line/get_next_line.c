@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:35:50 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/24 00:59:09 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/24 06:30:21 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,68 +44,47 @@ char *ft_linejoin(t_list *lst)
 char	*get_next_line(int fd)
 {
 	static char *line;
-	static char	buf[BUFFER_SIZE];
-	t_list		*lst;
-	static int	len;
-	
-	// 처음 함수 호출했을 경우.
+	char	buf[BUFFER_SIZE];
+	t_list	*lst;
+	int len;
+	char *ret;
+
+	lst = ft_lstnew(0);
 	if (!line)
 	{
-		// EOF를 못만났을 경우.
 		len = read(fd, buf, BUFFER_SIZE);
-		if (len == BUFFER_SIZE)
-		{
-			line = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-			if (!line)
-				return (0);
-			// 개행이 없을 경우.
-			ft_strcpy(line, buf);
-			len = ft_has_newline(line);
-			if (len == BUFFER_SIZE)
-				lst = ft_lstnew(line);
-			else
-			{
-				line[len] = 0;
-				return (line);
-			}
-		}
-		else
-		{
-			line[len] = 0;
-			return (line);
-		}
+		line = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+		if (!line)
+			return (0);
+		ft_strcpy(line, buf);
+		ft_lstadd_back(&lst, ft_lstnew(line));
 	}
-	// 두번째 이상 호출일 경우
 	while (len == BUFFER_SIZE)
 	{
 		len = read(fd, buf, BUFFER_SIZE);
-		if (len == BUFFER_SIZE) // EOF 아님.
-		{
-			line = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-			if (!line)
-				return (0);
-			ft_strcpy(line, buf);
-			ft_lstadd_back(&lst, ft_lstnew(line));
-			len = ft_has_newline(line);
-			if (len == BUFFER_SIZE)
-				continue ;
-			else
-				return (ft_linejoin(lst));
-		}
+		line = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+		if (!line)
+			return (0);
+		ft_strcpy(line, buf);
+		ft_lstadd_back(&lst, ft_lstnew(line));
 	}
+	ret = ft_linejoin(lst);
+	printf("%s",ret);
+	return (ret);
 }
 
-int	main(int ac, char **av)
+int	main()
 {
 	int	fd;
 	char *line;
+	int i;
 
+	i = 0;
 	fd = open("test", O_RDONLY);
-	while (1)
+	while (i < 3)
 	{
 		line = get_next_line(fd);
-		if (!line)
-			break;
-		printf("%s", get_next_line(fd));
+		printf("%s", line);
+		i++;
 	}
 }
