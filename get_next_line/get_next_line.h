@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:36:17 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/24 03:52:09 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:11:50 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,22 @@
 # include <stdio.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 10
 # endif
 
-typedef struct s_list
+typedef struct		s_list
 {
-	char	*content;
+	char			*content;
 	struct s_list	*next;
-}			t_list;
+}					t_list;
 
 char	*get_next_line(int fd);
-void	ft_strcpy(char *dst, char *buf);
+void	ft_strcpy(char *dst, char *buf, int len);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 t_list	*ft_lstnew(void *content);
-int		ft_has_newline(char *buf);
+int		ft_has_newline(char *line);
 t_list	*ft_lstlast(t_list *lst);
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+void	ft_strlcat(char *dst, const char *src, int end, int *len);
 int		ft_lstsize(t_list *lst);
-size_t	ft_strlen(const char *s);
 
 #endif
