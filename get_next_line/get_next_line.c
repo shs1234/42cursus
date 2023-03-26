@@ -6,21 +6,21 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:35:50 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/25 11:38:05 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/27 04:12:56 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_has_newline(char *line)
+int	ft_has_newline(char *buf)
 {
 	int	i;
 
 	i = 0;
-	while (i < BUFFER_SIZE)
+	while (buf[i])
 	{
-		if (line[i] == '\n')
-			return (i);
+		if (buf[i] == '\n')
+			return (1);
 		i++;
 	}
 	return (0);
@@ -45,73 +45,71 @@ char	*ft_substr(char const *s, unsigned int start, int len)
 	return (sub);
 }
 
-
-char	*ft_strtrim(char const *s1, int end)
-{
-	int	start;
-
-	if (!s1)
-		return (0);
-	start = 0;
-	while (s1[start]!='\n')
-		start++;
-	while (end > 0 && '\n' != s1[end - 1])
-		end--;
-	if (start == end - 1)
-		return (ft_substr(s1, 0, end));
-	return (ft_substr(s1, start + 1, end - start));
-}
-
-
-char *ft_linejoin(t_list *lst)
+char **ft_joinsplit(t_list *lst)
 {
 	char *join;
-	int last;
 	int len;
-	char *trim;
+	char **split;
+	int i;
 
 	join = (char *)malloc(sizeof(char) * ft_lstsize(lst) * BUFFER_SIZE + 1);
 	if (!join)
 		return (0);
 	len = 0;
-	last = 0;
 	while (lst)
 	{
-		if (!lst->next)
-			last = 1;
-		ft_strlcat(join, lst->content, last, &len);
+		i = 0;
+		while (lst->content[i])
+		{
+			join[len + i] = lst->content[i];
+			i++;
+		}
+		len += i;
 		lst = lst->next;
 	}
-	trim = ft_strtrim(join, len);
-	return (trim);
+	join[len] = 0;
+	split = ft_split(join, '\n');
+	free(join);
+	return (split);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
-	char		buf[BUFFER_SIZE];
-	t_list		*lst;
-	int			len;
-	char		*join;
+	static char **split;
+	char buf[BUFFER_SIZE + 1];
+	t_list *lst;
+	static int i;
+	int len;
 
-	lst = 0;
-	if (line)
-		ft_lstadd_back(&lst, ft_lstnew(line));
-	while (1)
+	if (split == 0 || split[i] == 0 || split[i + 1] == 0)
 	{
-		len = read(fd, buf, BUFFER_SIZE);
-		if (len == 0)
-			return (0);
-		line = (char *)malloc(sizeof(char) * len);
-		if (!line)
-			return (0);
-		ft_strcpy(line, buf, len);
-		ft_lstadd_back(&lst, ft_lstnew(line));
-		if (ft_has_newline(line) > 0)
-			break;
+		lst = 0;
+		if (split != 0 && split[i] && split[i + 1] == 0)
+		{
+			ft_lstadd_back(&lst, ft_lstnew(split[i]));
+			i = 0;
+			while (split[i])
+				free(split[i++]);
+			free(split);
+		}
+		i = 0;
+		while (1)
+		{
+			len = read(fd, buf, BUFFER_SIZE);
+			buf[len] = 0;
+			ft_lstadd_back(&lst, ft_lstnew(buf));
+			if (ft_has_newline(buf) || len == 0)
+				break;
+		}
+		split = ft_joinsplit(lst);
 	}
-	join = ft_linejoin(lst);
-	return (join);
+	// int j = 0;
+	// while (split[j])
+	// {
+	// 	printf("split[%d] : %s\n",j, split[j]);
+	// 	j++;
+	// }
+	return (split[i++]);
 }
 
 int	main()
@@ -125,7 +123,7 @@ int	main()
 	while (i < 9)
 	{
 		line = get_next_line(fd);
-		printf(">>>>>%d : %s\n", i + 1, line);
+		printf(">>>>>%d : %s", i + 1, line);
 		i++;
 	}
 }

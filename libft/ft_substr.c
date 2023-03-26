@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 14:26:19 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/21 06:59:08 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/26 11:16:54 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		sub[i] = s[start + i];
+		sub[i] = s[i + start];
 		i++;
 	}
 	sub[i] = 0;
