@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:35:50 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/27 04:12:56 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/27 12:00:42 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,6 @@ char	*get_next_line(int fd)
 		}
 		split = ft_joinsplit(lst);
 	}
-	// int j = 0;
-	// while (split[j])
-	// {
-	// 	printf("split[%d] : %s\n",j, split[j]);
-	// 	j++;
-	// }
 	return (split[i++]);
 }
 
@@ -120,10 +114,12 @@ int	main()
 
 	i = 0;
 	fd = open("test", O_RDONLY);
-	while (i < 9)
+	while (i < 11)
 	{
 		line = get_next_line(fd);
 		printf(">>>>>%d : %s", i + 1, line);
 		i++;
 	}
+	printf("\n");
+	// system("leaks a.out");
 }
