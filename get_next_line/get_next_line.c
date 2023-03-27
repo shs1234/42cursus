@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:35:50 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/27 12:00:42 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/28 01:40:54 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_has_newline(char *buf)
 	}
 	return (0);
 }
+
 char	*ft_substr(char const *s, unsigned int start, int len)
 {
 	char	*sub;
@@ -45,12 +46,12 @@ char	*ft_substr(char const *s, unsigned int start, int len)
 	return (sub);
 }
 
-char **ft_joinsplit(t_list *lst)
+char	**ft_joinsplit(t_list *lst)
 {
-	char *join;
-	int len;
-	char **split;
-	int i;
+	char	*join;
+	int		len;
+	char	**split;
+	int		i;
 
 	join = (char *)malloc(sizeof(char) * ft_lstsize(lst) * BUFFER_SIZE + 1);
 	if (!join)
@@ -75,11 +76,11 @@ char **ft_joinsplit(t_list *lst)
 
 char	*get_next_line(int fd)
 {
-	static char **split;
-	char buf[BUFFER_SIZE + 1];
-	t_list *lst;
-	static int i;
-	int len;
+	static char	**split;
+	char		buf[BUFFER_SIZE + 1];
+	t_list		*lst;
+	static int	i;
+	int			len;
 
 	if (split == 0 || split[i] == 0 || split[i + 1] == 0)
 	{
@@ -99,18 +100,18 @@ char	*get_next_line(int fd)
 			buf[len] = 0;
 			ft_lstadd_back(&lst, ft_lstnew(buf));
 			if (ft_has_newline(buf) || len == 0)
-				break;
+				break ;
 		}
 		split = ft_joinsplit(lst);
 	}
 	return (split[i++]);
 }
 
-int	main()
+int	main(void)
 {
-	int	fd;
-	char *line;
-	int i;
+	int		fd;
+	char	*line;
+	int		i;
 
 	i = 0;
 	fd = open("test", O_RDONLY);

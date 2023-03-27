@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 11:41:56 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/21 07:23:07 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/28 01:57:29 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static size_t	ft_splitword(char **split, char const *s, char c)
 		while (s[end] != c && s[end])
 			end++;
 		word = ft_substr(s, start, end - start);
-		split[i++] = word;
 		if (!word)
-			return (--i);
+			return (i);
+		split[i++] = word;
 		start = end;
 	}
 	split[i] = 0;
@@ -70,6 +70,7 @@ char	**ft_split(char const *s, char c)
 	char	**split;
 	size_t	count;
 	size_t	i;
+	size_t	split_i;
 
 	if (!s)
 		return (0);
@@ -77,11 +78,15 @@ char	**ft_split(char const *s, char c)
 	split = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!split)
 		return (0);
-	if (ft_splitword(split, s, c) < count)
+	split_i = ft_splitword(split, s, c);
+	if (split_i < count)
 	{
 		i = 0;
-		while (split[i])
-			free(split[i++]);
+		while (i < split_i)
+		{
+			free(split[i]);
+			i++;
+		}
 		free(split);
 		split = 0;
 	}
