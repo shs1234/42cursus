@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:36:08 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/28 01:00:20 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/28 01:59:54 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,10 @@ static size_t	ft_splitword(char **split, char const *s, char c)
 		end = start;
 		while (s[end] != c && s[end])
 			end++;
-		word = ft_substr(s, start, end - start + 1);
-		split[i++] = word;
+		word = ft_substr(s, start, end - start);
 		if (!word)
-			return (--i);
+			return (i);
+		split[i++] = word;
 		start = end;
 	}
 	split[i] = 0;
