@@ -6,12 +6,87 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:36:08 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/28 13:02:11 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:18:15 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+int	ft_has_newline(char *buf)
+{
+	int	i;
+
+	i = 0;
+	while (buf[i])
+	{
+		if (buf[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (*s)
+	{
+		len++;
+		s++;
+	}
+	return (len);
+}
+
+char	*ft_strjoin(char *ret, char *buf, int pos)
+{
+	char	*join;
+	char	*join_start;
+	char	*tmp;
+	size_t	ret_len;
+
+	if (!ret)
+		ret_len = 0;
+	else
+		ret_len = ft_strlen(ret);
+	if (pos == -1)
+		pos = ft_strlen(buf) - 1;
+	join = (char *)malloc(sizeof(char) * (ret_len + pos + 2));
+	if (!join)
+		return (0);
+	join_start = join;
+	tmp = ret;
+	while (ret_len--)
+		*join++ = *ret++;
+	pos++;
+	while (pos--)
+		*join++ = *buf++;
+	*join = '\0';
+	free(tmp);
+	return (join_start);
+}
+
+char	*ft_strdup(char *save, char *s1)
+{
+	char	*dup;
+	char	*dup_start;
+	size_t	len;
+
+	if (!s1)
+		len = 0;
+	else
+		len = ft_strlen(s1);
+	dup = (char *)malloc(sizeof(char) * len + 1);
+	if (!dup)
+		return (0);
+	dup_start = dup;
+	while (len--)
+		*dup++ = *s1++;
+	*dup = 0;
+	free(save);
+	return (dup_start);
+}
 // t_list	*ft_lstnew(char *content)
 // {
 // 	t_list	*lst;
@@ -159,78 +234,3 @@
 // 	return (split);
 // }
 
-int	ft_has_newline(char *buf)
-{
-	int	i;
-
-	i = 0;
-	while (buf[i])
-	{
-		if (buf[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (*s)
-	{
-		len++;
-		s++;
-	}
-	return (len);
-}
-
-char	*ft_strjoin(char *ret, char *buf, int pos)
-{
-	char	*join;
-	char	*join_start;
-	char	*tmp;
-	size_t	ret_len;
-
-	if (!ret)
-		ret_len = 0;
-	else
-		ret_len = ft_strlen(ret);
-	if (pos == -1)
-		pos = ft_strlen(buf) - 1;
-	join = (char *)malloc(sizeof(char) * (ret_len + pos + 2));
-	if (!join)
-		return (0);
-	join_start = join;
-	tmp = ret;
-	while (ret_len--)
-		*join++ = *ret++;
-	pos++;
-	while (pos--)
-		*join++ = *buf++;
-	*join = '\0';
-	free(tmp);
-	return (join_start);
-}
-
-char	*ft_strdup(char *save, char *s1)
-{
-	char	*dup;
-	char	*dup_start;
-	size_t	len;
-
-	if (!s1)
-		len = 0;
-	else
-		len = ft_strlen(s1);
-	dup = (char *)malloc(sizeof(char) * len + 1);
-	if (!dup)
-		return (0);
-	dup_start = dup;
-	while (len--)
-		*dup++ = *s1++;
-	*dup = 0;
-	free(save);
-	return (dup_start);
-}

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:35:50 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/28 13:06:53 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/28 14:14:52 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,36 @@
 // 	return (split[i++]);
 // }
 
+
+char *ft_savesplit(char *save, char *ret)
+{
+	int i;
+	
+	if (save)
+	{
+		i = ft_has_newline(save);
+		if (i >= 0)
+		{
+			ret = ft_strjoin(ret, save, i);
+			if (save[i + 1])
+				save = ft_strdup(save, &save[i + 1]);
+			else
+			{
+				free(save);
+				save = 0;
+			}
+		}
+	}
+}
+// 
+
 char	*get_next_line(int fd)
 {
 	static char	*save;
 	char		buf[BUFFER_SIZE + 1];
 	int			len;
 	char		*ret;
-	int			pos;
+	int			i;
 
 	ret = 0;
 	if (fd == 1 || fd == 2 || fd < 0 || BUFFER_SIZE < 1)
@@ -124,35 +147,48 @@ char	*get_next_line(int fd)
 		{
 			if (ret)
 				return (ret);
-			if (save)
-			{
-				pos = ft_has_newline(save);
-				ret = ft_strjoin(ret, save, pos);
-				if (save[pos + 1])
-					save = ft_strdup(save, &save[pos + 1]);
-			}
+			// if (save)
+			// {
+			// 	i = ft_has_newline(save);
+			// 	if (i >= 0)
+			// 	{
+			// 		ret = ft_strjoin(ret, save, i);
+			// 		if (save[i + 1])
+			// 			save = ft_strdup(save, &save[i + 1]);
+			// 		else
+			// 		{
+			// 			free(save);
+			// 			save = 0;
+			// 		}
+			// 	}
+			// }
 			break ;
 		}
-		else // 값 불러왔을때
+		else // 값 buf에 불러오기 성공(len > 0)
 		{
 			buf[len] = '\0';
-			if (save)
+			// if (save)
+			// {
+			// 	i = ft_has_newline(save);
+			// 	ret = ft_strjoin(ret, save, i);
+			// 	if (save[i + 1])
+			// 		save = ft_strdup(save, &save[i + 1]);
+			// 	else
+			// 	{
+			// 		free(save);
+			// 		save = 0;
+			// 	}
+			// }
+			i = ft_has_newline(buf);
+			if (i >= 0) // 개행이 있을 경우
 			{
-				pos = ft_has_newline(save);
-				ret = ft_strjoin(ret, save, pos);
-				if (save[pos + 1])
-					save = ft_strdup(save, &save[pos + 1]);
-			}
-			pos = ft_has_newline(buf);
-			if (pos >= 0) // 개행이 있을 경우
-			{
-				ret = ft_strjoin(ret, buf, pos);
-				if (buf[pos + 1])
-					save = ft_strdup(save, &buf[pos + 1]);
+				ret = ft_strjoin(ret, buf, i);
+				if (buf[i + 1])
+					save = ft_strdup(save, &buf[i + 1]);
 				break ;
 			}
 			else // pos -1 개행 없을 경우. 개행계속 붙이기만 함
-				ret = ft_strjoin(ret, buf, pos);
+				ret = ft_strjoin(ret, buf, i);
 		}
 	}
 	return (ret);
