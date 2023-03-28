@@ -6,12 +6,12 @@
 #    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 14:34:05 by hoseoson          #+#    #+#              #
-#    Updated: 2023/03/28 01:57:55 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/03/28 03:00:42 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libft.a
-CC		=	gcc
+CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
 AR		=	ar r
 RM		=	rm -rf

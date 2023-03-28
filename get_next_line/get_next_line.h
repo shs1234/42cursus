@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:36:17 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/27 14:59:54 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/03/28 12:32:21 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 10
 # endif
 
 typedef struct s_list
@@ -29,14 +29,19 @@ typedef struct s_list
 }					t_list;
 
 char				*get_next_line(int fd);
-void				ft_strcpy(char *dst, char *buf, int len);
-void				ft_lstadd_back(t_list **lst, t_list *new);
-t_list				*ft_lstnew(char *content);
+char				*ft_strjoin(char *s1, char *s2, int pos);
+size_t				ft_strlen(const char *s);
+char				*ft_strdup(char *save, char *s1);
 int					ft_has_newline(char *buf);
-t_list				*ft_lstlast(t_list *lst);
-void				ft_strlcat(char *dst, char *src, int end, int *len);
-int					ft_lstsize(t_list *lst);
-char				**ft_split(char const *s, char c);
-char				*ft_substr(char const *s, unsigned int start, int len);
+
+// void				ft_strcpy(char *dst, char *buf, int len);
+// void				ft_lstadd_back(t_list **lst, t_list *new);
+// t_list				*ft_lstnew(char *content);
+// int					ft_has_newline(char *buf);
+// t_list				*ft_lstlast(t_list *lst);
+// void				ft_strlcat(char *dst, char *src, int end, int *len);
+// int					ft_lstsize(t_list *lst);
+// char				**ft_split(char const *s, char c);
+// char				*ft_substr(char const *s, unsigned int start, int len);
 
 #endif
