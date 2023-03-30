@@ -39,32 +39,32 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-char	*ft_strjoin(char *ret, char *buf, int pos)
+char	*ft_strjoin(char *s1, char *s2, int i)
 {
-	char	*join;
-	char	*join_start;
+	char	*ret;
+	char	*ret_start;
 	char	*tmp;
-	size_t	ret_len;
+	size_t	s1_len;
 
-	if (!ret)
-		ret_len = 0;
+	if (!s1)
+		s1_len = 0;
 	else
-		ret_len = ft_strlen(ret);
-	if (pos == -1)
-		pos = ft_strlen(buf) - 1;
-	join = (char *)malloc(sizeof(char) * (ret_len + pos + 2));
-	if (!join)
-		return (0);
-	join_start = join;
-	tmp = ret;
-	while (ret_len--)
-		*join++ = *ret++;
-	pos++;
-	while (pos--)
-		*join++ = *buf++;
-	*join = '\0';
+		s1_len = ft_strlen(s1);
+	if (i == -1)
+		i = ft_strlen(s2) - 1;
+	ret = (char *)malloc(sizeof(char) * (s1_len + i + 2));
+	if (!ret)
+		return (NULL);
+	ret_start = ret;
+	tmp = s1;
+	while (s1_len--)
+		*ret++ = *s1++;
+	i++;
+	while (i--)
+		*ret++ = *s2++;
+	*ret = '\0';
 	free(tmp);
-	return (join_start);
+	return (ret_start);
 }
 
 char	*ft_strdup(char *save, char *s1)
@@ -79,14 +79,16 @@ char	*ft_strdup(char *save, char *s1)
 		len = ft_strlen(s1);
 	dup = (char *)malloc(sizeof(char) * len + 1);
 	if (!dup)
-		return (0);
+		return (NULL);
 	dup_start = dup;
 	while (len--)
 		*dup++ = *s1++;
-	*dup = 0;
+	*dup = '\0';
 	free(save);
 	return (dup_start);
 }
+
+
 // t_list	*ft_lstnew(char *content)
 // {
 // 	t_list	*lst;
