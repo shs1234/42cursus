@@ -39,7 +39,30 @@ int	ft_strlen(const char *s)
 	return (len);
 }
 
-char	*ft_strjoin(char *s1, char *s2, int i)
+void	ft_has_save(char **save, char **ret)
+{
+	int	i;
+
+	if (*save)
+	{
+		i = ft_has_newline(*save);
+		if (i >= 0)
+		{
+			*ret = ft_strjoin(*ret, *save, i);
+			if (*save[i + 1])
+				*save = ft_strdup(*save, &*save[i + 1]);
+			else
+				ft_free(&*save);
+		}
+		else
+		{
+			*ret = *save;
+			*save = 0;
+		}
+	}
+}
+
+char	*ft_strjoin(char *s1, const char *s2, int i)
 {
 	char	*ret;
 	char	*ret_start;
@@ -66,7 +89,7 @@ char	*ft_strjoin(char *s1, char *s2, int i)
 	return (ft_free(&tmp), ret_start);
 }
 
-char	*ft_strdup(char *save, char *s1)
+char	*ft_strdup(const char *s1, char *save)
 {
 	char	*dup;
 	char	*dup_start;

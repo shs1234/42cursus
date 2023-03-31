@@ -19,7 +19,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 3
 # endif
 
 typedef struct s_list
@@ -29,10 +29,11 @@ typedef struct s_list
 }					t_list;
 
 char				*get_next_line(int fd);
-char				*ft_strjoin(char *s1, char *s2, int pos);
+char				*ft_strjoin(char *s1, const char *s2, int i);
 int					ft_strlen(const char *s);
-char				*ft_strdup(char *save, char *s1);
+char				*ft_strdup(const char *s1, char *save);
 int					ft_has_newline(char *buf);
 void				ft_free(char **mem);
+void				ft_has_save(char **save, char **ret);
 
 #endif
