@@ -16,5 +16,5 @@ int	main(void)
 		i++;
 	}
 	// printf("\n");
-	// system("leaks a.out");
+	system("leaks a.out");
 }

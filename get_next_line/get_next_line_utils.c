@@ -26,9 +26,9 @@ int	ft_has_newline(char *buf)
 	return (-1);
 }
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	len;
+	int	len;
 
 	len = 0;
 	while (*s)
@@ -44,7 +44,7 @@ char	*ft_strjoin(char *s1, char *s2, int i)
 	char	*ret;
 	char	*ret_start;
 	char	*tmp;
-	size_t	s1_len;
+	int		s1_len;
 
 	if (!s1)
 		s1_len = 0;
@@ -54,7 +54,7 @@ char	*ft_strjoin(char *s1, char *s2, int i)
 		i = ft_strlen(s2) - 1;
 	ret = (char *)malloc(sizeof(char) * (s1_len + i + 2));
 	if (!ret)
-		return (NULL);
+		return (ft_free(&s1), NULL);
 	ret_start = ret;
 	tmp = s1;
 	while (s1_len--)
@@ -63,15 +63,14 @@ char	*ft_strjoin(char *s1, char *s2, int i)
 	while (i--)
 		*ret++ = *s2++;
 	*ret = '\0';
-	free(tmp);
-	return (ret_start);
+	return (ft_free(&tmp), ret_start);
 }
 
 char	*ft_strdup(char *save, char *s1)
 {
 	char	*dup;
 	char	*dup_start;
-	size_t	len;
+	int		len;
 
 	if (!s1)
 		len = 0;
@@ -79,160 +78,10 @@ char	*ft_strdup(char *save, char *s1)
 		len = ft_strlen(s1);
 	dup = (char *)malloc(sizeof(char) * len + 1);
 	if (!dup)
-		return (NULL);
+		return (ft_free(&save), NULL);
 	dup_start = dup;
 	while (len--)
 		*dup++ = *s1++;
 	*dup = '\0';
-	free(save);
-	return (dup_start);
+	return (ft_free(&save), dup_start);
 }
-
-
-// t_list	*ft_lstnew(char *content)
-// {
-// 	t_list	*lst;
-// 	size_t	i;
-// 	size_t	len;
-
-// 	lst = (t_list *)malloc(sizeof(t_list));
-// 	if (!lst)
-// 		return (0);
-// 	len = 0;
-// 	while (content[len])
-// 		len++;
-// 	lst->content = (char *)malloc(sizeof(char) * len + 1);
-// 	if (!lst->content)
-// 		return (0);
-// 	i = 0;
-// 	while (i < len)
-// 	{
-// 		lst->content[i] = content[i];
-// 		i++;
-// 	}
-// 	lst->content[i] = 0;
-// 	lst->next = 0;
-// 	return (lst);
-// }
-
-// void	ft_lstadd_back(t_list **lst, t_list *new)
-// {
-// 	t_list	*lastlst;
-
-// 	if (!*lst)
-// 	{
-// 		*lst = new;
-// 		return ;
-// 	}
-// 	lastlst = ft_lstlast(*lst);
-// 	lastlst->next = new;
-// }
-
-// t_list	*ft_lstlast(t_list *lst)
-// {
-// 	if (lst && lst->next)
-// 	{
-// 		while (lst)
-// 		{
-// 			if (!lst->next)
-// 				return (lst);
-// 			lst = lst->next;
-// 		}
-// 	}
-// 	return (lst);
-// }
-
-// int	ft_lstsize(t_list *lst)
-// {
-// 	int	size;
-
-// 	size = 0;
-// 	while (lst)
-// 	{
-// 		size++;
-// 		lst = lst->next;
-// 	}
-// 	return (size);
-// }
-
-// static size_t	ft_countword(char const *s, char c)
-// {
-// 	size_t	count;
-// 	size_t	start;
-// 	size_t	end;
-
-// 	start = 0;
-// 	count = 0;
-// 	while (s[start])
-// 	{
-// 		if (s[start] == c)
-// 		{
-// 			start++;
-// 			continue ;
-// 		}
-// 		end = start;
-// 		while (s[end] != c && s[end])
-// 			end++;
-// 		count++;
-// 		start = end;
-// 	}
-// 	return (count);
-// }
-
-// static size_t	ft_splitword(char **split, char const *s, char c)
-// {
-// 	size_t	start;
-// 	size_t	end;
-// 	size_t	i;
-// 	char	*word;
-
-// 	i = 0;
-// 	start = 0;
-// 	while (s[start])
-// 	{
-// 		if (s[start] == c)
-// 		{
-// 			start++;
-// 			continue ;
-// 		}
-// 		end = start;
-// 		while (s[end] != c && s[end])
-// 			end++;
-// 		word = ft_substr(s, start, end - start + 1);
-// 		if (!word)
-// 			return (i);
-// 		split[i++] = word;
-// 		start = end;
-// 	}
-// 	split[i] = 0;
-// 	return (i);
-// }
-
-// char	**ft_split(char const *s, char c)
-// {
-// 	char	**split;
-// 	size_t	count;
-// 	size_t	i;
-// 	size_t	split_i;
-
-// 	if (!s)
-// 		return (0);
-// 	count = ft_countword(s, c);
-// 	split = (char **)malloc(sizeof(char *) * (count + 1));
-// 	if (!split)
-// 		return (0);
-// 	split_i = ft_splitword(split, s, c);
-// 	if (split_i < count)
-// 	{
-// 		i = 0;
-// 		while (i < split_i)
-// 		{
-// 			free(split[i]);
-// 			i++;
-// 		}
-// 		free(split);
-// 		split = 0;
-// 	}
-// 	return (split);
-// }
-
