@@ -26,40 +26,57 @@ int	ft_has_newline(char *buf)
 	return (-1);
 }
 
-int	ft_strlen(const char *s)
-{
-	int	len;
-
-	len = 0;
-	while (*s)
-	{
-		len++;
-		s++;
-	}
-	return (len);
-}
-
-void	ft_has_save(char **save, char **ret)
+int	ft_ln_in_save(char **save, char **ret)
 {
 	int	i;
 
-	if (*save)
+	i = ft_has_newline(*save);
+	if (i >= 0)
 	{
-		i = ft_has_newline(*save);
-		if (i >= 0)
+		*ret = ft_strjoin(*ret, *save, i);
+		if (!(*ret))
 		{
-			*ret = ft_strjoin(*ret, *save, i);
-			if (*save[i + 1])
-				*save = ft_strdup(*save, &*save[i + 1]);
-			else
-				ft_free(&*save);
+			ft_free(save);
+			return (1);
+		}
+		if ((*save)[i + 1])
+		{
+			*save = ft_strdup(&(*save)[i + 1], *save);
+			if (!(*save))
+				ft_free(ret);
 		}
 		else
-		{
-			*ret = *save;
-			*save = 0;
-		}
+			ft_free(save);
+		return (1);
 	}
+	*ret = *save;
+	*save = 0;
+	return (0);
+}
+
+int	ft_ln_in_buf(char *buf, char **save, char **ret)
+{
+	int	i;
+
+	i = ft_has_newline(buf);
+	if (i >= 0)
+	{
+		*ret = ft_strjoin(*ret, buf, i);
+		if (!(*ret))
+		{
+			ft_free(save);
+			return (1);
+		}
+		if (buf[i + 1])
+		{
+			*save = ft_strdup(&buf[i + 1], *save);
+			if (!(*save))
+				ft_free(ret);
+		}
+		return (1);
+	}
+	*ret = ft_strjoin(*ret, buf, i);
+	return (0);
 }
 
 char	*ft_strjoin(char *s1, const char *s2, int i)

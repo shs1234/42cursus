@@ -19,7 +19,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 3
+#  define BUFFER_SIZE 10
 # endif
 
 typedef struct s_list
@@ -34,6 +34,7 @@ int					ft_strlen(const char *s);
 char				*ft_strdup(const char *s1, char *save);
 int					ft_has_newline(char *buf);
 void				ft_free(char **mem);
-void				ft_has_save(char **save, char **ret);
+int					ft_ln_in_save(char **save, char **ret);
+int					ft_ln_in_buf(char *buf, char **save, char **ret);
 
 #endif
