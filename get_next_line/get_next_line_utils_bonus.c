@@ -6,11 +6,11 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 19:08:53 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/01 19:08:54 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/02 09:35:37 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_has_newline(char *buf)
 {

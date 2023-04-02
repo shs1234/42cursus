@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:35:50 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/28 14:14:52 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/02 13:03:26 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*get_next_line(int fd)
 		if (len == -1)
 			return (ft_free(&save), ft_free(&ret), NULL);
 		buf[len] = '\0';
-		if (buf[0] && ft_ln_in_buf(buf, &save, &ret))
+		if (len && ft_ln_in_buf(buf, &save, &ret))
 			break ;
 	}
 	return (ret);

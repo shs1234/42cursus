@@ -6,12 +6,12 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 19:09:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/01 19:18:19 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/02 11:38:56 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <fcntl.h>
 # include <stdlib.h>
@@ -23,7 +23,9 @@
 
 typedef struct s_list
 {
-	char			*content;
+	int				fd;
+	char			*save;
+	struct s_list	*prev;
 	struct s_list	*next;
 }					t_list;
 
@@ -35,5 +37,7 @@ int					ft_has_newline(char *buf);
 void				ft_free(char **mem);
 int					ft_ln_in_save(char **save, char **ret);
 int					ft_ln_in_buf(char *buf, char **save, char **ret);
+t_list				*ft_lst_fd(int fd, t_list *lst);
+void				ft_lstfree(t_list **lst);
 
 #endif
