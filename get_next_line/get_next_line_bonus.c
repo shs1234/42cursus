@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 19:08:58 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/03 01:15:51 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/03 01:18:27 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,60 @@ void	ft_free(char **mem)
 // 		free(tmp);
 // 	}
 // }
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*lst;
+
+	lst = (t_list *)malloc(sizeof(t_list));
+	if (!lst)
+		return (0);
+	lst->content = content;
+	lst->next = 0;
+	return (lst);
+}
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*lastlst;
+
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	lastlst = ft_lstlast(*lst);
+	lastlst->next = new;
+}
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*start;
+	t_list	*tmp;
+
+	if (!lst || !del)
+		return ;
+	start = *lst;
+	while (start)
+	{
+		del(start->content);
+		tmp = start;
+		start = start->next;
+		free(tmp);
+	}
+	*lst = 0;
+}
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (lst && lst->next)
+	{
+		while (lst)
+		{
+			if (!lst->next)
+				return (lst);
+			lst = lst->next;
+		}
+	}
+	return (lst);
+}
 
 char	*get_next_line(int fd)
 {
