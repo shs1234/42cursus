@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/01 19:08:53 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/02 21:46:38 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/03/20 23:36:08 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/04/03 00:06:43 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_has_newline(char *buf)
 	return (-1);
 }
 
-int	ft_ln_in_save(char **save, char **ret, char **savelist)
+int	ft_ln_in_save(char **save, char **ret, t_list *head)
 {
 	int	i;
 
@@ -36,7 +36,7 @@ int	ft_ln_in_save(char **save, char **ret, char **savelist)
 		*ret = ft_strjoin(*ret, *save, i);
 		if (!(*ret))
 		{
-			ft_free_savelist(savelist);
+			ft_freelist(head);
 			return (1);
 		}
 		if ((*save)[i + 1])
@@ -46,7 +46,7 @@ int	ft_ln_in_save(char **save, char **ret, char **savelist)
 				ft_free(ret);
 		}
 		else
-			ft_free_savelist(savelist);
+			ft_freelist(head);
 		return (1);
 	}
 	*ret = *save;
@@ -54,7 +54,7 @@ int	ft_ln_in_save(char **save, char **ret, char **savelist)
 	return (0);
 }
 
-int	ft_ln_in_buf(char *buf, char **save, char **ret, char **savelist)
+int	ft_ln_in_buf(char *buf, char **save, char **ret, t_list *head)
 {
 	int	i;
 
@@ -64,7 +64,7 @@ int	ft_ln_in_buf(char *buf, char **save, char **ret, char **savelist)
 		*ret = ft_strjoin(*ret, buf, i);
 		if (!(*ret))
 		{
-			ft_free_savelist(savelist);
+			ft_freelist(head);
 			return (1);
 		}
 		if (buf[i + 1])
