@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 19:09:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/02 20:16:52 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:15:55 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,14 @@
 
 # define FD_MAX 4096
 
-// typedef struct s_list
-// {
-// 	int				fd;
-// 	char			*save;
-// 	struct s_list	*prev;
-// 	struct s_list	*next;
-// }					t_list;
-
-typedef struct s_list
-{
-	int		fd;
-	char	*save;
-}			t_list;
-
-char		*get_next_line(int fd);
-char		*ft_strjoin(char *s1, const char *s2, int i);
-int			ft_strlen(const char *s);
-char		*ft_strdup(const char *s1, char *save);
-int			ft_has_newline(char *buf);
-void		ft_free(char **mem);
-int			ft_ln_in_save(char **save, char **ret);
-int			ft_ln_in_buf(char *buf, char **save, char **ret);
+char	*get_next_line(int fd);
+char	*ft_strjoin(char *s1, const char *s2, int i);
+int		ft_strlen(const char *s);
+char	*ft_strdup(const char *s1, char *save);
+int		ft_has_newline(char *buf);
+void	ft_free(char **mem);
+int		ft_ln_in_save(char **save, char **ret);
+int		ft_ln_in_buf(char *buf, char **save, char **ret);
+void	ft_freesave(char **save);
 
 #endif
