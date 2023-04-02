@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 19:08:58 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/02 21:28:19 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:45:51 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ void	ft_free(char **mem)
 	*mem = 0;
 }
 
-void	ft_freesave(char **save)
+void	ft_free_savelist(char **savelist)
 {
 	int	i;
 
 	i = 0;
 	while (i < FD_MAX + 1)
-		ft_free(&save[i++]);
+		ft_free(&savelist[i++]);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*save[FD_MAX + 1];
+	static char	*savelist[FD_MAX + 1];
 	char		buf[BUFFER_SIZE + 1];
 	int			len;
 	char		*ret;
@@ -51,15 +51,15 @@ char	*get_next_line(int fd)
 	len = 1;
 	if (fd < 0 || fd > FD_MAX || BUFFER_SIZE < 1)
 		return (NULL);
-	if (save[fd] && ft_ln_in_save(&save[fd], &ret))
+	if (savelist[fd] && ft_ln_in_save(&savelist[fd], &ret, savelist))
 		return (ret);
 	while (len)
 	{
 		len = read(fd, buf, BUFFER_SIZE);
 		if (len == -1)
-			return (ft_freesave(save), ft_free(&ret), NULL);
+			return (ft_free_savelist(savelist), ft_free(&ret), NULL);
 		buf[len] = '\0';
-		if (len && ft_ln_in_buf(buf, &save[fd], &ret))
+		if (len && ft_ln_in_buf(buf, &savelist[fd], &ret, savelist))
 			break ;
 	}
 	return (ret);

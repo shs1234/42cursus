@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 19:09:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/02 21:15:55 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:45:44 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int		ft_strlen(const char *s);
 char	*ft_strdup(const char *s1, char *save);
 int		ft_has_newline(char *buf);
 void	ft_free(char **mem);
-int		ft_ln_in_save(char **save, char **ret);
-int		ft_ln_in_buf(char *buf, char **save, char **ret);
+int		ft_ln_in_save(char **save, char **ret, char **savelist);
+int		ft_ln_in_buf(char *buf, char **save, char **ret, char **savelist);
 void	ft_freesave(char **save);
 
 #endif
