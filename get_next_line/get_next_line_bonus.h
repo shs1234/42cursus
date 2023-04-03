@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 19:09:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/03 00:21:22 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/03 21:45:00 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,16 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 42
 # endif
 
-// # define FD_MAX 4096
-
-typedef struct s_list
-{
-	int				fd;
-	char			*save;
-	struct s_list	*next;
-}					t_list;
-
-char				*get_next_line(int fd);
-char				*ft_strjoin(char *s1, const char *s2, int i);
-int					ft_strlen(const char *s);
-char				*ft_strdup(const char *s1, char *save);
-int					ft_has_newline(char *buf);
-void				ft_free(char **mem);
-int					ft_ln_in_save(char **save, char **ret, t_list *head);
-int					ft_ln_in_buf(char *buf, char **save, char **ret,
-						t_list *head);
-void				ft_freelist(t_list *head);
-t_list				*ft_findfd(t_list **head, int fd);
+char	*get_next_line(int fd);
+char	*ft_strjoin(char *s1, const char *s2, int i);
+int		ft_strlen(const char *s);
+char	*ft_strdup(const char *s1, char *save);
+int		ft_has_newline(char *buf);
+void	ft_free(char **mem);
+int		ft_ln_in_save(char **save, char **ret);
+int		ft_ln_in_buf(char *buf, char **save, char **ret);
 
 #endif
