@@ -6,7 +6,7 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/04/03 22:56:51 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/04/04 01:56:50 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ AR		=	ar r
 RM		=	rm -rf
 HEADER	=	ft_printf.h
 
-SRCS	=	ft_printf.c
+SRCS	=	ft_printf.c ft_putchar_fd.c
 
 OBJS	=	$(SRCS:.c=.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:36:08 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/03/28 13:18:15 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/04 01:13:18 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
