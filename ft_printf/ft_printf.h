@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:37:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/04 16:22:06 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/04 23:43:27 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ int		ft_putchar_fd(char c, int fd);
 int		ft_putstr_fd(char *s, int fd);
 int		ft_putnbr_fd(int n, int fd);
 int		ft_putuint_fd(unsigned int n, int fd);
+int		ft_print_hex_upper(unsigned int n);
 int		ft_print_hex_lower(unsigned int n);
 int		ft_print_addr(void *addr);
-int		ft_print_hex_upper(unsigned int n);
 size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
 
 #endif

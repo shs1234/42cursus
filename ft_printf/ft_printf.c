@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:35:38 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/04 16:12:36 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/05 01:08:57 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	ft_printarg(char c, va_list ap)
 		len += ft_print_hex_lower(va_arg(ap, unsigned int));
 	else if (c == 'X')
 		len += ft_print_hex_upper(va_arg(ap, unsigned int));
+	else if (c == '%')
+		len += write(1, "%", 1);
 	return (len);
 }
 
@@ -50,10 +52,13 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			if (*format == '%')
-				len += ft_putchar_fd(*format, 1);
-			else
+			if (ft_strchr("cspdiuxX%", *format))
 				len += ft_printarg(*format, ap);
+			else
+			{
+				len = -1;
+				break ;
+			}
 		}
 		else
 			len += ft_putchar_fd(*format, 1);

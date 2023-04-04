@@ -1,44 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putuint_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 15:28:56 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/05 01:58:42 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/04/05 02:00:02 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/04/05 02:00:02 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr_fd(int n, int fd)
+int	ft_putuint_fd(unsigned int n, int fd)
 {
-	long long	lln;
-	int			tab[10];
-	int			i;
-	int			len;
+	int tab[10];
+	int i;
+	int len;
 
-	lln = n;
 	i = 0;
-	len = 0;
-	if (lln == 0)
-	{
+	if (n == 0)
 		ft_putchar_fd(0 + '0', fd);
-		len++;
-	}
-	if (lln < 0)
+	while (n)
 	{
-		ft_putchar_fd('-', fd);
-		lln *= -1;
-		len++;
+		tab[i++] = n % 10;
+		n /= 10;
 	}
-	while (lln)
-	{
-		tab[i++] = lln % 10;
-		lln /= 10;
-	}
-	len += i;
+	len = i;
 	while (i--)
 		ft_putchar_fd(tab[i] + '0', fd);
 	return (len);

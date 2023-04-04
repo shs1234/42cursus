@@ -1,45 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 15:28:56 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/05 01:58:42 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/04/05 01:59:53 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/04/05 01:59:54 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr_fd(int n, int fd)
+int	ft_print_hex_lower(unsigned int n)
 {
-	long long	lln;
-	int			tab[10];
-	int			i;
-	int			len;
+	char	hex[8];
+	int		i;
+	int		len;
 
-	lln = n;
 	i = 0;
-	len = 0;
-	if (lln == 0)
+	while (n)
 	{
-		ft_putchar_fd(0 + '0', fd);
-		len++;
+		hex[i++] = "0123456789abcdef"[n % 16];
+		n /= 16;
 	}
-	if (lln < 0)
+	len = i;
+	while (i)
+		write(1, &hex[--i], 1);
+	return (len);
+}
+
+int	ft_print_hex_upper(unsigned int n)
+{
+	char hex[8];
+	int i;
+	int len;
+
+	i = 0;
+	while (n)
 	{
-		ft_putchar_fd('-', fd);
-		lln *= -1;
-		len++;
+		hex[i++] = "0123456789ABCDEF"[n % 16];
+		n /= 16;
 	}
-	while (lln)
-	{
-		tab[i++] = lln % 10;
-		lln /= 10;
-	}
-	len += i;
-	while (i--)
-		ft_putchar_fd(tab[i] + '0', fd);
+	len = i;
+	while (i)
+		write(1, &hex[--i], 1);
 	return (len);
 }

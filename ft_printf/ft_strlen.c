@@ -1,45 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 15:28:56 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/05 01:58:42 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/03/14 09:51:41 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/04/05 01:10:15 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr_fd(int n, int fd)
+size_t	ft_strlen(const char *s)
 {
-	long long	lln;
-	int			tab[10];
-	int			i;
-	int			len;
+	size_t	len;
 
-	lln = n;
-	i = 0;
 	len = 0;
-	if (lln == 0)
+	while (*s)
 	{
-		ft_putchar_fd(0 + '0', fd);
 		len++;
+		s++;
 	}
-	if (lln < 0)
-	{
-		ft_putchar_fd('-', fd);
-		lln *= -1;
-		len++;
-	}
-	while (lln)
-	{
-		tab[i++] = lln % 10;
-		lln /= 10;
-	}
-	len += i;
-	while (i--)
-		ft_putchar_fd(tab[i] + '0', fd);
 	return (len);
 }
