@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_addr.c                                    :+:      :+:    :+:   */
+/*   ft_putaddr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 01:59:50 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/05 22:32:04 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/06 00:41:14 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ static int	ft_print_addr(void *addr, int *len)
 
 int	ft_putaddr(void *addr)
 {
-	int					len;
-	unsigned long long	ull_addr;
+	int	len;
 
+	// unsigned long long	ull_addr;
 	len = 0;
-	ull_addr = (unsigned long long)addr;
+	// ull_addr = (unsigned long long)addr;
 	if (write(1, "0x", 2) == -1)
 		return (-1);
 	len += 2;
