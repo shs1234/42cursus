@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:14:30 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/05 13:07:10 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/05 22:33:42 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	ft_putchar_fd(char c, int fd)
 {
-	int	len;
-
-	len = 0;
-	len += write(fd, &c, 1);
-	return (len);
+	if (write(fd, &c, 1) == -1)
+		return (-1);
+	return (1);
 }

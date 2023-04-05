@@ -6,38 +6,39 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:35:38 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/05 13:07:05 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/05 23:12:34 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printarg(char c, va_list ap)
+int	ft_printarg(char c, va_list ap, int *len)
 {
-	int	fd;
-	int	len;
+	int	ret;
 
-	len = 0;
-	fd = 1;
+	ret = 0;
 	if (c == 'c')
-		len += ft_putchar_fd(va_arg(ap, int), fd);
+		ret = ft_putchar_fd(va_arg(ap, int), 1);
 	else if (c == 's')
-		len += ft_putstr_fd(va_arg(ap, char *), fd);
+		ret = ft_putstr_fd(va_arg(ap, char *), 1);
 	else if (c == 'p')
-		len += ft_print_addr(va_arg(ap, void *));
+		ret = ft_putaddr(va_arg(ap, void *));
 	else if (c == 'd')
-		len += ft_putnbr_fd(va_arg(ap, int), fd);
+		ret = ft_putnbr_fd(va_arg(ap, int), 1);
 	else if (c == 'i')
-		len += ft_putnbr_fd(va_arg(ap, int), fd);
+		ret = ft_putnbr_fd(va_arg(ap, int), 1);
 	else if (c == 'u')
-		len += ft_putuint_fd(va_arg(ap, unsigned int), fd);
+		ret = ft_putuint_fd(va_arg(ap, unsigned int), 1);
 	else if (c == 'x')
-		len += ft_print_hex_lower(va_arg(ap, unsigned int));
+		ret = ft_print_hex_lower(va_arg(ap, unsigned int));
 	else if (c == 'X')
-		len += ft_print_hex_upper(va_arg(ap, unsigned int));
+		ret = ft_print_hex_upper(va_arg(ap, unsigned int));
 	else if (c == '%')
-		len += write(1, "%", 1);
-	return (len);
+		ret = write(1, "%", 1);
+	if (ret == -1)
+		return (0);
+	(*len) += ret;
+	return (1);
 }
 
 int	ft_printf(const char *format, ...)
@@ -53,12 +54,15 @@ int	ft_printf(const char *format, ...)
 		{
 			format++;
 			if (ft_strchr("cspdiuxX%", *format))
-				len += ft_printarg(*format, ap);
-			else
 			{
-				len = -1;
-				break ;
+				if (!ft_printarg(*format, ap, &len))
+					return (-1);
 			}
+			// else
+			// {
+			// 	len = -1;
+			// 	break ;
+			// }
 		}
 		else
 			len += ft_putchar_fd(*format, 1);

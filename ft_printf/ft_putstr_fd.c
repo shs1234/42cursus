@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:16:22 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/05 13:27:35 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/05 22:43:56 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,17 @@ int	ft_putstr_fd(char *s, int fd)
 	if (s)
 	{
 		while (*s)
-			len += ft_putchar_fd(*s++, fd);
+		{
+			if (write(fd, s++, 1) == -1)
+				return (-1);
+			len++;
+		}
 	}
 	else
-		len += write(1, "(null)", 6);
+	{
+		if (write(1, "(null)", 6) == -1)
+			return (-1);
+		len += 6;
+	}
 	return (len);
 }

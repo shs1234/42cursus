@@ -6,33 +6,51 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 01:59:50 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/05 13:31:38 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/05 22:32:04 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_addr(void *addr)
+static int	ft_print_addr(void *addr, int *len)
 {
-	int					i;
-	unsigned long long	ull;
 	char				tab[16];
-	int					len;
+	int					i;
+	unsigned long long	ull_addr;
 
 	i = 0;
-	len = 0;
-	ull = (unsigned long long)addr;
-	len += write(1, "0x", 2);
-	if (ull == 0)
-		len += write(1, "0", 1);
-	while (ull)
+	ull_addr = (unsigned long long)addr;
+	while (ull_addr)
 	{
-		tab[i] = "0123456789abcdef"[ull % 16];
-		ull /= 16;
-		i++;
+		tab[i++] = "0123456789abcdef"[ull_addr % 16];
+		ull_addr /= 16;
 	}
-	len += i;
 	while (i)
-		write(1, &tab[--i], 1);
+	{
+		if (write(1, &tab[--i], 1) == -1)
+			return (0);
+		(*len)++;
+	}
+	return (1);
+}
+
+int	ft_putaddr(void *addr)
+{
+	int					len;
+	unsigned long long	ull_addr;
+
+	len = 0;
+	ull_addr = (unsigned long long)addr;
+	if (write(1, "0x", 2) == -1)
+		return (-1);
+	len += 2;
+	if (!addr)
+	{
+		if (write(1, "0", 1) == -1)
+			return (-1);
+		len++;
+	}
+	if (!ft_print_addr(addr, &len))
+		return (-1);
 	return (len);
 }
