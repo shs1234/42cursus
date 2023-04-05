@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 14:34:05 by hoseoson          #+#    #+#              #
-#    Updated: 2023/03/28 03:00:42 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/04/05 18:15:51 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libft.a
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
-AR		=	ar r
+AR		=	ar rcs
 RM		=	rm -rf
 HEADER	=	libft.h
 

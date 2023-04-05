@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 01:59:50 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/05 01:59:51 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/05 13:31:38 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int	ft_print_addr(void *addr)
 	i = 0;
 	len = 0;
 	ull = (unsigned long long)addr;
-	write(1, "0x", 2);
-	len += 2;
+	len += write(1, "0x", 2);
+	if (ull == 0)
+		len += write(1, "0", 1);
 	while (ull)
 	{
 		tab[i] = "0123456789abcdef"[ull % 16];

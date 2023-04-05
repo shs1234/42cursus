@@ -6,14 +6,14 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/04/05 02:02:36 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/04/05 13:06:10 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libftprintf.a
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
-AR		=	ar r
+AR		=	ar rcs
 RM		=	rm -rf
 HEADER	=	ft_printf.h
 
