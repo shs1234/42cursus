@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 01:59:50 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/06 00:41:14 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/06 14:06:31 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ int	ft_putaddr(void *addr)
 {
 	int	len;
 
-	// unsigned long long	ull_addr;
 	len = 0;
-	// ull_addr = (unsigned long long)addr;
 	if (write(1, "0x", 2) == -1)
 		return (-1);
 	len += 2;

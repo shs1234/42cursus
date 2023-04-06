@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 19:08:58 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/05 18:26:13 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/06 16:39:20 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ int	ft_strlen(const char *s)
 
 char	*get_next_line(int fd)
 {
-	static char	*save[49153];
+	static char	*save[FD_MAX];
 	char		buf[BUFFER_SIZE + 1];
 	int			len;
 	char		*ret;
 
 	ret = 0;
 	len = 1;
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || fd > FD_MAX || BUFFER_SIZE < 1)
 		return (NULL);
 	if (save[fd] && ft_ln_in_save(&save[fd], &ret))
 		return (ret);

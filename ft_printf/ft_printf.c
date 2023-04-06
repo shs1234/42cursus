@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:35:38 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/05 23:12:34 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/06 14:09:47 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,13 @@ int	ft_printf(const char *format, ...)
 				if (!ft_printarg(*format, ap, &len))
 					return (-1);
 			}
-			// else
-			// {
-			// 	len = -1;
-			// 	break ;
-			// }
 		}
 		else
-			len += ft_putchar_fd(*format, 1);
+		{
+			if (ft_putchar_fd(*format, 1) == -1)
+				return (-1);
+			len++;
+		}
 		format++;
 	}
 	va_end(ap);

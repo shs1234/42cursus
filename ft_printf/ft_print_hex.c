@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 01:59:53 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/05 13:39:39 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/06 14:36:38 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,22 @@ int	ft_print_hex_lower(unsigned int n)
 	i = 0;
 	len = 0;
 	if (n == 0)
-		len += write(1, "0", 1);
+	{
+		if (write(1, "0", 1) == -1)
+			return (-1);
+		len++;
+	}
 	while (n)
 	{
 		hex[i++] = "0123456789abcdef"[n % 16];
 		n /= 16;
 	}
 	while (i)
-		len += write(1, &hex[--i], 1);
+	{
+		if (write(1, &hex[--i], 1) == -1)
+			return (-1);
+		len++;
+	}
 	return (len);
 }
 
@@ -41,13 +49,21 @@ int	ft_print_hex_upper(unsigned int n)
 	i = 0;
 	len = 0;
 	if (n == 0)
-		len += write(1, "0", 1);
+	{
+		if (write(1, "0", 1) == -1)
+			return (-1);
+		len++;
+	}
 	while (n)
 	{
 		hex[i++] = "0123456789ABCDEF"[n % 16];
 		n /= 16;
 	}
 	while (i)
-		len += write(1, &hex[--i], 1);
+	{
+		if (write(1, &hex[--i], 1) == -1)
+			return (-1);
+		len++;
+	}
 	return (len);
 }
