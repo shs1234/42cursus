@@ -6,43 +6,67 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 18:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/07 03:25:39 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/07 20:31:18 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ft_stack_init(int ac, char **av, int **a, int **b, t_index **index)
+static void	ft_stack_init(int ac, char **av, t_stack *a, t_stack *b)
 {
-	size_t	i;
+	int	i;
 
-	*a = (int *)malloc(sizeof(int) * (ac - 1));
-	*b = (int *)malloc(sizeof(int) * (ac - 1));
-	*index = (t_index *)malloc(sizeof(t_index));
-	if (!*a || !*b || !*index)
-		exit(1);
-	i = 0;
-	while (i < ac - 1)
+	i = 1;
+	a->head = (t_node *)malloc(sizeof(t_node));
+	if (!a->head)
+		ft_error();
+	a->head->n = ft_atoi(av[i]);
+	a->head->prev = NULL;
+	a->tail = a->head;
+	a->count = 1;
+	b->head = NULL;
+	b->tail = NULL;
+	b->count = 0;
+	while (++i < ac)
 	{
-		(*a)[i] = ft_atoi(av[i + 1]);
-		i++;
+		a->tail->next = (t_node *)malloc(sizeof(t_node));
+		if (!a->tail->next)
+			ft_error();
+		a->tail->next->prev = a->tail;
+		a->tail = a->tail->next;
+		a->tail->next = NULL;
+		a->tail->n = ft_atoi(av[i]);
+		a->count++;
 	}
-	(*index)->a_head = 0;
-	(*index)->a_tail = ac - 2;
-	(*index)->a_count = ac - 1;
-	(*index)->b_head = 0;
-	(*index)->b_tail = ac - 2;
-	(*index)->b_count = 0;
-	(*index)->len = ac - 1;
 }
 
 void	ft_sorting(int ac, char **av)
 {
-	int		*a;
-	int		*b;
-	t_index	*index;
+	t_stack	*a;
+	t_stack	*b;
 
-	ft_stack_init(ac, av, &a, &b, &index);
-	// printf("%d %d %d %d\n", index->a_head, index->b_head, index->a_tail,
-	// 		index->b_tail);
+	a = (t_stack *)malloc(sizeof(t_stack));
+	b = (t_stack *)malloc(sizeof(t_stack));
+	if (!a || !b)
+		ft_error();
+	ft_stack_init(ac, av, a, b);
+	// ft_print_stack(a, b);
+	// ft_pb(a, b);
+	// ft_pb(a, b);
+	// ft_pb(a, b);
+	// ft_print_stack(a, b);
+	// ft_ra(a);
+	// ft_print_stack(a, b);
+	// ft_rb(b);
+	// ft_print_stack(a, b);
+	// ft_rr(a, b);
+	// ft_print_stack(a, b);
+	// ft_rra(a);
+	// ft_print_stack(a, b);
+	// ft_rra(a);
+	// ft_print_stack(a, b);
+	// ft_rrb(b);
+	// ft_print_stack(a, b);
+	// ft_rrr(a, b);
+	// ft_print_stack(a, b);
 }

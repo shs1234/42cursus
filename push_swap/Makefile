@@ -6,7 +6,7 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/04/07 03:41:12 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/04/07 20:38:35 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ RM		=	rm -rf
 HEADER	=	push_swap.h
 LIBFT   =	make -C libft
 
-SRCS	=	main.c input_valid.c command.c ft_sorting.c utils.c
+SRCS	=	main.c input_valid.c ft_sorting.c utils.c \
+			command_1.c command_2.c command_3.c 
 
 OBJS	=	$(SRCS:.c=.o)
 
