@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:12:54 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/07 20:33:04 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/09 02:45:56 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,18 @@
 void	ft_sa(t_stack *a)
 {
 	if (a->count > 1)
+	{
 		ft_swap(&a->head->n, &a->head->next->n);
-	write(1, "sa\n", 3);
+		write(1, "sa\n", 3);
+	}
 }
 void	ft_sb(t_stack *b)
 {
 	if (b->count > 1)
+	{
 		ft_swap(&b->head->n, &b->head->next->n);
-	write(1, "sb\n", 3);
+		write(1, "sb\n", 3);
+	}
 }
 void	ft_ss(t_stack *a, t_stack *b)
 {
@@ -30,7 +34,8 @@ void	ft_ss(t_stack *a, t_stack *b)
 		ft_swap(&a->head->n, &a->head->next->n);
 	if (b->count > 1)
 		ft_swap(&b->head->n, &b->head->next->n);
-	write(1, "ss\n", 3);
+	if (a->count > 1 || b->count > 1)
+		write(1, "ss\n", 3);
 }
 void	ft_pa(t_stack *a, t_stack *b)
 {
@@ -57,8 +62,8 @@ void	ft_pa(t_stack *a, t_stack *b)
 			a->tail = a->head;
 		a->count++;
 		b->count--;
+		write(1, "pa\n", 3);
 	}
-	write(1, "pa\n", 3);
 }
 
 void	ft_pb(t_stack *a, t_stack *b)
@@ -86,6 +91,6 @@ void	ft_pb(t_stack *a, t_stack *b)
 			b->tail = b->head;
 		b->count++;
 		a->count--;
+		write(1, "pb\n", 3);
 	}
-	write(1, "pb\n", 3);
 }
