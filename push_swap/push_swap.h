@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:13:10 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/07 20:33:27 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/13 02:16:50 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,13 @@ typedef struct s_stack
 int					ft_is_valid(int ac, char **av);
 
 void				ft_sorting(int ac, char **av);
+void				ft_atob(t_stack *a, t_stack *b, int n, int stack,
+						char *pos);
+void				ft_btoa(t_stack *a, t_stack *b, int n, int stack,
+						char *pos);
 
 void				ft_swap(int *a, int *b);
+void				ft_sort_int_tab(int *tab, int size);
 void				ft_error(void);
 void				ft_print_stack(t_stack *a, t_stack *b);
 
@@ -56,3 +61,5 @@ void				ft_rrb(t_stack *b);
 void				ft_rrr(t_stack *a, t_stack *b);
 
 #endif
+
+// 41 39 19 27 5 28 16 31 17 25 29 38 9 44 18 30

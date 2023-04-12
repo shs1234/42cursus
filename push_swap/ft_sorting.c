@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 18:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/09 04:08:50 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/13 07:03:14 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,106 +40,244 @@ static void	ft_stack_init(int ac, char **av, t_stack *a, t_stack *b)
 	}
 }
 
-void	ft_merge(t_stack *a, t_stack *b, int end)
+void	ft_pivot(t_stack *stack, int n, int *pivot)
 {
+	t_node	*node;
 	int		i;
-	int		j;
-	int		m;
-	t_node	*div_i;
-	t_node	*div_j;
+	int		*tab;
 
-	// printf("----------------------\n%d : ", end);
-	if (end == 1)
-	{
-		ft_ra(a);
-		return ;
-	}
-	else if (end == 2)
-	{
-		if (a->head->n < a->head->next->n)
-		{
-			ft_ra(a);
-			ft_ra(a);
-		}
-		else
-		{
-			ft_sa(a);
-			ft_ra(a);
-			ft_ra(a);
-		}
-		return ;
-	}
-	div_i = a->head;
-	div_j = a->head;
+	node = stack->head;
+	tab = (int *)malloc(sizeof(int) * n);
+	if (!tab)
+		ft_error();
 	i = 0;
-	end--;
-	m = (i + end) / 2;
-	j = m + 1;
-	while (i < j)
+	while (node && i < n)
 	{
-		div_j = div_j->next;
+		printf("----------%d--%d ", n, node->n);
+		tab[i] = node->n;
+		node = node->next;
 		i++;
 	}
+	ft_sort_int_tab(tab, n);
+	pivot[0] = tab[n / 3];
+	pivot[1] = tab[(n / 3) * 2];
+	free(tab);
+}
+
+void	ft_atob(t_stack *a, t_stack *b, int n, int stack, char *pos)
+{
+	int	pivot[2];
+	int	i;
+	int	count_middle;
+	int	count_big;
+
+	count_middle = 0;
+	count_big = 0;
 	i = 0;
-	while (i <= m)
+	if (n)
+		ft_pivot(a, n, pivot);
+	printf("----%s-----[atob] stack : %d n : %d pivot[0] : %d pivot[1] :%d\n",
+			pos,
+			stack,
+			n,
+			pivot[0],
+			pivot[1]);
+	// ft_print_stack(a, b);
+	if (n <= 3)
 	{
-		if (a->head->n < div_j->n)
+		if (n == 3)
+		{
+			if (a->head->next->next->n > a->head->next->n
+				&& a->head->next->next->n > a->head->n)
+			{
+				ft_pb(a, b);
+				ft_pb(a, b);
+			}
+			else if (a->head->next->n > a->head->next->next->n
+					&& a->head->next->n > a->head->n)
+			{
+				ft_pb(a, b);
+				ft_ra(a);
+				ft_pb(a, b);
+				ft_rra(a);
+			}
+			else if (a->head->n > a->head->next->next->n
+					&& a->head->n > a->head->next->n)
+			{
+				ft_ra(a);
+				ft_pb(a, b);
+				ft_pb(a, b);
+				ft_rra(a);
+			}
+			if (b->head->n < b->head->next->n)
+				ft_sb(b);
+		}
+		else if (n == 2)
+		{
+			if (a->head->n > a->head->next->n)
+				ft_sa(a);
+			ft_pb(a, b);
+		}
+		ft_pb(a, b);
+		ft_print_stack(a, b);
+		return ;
+	}
+	while (i < n)
+	{
+		printf("n : [%d]\n", a->head->n);
+		if (a->head->n >= pivot[1])
+		{
 			ft_ra(a);
+			count_big++;
+		}
 		else
 		{
 			ft_pb(a, b);
-			ft_rb(b);
+			if (b->head->n >= pivot[0])
+			{
+				ft_rb(b);
+				count_middle++;
+			}
 		}
 		i++;
+		ft_print_stack(a, b);
 	}
-	while (j <= end)
+	// printf("\n");
+	i = 0;
+	printf("------count_big : %d  count_middle : %d-------\n", count_big,
+			count_middle);
+	while (i < count_big && i < count_middle)
 	{
-		if (b->head)
+		ft_rrr(a, b);
+		ft_print_stack(a, b);
+		i++;
+	}
+	while (i < count_big)
+	{
+		ft_rra(a);
+		ft_print_stack(a, b);
+		i++;
+	}
+	while (i < count_middle)
+	{
+		ft_rrb(b);
+		ft_print_stack(a, b);
+		i++;
+	}
+	ft_atob(a, b, count_big, stack + 1, "big");
+	ft_btoa(a, b, count_big, stack + 1, "big");
+	ft_btoa(a, b, count_middle, stack + 1, "mid");
+	ft_btoa(a, b, n - count_big - count_middle, stack + 1, "smal");
+}
+
+void	ft_btoa(t_stack *a, t_stack *b, int n, int stack, char *pos)
+{
+	int	pivot[2];
+	int	i;
+	int	count_small;
+	int	count_middle;
+
+	if (b->head == NULL)
+		exit(0);
+	count_small = 0;
+	count_middle = 0;
+	i = 0;
+	i = 0;
+	if (n)
+		ft_pivot(b, n, pivot);
+	printf("----%s------[btoa] stack : %d n : %d pivot[0] : %d pivot[1] :%d\n",
+			pos,
+			stack,
+			n,
+			pivot[0],
+			pivot[1]);
+	// ft_print_stack(a, b);
+	if (n <= 3)
+	{
+		if (n == 3)
 		{
-			if (a->head->n < b->head->n)
+			if (b->head->next->next->n > b->head->next->n
+				&& b->head->next->next->n > b->head->n)
 			{
-				ft_ra(a);
-				j++;
+				ft_rb(b);
+				ft_rb(b);
+				ft_pa(a, b);
+				ft_rrb(b);
+				ft_rrb(b);
 			}
-			else
+			else if (b->head->next->n > b->head->next->next->n
+					&& b->head->next->n > b->head->n)
+			{
+				ft_rb(b);
+				ft_pa(a, b);
+				ft_rrb(b);
+			}
+			else if (b->head->n > b->head->next->next->n
+					&& b->head->n > b->head->next->n)
 			{
 				ft_pa(a, b);
-				ft_ra(a);
 			}
+			if (b->head->n < b->head->next->n)
+				ft_sb(b);
+			ft_pa(a, b);
+		}
+		else if (n == 2)
+		{
+			if (b->head->n < b->head->next->n)
+				ft_sb(b);
+			ft_pa(a, b);
+		}
+		ft_pa(a, b);
+		ft_print_stack(a, b);
+		return ;
+	}
+	while (i < n)
+	{
+		if (b->head == NULL)
+			exit(0);
+		if (b->head->n < pivot[0])
+		{
+			ft_rb(b);
+			count_small++;
 		}
 		else
 		{
-			ft_ra(a);
-			j++;
+			ft_pa(a, b);
+			if (a->head->n < pivot[1])
+			{
+				ft_ra(a);
+				count_middle++;
+			}
 		}
+		i++;
+		ft_print_stack(a, b);
 	}
-	while (b->head)
-	{
-		ft_pa(a, b);
-		ft_ra(a);
-	}
-	// ft_print_stack(a, b);
-}
-
-void	ft_divide(t_stack *a, t_stack *b, int n)
-{
-	int	i;
-	int	j;
-	int	tab[20000];
-
+	// printf("\n");
 	i = 0;
-	j = 0;
-	tab[i++] = n;
-	while (i < 20000)
+	ft_atob(a, b, n - count_small - count_middle, stack + 1, "big");
+	ft_btoa(a, b, n - count_small - count_middle, stack + 1, "big");
+	printf("------count_small : %d  count_middle : %d-------\n", count_small,
+			count_middle);
+	while (i < count_small && i < count_middle)
 	{
-		if (tab[j] / 2 == 0)
-			break ;
-		tab[i++] = tab[j] / 2;
-		tab[i++] = tab[j] - tab[j] / 2;
-		j++;
+		ft_rrr(a, b);
+		ft_print_stack(a, b);
+		i++;
 	}
-	while (--i >= 0)
-		ft_merge(a, b, tab[i]);
+	while (i < count_small)
+	{
+		ft_rrb(b);
+		ft_print_stack(a, b);
+		i++;
+	}
+	while (i < count_middle)
+	{
+		ft_rra(a);
+		ft_print_stack(a, b);
+		i++;
+	}
+	ft_atob(a, b, count_middle, stack + 1, "mid");
+	ft_btoa(a, b, count_small, stack + 1, "smal");
 }
 
 void	ft_sorting(int ac, char **av)
@@ -153,6 +291,6 @@ void	ft_sorting(int ac, char **av)
 		ft_error();
 	ft_stack_init(ac, av, a, b);
 	// ft_print_stack(a, b);
-	ft_divide(a, b, ac - 1);
+	ft_atob(a, b, ac - 1, 1, "start");
 	// ft_print_stack(a, b);
 }

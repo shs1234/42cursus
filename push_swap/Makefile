@@ -6,13 +6,12 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/04/08 23:53:09 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/04/13 05:40:47 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	push_swap
-# CFLAGS	=	-Wall -Wextra -Werror
-CFLAGS	=	
+CFLAGS	=	-Wall -Wextra -Werror -g -O0
 AR		=	ar rcs
 RM		=	rm -rf
 HEADER	=	push_swap.h
