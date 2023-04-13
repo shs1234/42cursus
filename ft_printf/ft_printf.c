@@ -6,13 +6,13 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:35:38 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/06 14:09:47 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/13 19:09:40 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printarg(char c, va_list ap, int *len)
+static int	ft_printarg(char c, va_list ap, int *len)
 {
 	int	ret;
 
@@ -67,6 +67,5 @@ int	ft_printf(const char *format, ...)
 		}
 		format++;
 	}
-	va_end(ap);
-	return (len);
+	return (va_end(ap), len);
 }
