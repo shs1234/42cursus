@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 18:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/14 09:30:28 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/15 04:37:59 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	ft_stack_init(int ac, char **av, t_stack *a, t_stack *b)
 	a->head->prev = NULL;
 	a->tail = a->head;
 	a->count = 1;
+	a->first_iter = 1;
 	b->head = NULL;
 	b->tail = NULL;
 	b->count = 0;
@@ -38,7 +39,6 @@ static void	ft_stack_init(int ac, char **av, t_stack *a, t_stack *b)
 		a->tail->n = ft_atoi(av[i]);
 		a->count++;
 	}
-	a->total = ac - 1;
 }
 
 void	ft_sorting(int ac, char **av)

@@ -6,19 +6,18 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 04:39:57 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/14 11:07:03 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/15 04:38:40 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ft_btoa_2(t_stack *a, t_stack *b)
+void	ft_btoa_2(t_stack *a, t_stack *b)
 {
 	if (b->head->n < b->head->next->n)
 		ft_sb(b);
 	ft_pa(a, b);
 	ft_pa(a, b);
-	return ;
 }
 
 static void	ft_btoa_3(t_stack *a, t_stack *b)
@@ -43,7 +42,34 @@ static void	ft_btoa_3(t_stack *a, t_stack *b)
 	else if (i == 1)
 		ft_pa(a, b);
 	ft_btoa_2(a, b);
-	return ;
+}
+
+static void	ft_btoa_5(t_stack *a, t_stack *b)
+{
+	int	mid;
+	int	i;
+	int	rb;
+
+	i = 0;
+	rb = 0;
+	mid = ft_3rd_5(a->head);
+	while (i < 3)
+	{
+		if (a->head->n >= mid)
+		{
+			ft_pa(a, b);
+			i++;
+		}
+		else
+		{
+			ft_rb(b);
+			rb++;
+		}
+	}
+	while (rb--)
+		ft_rrb(b);
+	ft_atob_3(a, b);
+	ft_btoa_2(a, b);
 }
 
 static void	ft_btoa_divide(t_stack *a, t_stack *b, int n, int *count)
@@ -76,12 +102,13 @@ void	ft_btoa(t_stack *a, t_stack *b, int n)
 {
 	int	count[2];
 
-	if (n == 3)
+	a->first_iter = 0;
+	if (n == 5)
+		return (ft_btoa_5(a, b));
+	else if (n == 3)
 		return (ft_btoa_3(a, b));
 	else if (n == 2)
 		return (ft_btoa_2(a, b));
-	else if (n == 1)
-		return (ft_pa(a, b));
 	ft_btoa_divide(a, b, n, count);
 	if (!ft_issorted(a->head, n - count[0] - count[1]))
 		ft_atob(a, b, n - count[0] - count[1]);

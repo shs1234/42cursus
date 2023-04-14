@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 03:40:41 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/14 08:36:21 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/15 04:31:59 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,17 +94,44 @@ void	ft_pivot(t_stack *stack, int n, int *pivot)
 	free(tab);
 }
 
+int	ft_3rd_5(t_node *node)
+{
+	int	i;
+	int	*tab;
+	int	ret;
+
+	tab = (int *)malloc(sizeof(int) * 5);
+	if (!tab)
+		ft_error();
+	i = 0;
+	while (i < 5)
+	{
+		tab[i] = node->n;
+		node = node->next;
+		i++;
+	}
+	ft_sort_int_tab(tab, 5);
+	ret = tab[2];
+	free(tab);
+	return (ret);
+}
+
 void	ft_rrab(t_stack *a, t_stack *b, int *count)
 {
 	int	i;
+	int	count0_copy;
 
 	i = 0;
-	while (i < count[0] && i < count[1])
+	if (a->first_iter)
+		count0_copy = 0;
+	else
+		count0_copy = count[0];
+	while (i < count0_copy && i < count[1])
 	{
 		ft_rrr(a, b);
 		i++;
 	}
-	while (i < count[0])
+	while (i < count0_copy)
 	{
 		ft_rra(a);
 		i++;
@@ -118,9 +145,9 @@ void	ft_rrab(t_stack *a, t_stack *b, int *count)
 
 int	ft_whereisbig(t_node *node, int n)
 {
-	int		i;
-	int		big;
-	int		big_index;
+	int	i;
+	int	big;
+	int	big_index;
 
 	big = node->n;
 	i = 0;
@@ -135,4 +162,32 @@ int	ft_whereisbig(t_node *node, int n)
 		i++;
 	}
 	return (big_index + 1);
+}
+int	ft_issorted(t_node *node, int n)
+{
+	while (--n)
+	{
+		if (node->n > node->next->n)
+			return (0);
+		node = node->next;
+	}
+	return (1);
+}
+
+int	ft_issorted_rev(t_stack *a, t_stack *b, int n)
+{
+	int n_copy;
+	t_node *node;
+
+	node = b->head;
+	n_copy = n;
+	while (--n)
+	{
+		if (node->n < node->next->n)
+			return (0);
+		node = node->next;
+	}
+	while (n_copy--)
+		ft_pa(a, b);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 04:36:36 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/14 11:07:17 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/15 04:43:33 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@ static void	ft_atob_2(t_stack *a)
 {
 	if (a->head->n > a->head->next->n)
 		ft_sa(a);
-	return ;
 }
 
-static void	ft_atob_3(t_stack *a, t_stack *b)
+void	ft_atob_3(t_stack *a, t_stack *b)
 {
 	int	i;
 
@@ -40,7 +39,34 @@ static void	ft_atob_3(t_stack *a, t_stack *b)
 		ft_pa(a, b);
 	}
 	ft_atob_2(a);
-	return ;
+}
+
+static void	ft_atob_5(t_stack *a, t_stack *b)
+{
+	int	mid;
+	int	i;
+	int	ra;
+
+	i = 0;
+	ra = 0;
+	mid = ft_3rd_5(a->head);
+	while (i < 2)
+	{
+		if (a->head->n < mid)
+		{
+			ft_pb(a, b);
+			i++;
+		}
+		else
+		{
+			ft_ra(a);
+			ra++;
+		}
+	}
+	while (ra--)
+		ft_rra(a);
+	ft_atob_3(a, b);
+	ft_btoa_2(a, b);
 }
 
 static void	ft_atob_divide(t_stack *a, t_stack *b, int n, int *count)
@@ -94,47 +120,17 @@ static void	ft_atob_divide_first(t_stack *a, t_stack *b, int n, int *count)
 		}
 	}
 }
-
-int	ft_issorted(t_node *node, int n)
-{
-	while (--n)
-	{
-		if (node->n > node->next->n)
-			return (0);
-		node = node->next;
-	}
-	return (1);
-}
-
-int	ft_issorted_rev(t_stack *a, t_stack *b, int n)
-{
-	int		n_copy;
-	t_node	*node;
-
-	node = b->head;
-	n_copy = n;
-	while (--n)
-	{
-		if (node->n < node->next->n)
-			return (0);
-		node = node->next;
-	}
-	while (n_copy--)
-		ft_pa(a, b);
-	return (1);
-}
-
 void	ft_atob(t_stack *a, t_stack *b, int n)
 {
 	int	count[2];
 
-	if (n == 3)
+	if (n == 5)
+		return (ft_atob_5(a, b));
+	else if (n == 3)
 		return (ft_atob_3(a, b));
 	else if (n == 2)
 		return (ft_atob_2(a));
-	else if (n == 1)
-		return ;
-	if (a->count == a->total)
+	if (b->count == 0)
 		ft_atob_divide_first(a, b, n, count);
 	else
 	{

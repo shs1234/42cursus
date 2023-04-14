@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:13:10 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/14 11:26:50 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/15 03:42:57 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_stack
 	t_node			*head;
 	t_node			*tail;
 	int				count;
-	int				total;
+	int				first_iter;
 }					t_stack;
 
 int					ft_is_valid(int ac, char **av);
@@ -45,6 +45,7 @@ void				ft_error(void);
 void				ft_print_stack(t_stack *a, t_stack *b);
 void				ft_pivot(t_stack *stack, int n, int *pivot);
 void				ft_rrab(t_stack *a, t_stack *b, int *count);
+int					ft_3rd_5(t_node *node);
 
 void				ft_sa(t_stack *a);
 void				ft_sb(t_stack *b);
@@ -66,5 +67,8 @@ int					ft_issorted_rev(t_stack *a, t_stack *b, int n);
 
 int					ft_isdigit(int c);
 int					ft_atoi(const char *str);
+
+void				ft_btoa_2(t_stack *a, t_stack *b);
+void				ft_atob_3(t_stack *a, t_stack *b);
 
 #endif
