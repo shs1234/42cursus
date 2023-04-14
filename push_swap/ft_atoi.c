@@ -6,12 +6,11 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:26:54 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/05 18:12:16 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:27:44 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "push_swap.h"
 
 static int	ft_numlen(long long n)
 {
