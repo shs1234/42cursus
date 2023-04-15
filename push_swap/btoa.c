@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 04:39:57 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/15 04:38:40 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/15 19:28:57 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void	ft_btoa(t_stack *a, t_stack *b, int n)
 		return (ft_btoa_3(a, b));
 	else if (n == 2)
 		return (ft_btoa_2(a, b));
+	else if (n == 0)
+		return ;
 	ft_btoa_divide(a, b, n, count);
 	if (!ft_issorted(a->head, n - count[0] - count[1]))
 		ft_atob(a, b, n - count[0] - count[1]);

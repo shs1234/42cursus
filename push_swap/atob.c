@@ -6,17 +6,11 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 04:36:36 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/15 04:43:33 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/15 19:35:28 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static void	ft_atob_2(t_stack *a)
-{
-	if (a->head->n > a->head->next->n)
-		ft_sa(a);
-}
 
 void	ft_atob_3(t_stack *a, t_stack *b)
 {
@@ -38,7 +32,8 @@ void	ft_atob_3(t_stack *a, t_stack *b)
 		ft_pa(a, b);
 		ft_pa(a, b);
 	}
-	ft_atob_2(a);
+	if (a->head->n > a->head->next->n)
+		ft_sa(a);
 }
 
 static void	ft_atob_5(t_stack *a, t_stack *b)
@@ -129,7 +124,11 @@ void	ft_atob(t_stack *a, t_stack *b, int n)
 	else if (n == 3)
 		return (ft_atob_3(a, b));
 	else if (n == 2)
-		return (ft_atob_2(a));
+	{
+		if (a->head->n > a->head->next->n)
+			ft_sa(a);
+		return ;
+	}
 	if (b->count == 0)
 		ft_atob_divide_first(a, b, n, count);
 	else
