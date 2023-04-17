@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 03:40:41 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/15 19:30:03 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:22:10 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_error(void)
 {
-	write(1, "error\n", 6);
+	write(1, "Error\n", 6);
 	exit(1);
 }
 
@@ -47,28 +47,6 @@ void	ft_sort_int_tab(int *tab, int size)
 			i++;
 		}
 	}
-}
-
-void	ft_print_stack(t_stack *a, t_stack *b)
-{
-	t_node	*node;
-
-	node = a->head;
-	printf("a : ");
-	while (node)
-	{
-		printf("%d ", node->n);
-		node = node->next;
-	}
-	printf("\n");
-	printf("b : ");
-	node = b->head;
-	while (node)
-	{
-		printf("%d ", node->n);
-		node = node->next;
-	}
-	printf("\n");
 }
 
 void	ft_pivot(t_stack *stack, int n, int *pivot)
@@ -190,4 +168,38 @@ int	ft_issorted_rev(t_stack *a, t_stack *b, int n)
 	while (n_copy--)
 		ft_pa(a, b);
 	return (1);
+}
+
+char	*ft_strcpy(char *dest, char *src)
+{
+	char *dest_start;
+
+	dest_start = dest;
+	while (*src)
+		*dest++ = *src++;
+	*dest = '\0';
+	return (dest_start);
+}
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (s)
+	{
+		while (*s)
+		{
+			write(fd, s, sizeof(*s));
+			s++;
+		}
+	}
+}
+int	ft_strlen(const char *s)
+{
+	int	len;
+
+	len = 0;
+	while (*s)
+	{
+		len++;
+		s++;
+	}
+	return (len);
 }
