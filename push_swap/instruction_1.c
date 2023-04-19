@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:12:54 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/17 01:09:17 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:56:03 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_sa(t_stack *a)
 		ft_lstadd_back(a->list_head, ft_lstnew("sa\n"));
 	}
 }
+
 void	ft_sb(t_stack *b)
 {
 	if (b->count > 1)
@@ -28,6 +29,7 @@ void	ft_sb(t_stack *b)
 		ft_lstadd_back(b->list_head, ft_lstnew("sb\n"));
 	}
 }
+
 void	ft_ss(t_stack *a, t_stack *b)
 {
 	if (a->count > 1)
@@ -37,6 +39,7 @@ void	ft_ss(t_stack *a, t_stack *b)
 	if (a->count > 1 || b->count > 1)
 		ft_lstadd_back(a->list_head, ft_lstnew("ss\n"));
 }
+
 void	ft_pa(t_stack *a, t_stack *b)
 {
 	t_node	*temp;

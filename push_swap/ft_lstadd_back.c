@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:05:13 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/17 21:22:37 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:54:01 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_list	*ft_lstnew(char *content)
 	lst->next = 0;
 	return (lst);
 }
+
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*lastlst;
@@ -35,6 +36,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	lastlst = ft_lstlast(*lst);
 	lastlst->next = new;
 }
+
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (lst && lst->next)

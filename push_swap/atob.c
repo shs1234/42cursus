@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 04:36:36 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/18 00:10:23 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:53:38 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ static void	ft_atob_divide_first(t_stack *a, t_stack *b, int n, int *count)
 		}
 	}
 }
+
 void	ft_atob(t_stack *a, t_stack *b, int n)
 {
 	int	count[2];

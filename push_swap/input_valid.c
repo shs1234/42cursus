@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:14:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/18 00:27:14 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:55:47 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ static int	ft_isint(char *n)
 		return (0);
 	return (1);
 }
+
 int	ft_strcmp(char *s1, char *s2)
 {
 	while (*s1 && *s2 && *s1 == *s2)
-    {
-        s1++;
-        s2++;
-    }
+	{
+		s1++;
+		s2++;
+	}
 	return (*s1 - *s2);
 }
 

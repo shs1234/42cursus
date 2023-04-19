@@ -6,7 +6,7 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 14:34:05 by hoseoson          #+#    #+#              #
-#    Updated: 2023/04/05 18:15:51 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/04/19 12:30:42 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ else
 endif
 
 all : $(NAME)
+	sleep 1
 
 $(NAME) : $(OBJ_SWITCH)
 	$(AR) $@ $^

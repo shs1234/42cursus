@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:12:54 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/17 01:09:35 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:56:09 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_rb(t_stack *b)
 		ft_lstadd_back(b->list_head, ft_lstnew("rb\n"));
 	}
 }
+
 void	ft_rr(t_stack *a, t_stack *b)
 {
 	t_node	*temp;

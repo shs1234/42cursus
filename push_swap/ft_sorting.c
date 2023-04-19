@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 18:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/18 00:11:43 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:54:25 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_stack_init(int ac, char **av, t_stack *a, t_stack *b)
 	}
 }
 
-static void ft_print_inst(t_stack *a)
+static void	ft_print_inst(t_stack *a)
 {
 	while (*a->list_head)
 	{
@@ -50,7 +50,7 @@ static void ft_print_inst(t_stack *a)
 	}
 }
 
-static void ft_ac3(t_stack *a)
+static void	ft_ac3(t_stack *a)
 {
 	int	i;
 
@@ -62,7 +62,8 @@ static void ft_ac3(t_stack *a)
 	if (a->head->n > a->head->next->n)
 		ft_sa(a);
 }
-static void ft_ac5(t_stack *a, t_stack *b)
+
+static void	ft_ac5(t_stack *a, t_stack *b)
 {
 	int	i;
 	int	mid;
