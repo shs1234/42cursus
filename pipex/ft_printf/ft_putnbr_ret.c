@@ -1,69 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_hex.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/05 01:59:53 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/22 01:59:44 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/03/17 15:28:56 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/04/22 03:45:34 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_hex_lower(unsigned int n)
+static int	ft_print_nbr(long long lln, int *len)
 {
-	char	hex[8];
-	int		i;
-	int		len;
+	int	tab[10];
+	int	i;
 
 	i = 0;
-	len = 0;
-	if (n == 0)
+	while (lln)
 	{
-		if (write(1, "0", 1) == -1)
-			return (-1);
-		len++;
+		tab[i++] = lln % 10;
+		lln /= 10;
 	}
-	while (n)
+	while (i--)
 	{
-		hex[i++] = "0123456789abcdef"[n % 16];
-		n /= 16;
+		if (ft_putchar_ret(tab[i] + '0') == -1)
+			return (0);
+		(*len)++;
 	}
-	while (i)
-	{
-		if (write(1, &hex[--i], 1) == -1)
-			return (-1);
-		len++;
-	}
-	return (len);
+	return (1);
 }
 
-int	ft_print_hex_upper(unsigned int n)
+int	ft_putnbr_ret(int n)
 {
-	char	hex[8];
-	int		i;
-	int		len;
+	long long	lln;
+	int			len;
 
-	i = 0;
+	lln = n;
 	len = 0;
-	if (n == 0)
+	if (lln == 0)
 	{
-		if (write(1, "0", 1) == -1)
+		if (ft_putchar_ret(0 + '0' == -1))
 			return (-1);
 		len++;
 	}
-	while (n)
+	if (lln < 0)
 	{
-		hex[i++] = "0123456789ABCDEF"[n % 16];
-		n /= 16;
-	}
-	while (i)
-	{
-		if (write(1, &hex[--i], 1) == -1)
+		if (ft_putchar_ret('-') == -1)
 			return (-1);
+		lln *= -1;
 		len++;
 	}
+	if (!ft_print_nbr(lln, &len))
+		return (-1);
 	return (len);
 }

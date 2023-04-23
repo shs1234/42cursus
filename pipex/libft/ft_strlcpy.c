@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 15:16:22 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/13 19:10:26 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/03/14 20:17:16 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/03/21 02:55:56 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putstr_fd(char *s, int fd)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int	len;
+	size_t	i;
 
-	len = 0;
-	if (s)
+	i = 0;
+	if (dstsize == 0)
+		return (ft_strlen(src));
+	while (i + 1 < dstsize && src[i])
 	{
-		while (*s)
-		{
-			if (write(fd, s++, 1) == -1)
-				return (-1);
-			len++;
-		}
+		dst[i] = src[i];
+		i++;
 	}
-	else
-	{
-		if (write(1, "(null)", 6) == -1)
-			return (-1);
-		len += 6;
-	}
-	return (len);
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }

@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 22:37:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/22 03:49:27 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/03/17 15:28:56 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/03/20 21:03:44 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdarg.h>
-# include <unistd.h>
+void	ft_putnbr_fd(int n, int fd)
+{
+	long long	lln;
+	int			tab[10];
+	int			i;
 
-int		ft_printf(const char *format, ...);
-int		ft_putchar_ret(char c);
-int		ft_putstr_ret(char *s);
-int		ft_putnbr_ret(int n);
-int		ft_putuint_ret(unsigned int n);
-int		ft_print_hex_upper(unsigned int n);
-int		ft_print_hex_lower(unsigned int n);
-int		ft_putaddr(void *addr);
-char	*ft_strchr(const char *s, int c);
-
-#endif
+	lln = n;
+	i = 0;
+	if (lln == 0)
+		ft_putchar_fd(0 + '0', fd);
+	if (lln < 0)
+	{
+		ft_putchar_fd('-', fd);
+		lln *= -1;
+	}
+	while (lln)
+	{
+		tab[i++] = lln % 10;
+		lln /= 10;
+	}
+	while (i > 0)
+		ft_putchar_fd(tab[--i] + '0', fd);
+}

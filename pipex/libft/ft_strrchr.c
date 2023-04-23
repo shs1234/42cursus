@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 22:37:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/22 03:49:27 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/03/15 08:11:19 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/03/21 03:14:07 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdarg.h>
-# include <unistd.h>
+char	*ft_strrchr(const char *s, int c)
+{
+	const char	*s_start;
+	char		char_c;
 
-int		ft_printf(const char *format, ...);
-int		ft_putchar_ret(char c);
-int		ft_putstr_ret(char *s);
-int		ft_putnbr_ret(int n);
-int		ft_putuint_ret(unsigned int n);
-int		ft_print_hex_upper(unsigned int n);
-int		ft_print_hex_lower(unsigned int n);
-int		ft_putaddr(void *addr);
-char	*ft_strchr(const char *s, int c);
-
-#endif
+	char_c = (char)c;
+	s_start = s;
+	while (*s)
+		s++;
+	while (s_start != s)
+	{
+		if (*s == char_c)
+			return ((char *)s);
+		s--;
+	}
+	if (*s == char_c)
+		return ((char *)s);
+	return (0);
+}

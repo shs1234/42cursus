@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 22:37:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/22 03:49:27 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/03/17 15:59:57 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/03/21 02:16:55 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdarg.h>
-# include <unistd.h>
+int	ft_lstsize(t_list *lst)
+{
+	int	size;
 
-int		ft_printf(const char *format, ...);
-int		ft_putchar_ret(char c);
-int		ft_putstr_ret(char *s);
-int		ft_putnbr_ret(int n);
-int		ft_putuint_ret(unsigned int n);
-int		ft_print_hex_upper(unsigned int n);
-int		ft_print_hex_lower(unsigned int n);
-int		ft_putaddr(void *addr);
-char	*ft_strchr(const char *s, int c);
-
-#endif
+	size = 0;
+	while (lst)
+	{
+		size++;
+		lst = lst->next;
+	}
+	return (size);
+}

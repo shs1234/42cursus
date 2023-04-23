@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 22:37:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/22 03:49:27 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/03/16 22:04:23 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/03/20 21:14:12 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdarg.h>
-# include <unistd.h>
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+	size_t	s1_len;
+	size_t	s2_len;
 
-int		ft_printf(const char *format, ...);
-int		ft_putchar_ret(char c);
-int		ft_putstr_ret(char *s);
-int		ft_putnbr_ret(int n);
-int		ft_putuint_ret(unsigned int n);
-int		ft_print_hex_upper(unsigned int n);
-int		ft_print_hex_lower(unsigned int n);
-int		ft_putaddr(void *addr);
-char	*ft_strchr(const char *s, int c);
-
-#endif
+	if (!s1 || !s2)
+		return (0);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!str)
+		return (0);
+	*str = 0;
+	ft_strlcat(str, s1, s1_len + 1);
+	ft_strlcat(str, s2, s1_len + s2_len + 1);
+	return (str);
+}

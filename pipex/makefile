@@ -6,14 +6,12 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/04/18 01:00:51 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/04/22 09:38:43 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	pipex
-CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
-AR		=	ar rcs
+# CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -rf
 HEADER	=	pipex.h
 
@@ -23,15 +21,21 @@ OBJS	=	$(SRCS:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(AR) $@ $^
+	$(MAKE) -C libft
+	$(MAKE) -C ft_printf
+	$(CC) -o $@ $^ ./ft_printf/libftprintf.a ./libft/libft.a -I./libft/ -I./ft_printf/
 
 %.o : %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean : 
+	$(MAKE) -C libft $@
+	$(MAKE) -C ft_printf $@
 	$(RM) $(OBJS)
 
 fclean : clean
+	$(MAKE) -C libft $@
+	$(MAKE) -C ft_printf $@
 	$(RM) $(NAME)
 
 re : fclean all
