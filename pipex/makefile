@@ -6,16 +6,16 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/04/22 09:38:43 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/04/25 07:56:55 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	pipex
-# CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -rf
 HEADER	=	pipex.h
 
-SRCS	=	main.c
+SRCS	=	main.c pipex.c utils.c
 OBJS	=	$(SRCS:.c=.o)
 
 all : $(NAME)
