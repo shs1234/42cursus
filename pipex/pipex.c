@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 07:04:21 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/25 07:58:04 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:45:16 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	ft_sub_process(pid_t *pid, t_info *info, char **envp)
 		if (dup2(info->infile_fd, STDIN_FILENO) == -1 ||
 			dup2(info->pipe[1], STDOUT_FILENO) == -1)
 			ft_error("dup");
-		close(info->pipe[0]);
-		close(info->pipe[1]);
+		ft_closepipe(info->pipe);
 		execve(info->pathcmd1, info->cmd1_split, envp);
 	}
 	pid[1] = fork();
@@ -55,8 +54,7 @@ void	ft_sub_process(pid_t *pid, t_info *info, char **envp)
 		if (dup2(info->outfile_fd, STDOUT_FILENO) == -1 ||
 			dup2(info->pipe[0], STDIN_FILENO) == -1)
 			ft_error("dup");
-		close(info->pipe[1]);
-		close(info->pipe[0]);
+		ft_closepipe(info->pipe);
 		execve(info->pathcmd2, info->cmd2_split, envp);
 	}
 }
@@ -67,8 +65,7 @@ void	ft_pipex(char **av, char **envp)
 
 	ft_info_init(av, envp, &info);
 	ft_sub_process(pid, &info, envp);
-	close(info.pipe[0]);
-	close(info.pipe[1]);
+	ft_closepipe(info.pipe);
 	waitpid(pid[0], NULL, 0);
 	waitpid(pid[1], NULL, 0);
 }

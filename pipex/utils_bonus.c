@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/25 07:51:45 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/25 10:07:14 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/04/25 09:16:01 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/04/26 13:18:49 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void ft_closepipe(int *pipe)
 {
@@ -31,10 +31,10 @@ char	*ft_pathjoin(char const *path, char const *cmd)
 	char	*str_start;
 
 	if (!path || !cmd)
-		return (0);
+		return (NULL);
 	str = malloc(sizeof(char) * (ft_strlen(path) + ft_strlen(cmd) + 2));
 	if (!str)
-		return (0);
+		return (NULL);
 	str_start = str;
 	while (*path)
 		*str++ = *path++;
