@@ -6,12 +6,12 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/04/26 19:03:25 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/04/27 11:12:47 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	pipex
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror
 # CFLAGS		=	-g
 RM			=	rm -rf
 
@@ -33,6 +33,7 @@ else
 endif
 
 all : $(NAME)
+	sleep 1
 
 bonus :
 	$(MAKE) BONUS=1 all

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:55:12 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/25 10:08:12 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:47:44 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <string.h>
-# include <wait.h>
+# include <sys/errno.h>
+# include <sys/wait.h>
 
 typedef struct s_info
 {
@@ -31,7 +32,7 @@ typedef struct s_info
 	char	*pathcmd2;
 }			t_info;
 
-void		ft_error(char *msg);
+void		ft_error(char *errmsg);
 void		ft_closepipe(int *pipe);
 char		*ft_pathjoin(char const *s1, char const *s2);
 void		ft_findcmd(char **path, char *cmd, char **pathcmd);

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:51:57 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/25 07:57:35 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:48:25 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,7 @@ int	main(int ac, char **av, char **envp)
 {
 	if (ac == 5)
 		ft_pipex(av, envp);
+	else
+		exit(1);
 	return (0);
 }

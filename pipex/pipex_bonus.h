@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 08:40:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/26 19:11:25 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/27 08:45:15 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <string.h>
-# include <wait.h>
+# include <sys/wait.h>
 
 typedef struct s_info
 {
