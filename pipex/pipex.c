@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 07:04:21 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/27 20:46:33 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/28 21:48:47 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_info_init(char **av, char **envp, t_info *info)
 	info->infile_fd = open(av[1], O_RDONLY);
 	info->outfile_fd = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (info->infile_fd < 0 || info->outfile_fd < 0)
-		ft_putstr_fd(strerror(errno), 1);
+		ft_error(strerror(errno));
 	while (ft_strncmp(*envp, "PATH", 4))
 		envp++;
 	path = ft_split(&(*envp)[5], ':');
@@ -42,9 +42,10 @@ void	ft_sub_process(pid_t *pid, t_info *info, char **envp)
 	{
 		if (dup2(info->infile_fd, STDIN_FILENO) == -1 || dup2(info->pipe[1],
 				STDOUT_FILENO) == -1)
-			ft_putstr_fd(strerror(errno), 1);
+			ft_putstr_fd("dup", 1);
 		ft_closepipe(info->pipe);
 		execve(info->pathcmd1, info->cmd1_split, envp);
+		exit(0);
 	}
 	pid[1] = fork();
 	if (pid[1] < 0)
@@ -53,7 +54,7 @@ void	ft_sub_process(pid_t *pid, t_info *info, char **envp)
 	{
 		if (dup2(info->outfile_fd, STDOUT_FILENO) == -1 || dup2(info->pipe[0],
 				STDIN_FILENO) == -1)
-			ft_putstr_fd(strerror(errno), 1);
+			ft_putstr_fd("dup", 1);
 		ft_closepipe(info->pipe);
 		execve(info->pathcmd2, info->cmd2_split, envp);
 	}
