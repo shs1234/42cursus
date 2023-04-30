@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 01:59:50 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/06 14:06:31 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/29 23:16:55 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_print_addr(void *addr, int *len)
 	}
 	while (i)
 	{
-		if (write(1, &tab[--i], 1) == -1)
+		if (ft_putchar_ret(tab[--i]) == -1)
 			return (0);
 		(*len)++;
 	}
@@ -38,13 +38,12 @@ int	ft_putaddr(void *addr)
 {
 	int	len;
 
-	len = 0;
-	if (write(1, "0x", 2) == -1)
+	if (ft_putstr_ret("0x") == -1)
 		return (-1);
-	len += 2;
+	len = 2;
 	if (!addr)
 	{
-		if (write(1, "0", 1) == -1)
+		if (ft_putchar_ret('0') == -1)
 			return (-1);
 		len++;
 	}

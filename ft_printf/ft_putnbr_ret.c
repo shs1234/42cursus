@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr_ret.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:28:56 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/22 03:45:34 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/29 23:23:04 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,10 @@ int	ft_putnbr_ret(int n)
 	long long	lln;
 	int			len;
 
-	lln = n;
+	if (n == 0)
+		return (ft_putchar_ret('0'));
 	len = 0;
-	if (lln == 0)
-	{
-		if (ft_putchar_ret(0 + '0' == -1))
-			return (-1);
-		len++;
-	}
+	lln = n;
 	if (lln < 0)
 	{
 		if (ft_putchar_ret('-') == -1)

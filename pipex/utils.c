@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 07:51:45 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/28 20:04:50 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/30 11:44:55 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@ void	ft_closepipe(int *pipe)
 	close(pipe[1]);
 }
 
-// void	ft_error(char *msg)
-// {
-// 	ft_putstr_fd(msg, STDOUT_FILENO);
-// 	ft_putchar_fd('\n', STDOUT_FILENO);
-// 	exit(EXIT_FAILURE);
-// }
 void	ft_error(char *errmsg)
 {
 	ft_putstr_fd(errmsg, STDOUT_FILENO);
@@ -68,5 +62,6 @@ void	ft_findcmd(char **path, char *cmd, char **pathcmd)
 		path++;
 		free(str);
 	}
+	*pathcmd = cmd;
 	ft_putstr_fd("command not found\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:35:38 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/22 03:48:37 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/29 23:15:06 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_printarg(char c, va_list ap, int *len)
 	else if (c == 'X')
 		ret = ft_print_hex_upper(va_arg(ap, unsigned int));
 	else if (c == '%')
-		ret = write(1, "%", 1);
+		ret = ft_putchar_ret('%');
 	if (ret == -1)
 		return (0);
 	(*len) += ret;

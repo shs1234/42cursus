@@ -16,21 +16,15 @@ int	ft_putstr_ret(char *s)
 {
 	int	len;
 
+	if (!s)
+		return (ft_putstr_ret("(null)"));
 	len = 0;
-	if (s)
+	while (*s)
 	{
-		while (*s)
-		{
-			if (write(1, s++, 1) == -1)
-				return (-1);
-			len++;
-		}
-	}
-	else
-	{
-		if (write(1, "(null)", 6) == -1)
+		if (ft_putchar_ret(*s) == -1)
 			return (-1);
-		len += 6;
+		len++;
+		s++;
 	}
 	return (len);
 }
