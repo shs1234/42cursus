@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:55:12 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/27 12:47:44 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/01 16:31:44 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void		ft_error(char *errmsg);
 void		ft_closepipe(int *pipe);
 char		*ft_pathjoin(char const *s1, char const *s2);
 void		ft_findcmd(char **path, char *cmd, char **pathcmd);
-void		ft_info_init(char **av, char **envp, t_info *info);
-void		ft_pipex(char **av, char **envp);
+void		ft_info_init(int ac, char **av, char **envp, t_info *info);
+void		ft_pipex(int ac, char **av, char **envp);
 void		ft_sub_process(pid_t *pid, t_info *info, char **envp);
 
 #endif
