@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 07:51:45 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/30 11:44:55 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/30 21:34:03 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_pathjoin(char const *path, char const *cmd)
 
 	if (!path || !cmd)
 		return (0);
-	str = malloc(sizeof(char) * (ft_strlen(path) + ft_strlen(cmd) + 2));
+	str = malloc(ft_strlen(path) + ft_strlen(cmd) + 2);
 	if (!str)
 		return (0);
 	str_start = str;

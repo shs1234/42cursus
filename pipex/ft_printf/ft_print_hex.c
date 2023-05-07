@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 01:59:53 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/22 01:59:44 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/29 23:07:33 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,10 @@ int	ft_print_hex_lower(unsigned int n)
 	int		i;
 	int		len;
 
+	if (n == 0)
+		return (ft_putchar_ret('0'));
 	i = 0;
 	len = 0;
-	if (n == 0)
-	{
-		if (write(1, "0", 1) == -1)
-			return (-1);
-		len++;
-	}
 	while (n)
 	{
 		hex[i++] = "0123456789abcdef"[n % 16];
@@ -33,7 +29,7 @@ int	ft_print_hex_lower(unsigned int n)
 	}
 	while (i)
 	{
-		if (write(1, &hex[--i], 1) == -1)
+		if (ft_putchar_ret(hex[--i]) == -1)
 			return (-1);
 		len++;
 	}
@@ -46,14 +42,10 @@ int	ft_print_hex_upper(unsigned int n)
 	int		i;
 	int		len;
 
+	if (n == 0)
+		return (ft_putchar_ret('0'));
 	i = 0;
 	len = 0;
-	if (n == 0)
-	{
-		if (write(1, "0", 1) == -1)
-			return (-1);
-		len++;
-	}
 	while (n)
 	{
 		hex[i++] = "0123456789ABCDEF"[n % 16];
@@ -61,7 +53,7 @@ int	ft_print_hex_upper(unsigned int n)
 	}
 	while (i)
 	{
-		if (write(1, &hex[--i], 1) == -1)
+		if (ft_putchar_ret(hex[--i]) == -1)
 			return (-1);
 		len++;
 	}

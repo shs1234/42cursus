@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 08:40:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/04/27 08:45:15 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/07 02:06:11 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <string.h>
+# include <sys/errno.h>
 # include <sys/wait.h>
 
 typedef struct s_info
 {
+	int		ac;
 	int		infile_fd;
 	int		outfile_fd;
 	int		**pipe;
@@ -34,8 +36,6 @@ char		*ft_pathjoin(char const *s1, char const *s2);
 void		ft_findcmd(char **path, char *cmd, char **pathcmd);
 void		ft_info_init(int ac, char **av, char **envp, t_info *info);
 void		ft_pipex(int ac, char **av, char **envp);
-void		ft_sub_process(int i, pid_t *pid, t_info *info,
-				char **envp);
 void		ft_closepipe(int *pipe);
 
 #endif
