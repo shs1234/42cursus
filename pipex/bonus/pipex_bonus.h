@@ -6,15 +6,15 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 08:40:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/07 02:06:11 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:42:10 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 
-# include "ft_printf/ft_printf.h"
-# include "libft/libft.h"
+# include "../ft_printf/ft_printf.h"
+# include "../libft/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <string.h>

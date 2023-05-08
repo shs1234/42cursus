@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 09:14:42 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/07 02:34:53 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/08 17:45:26 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,8 @@ static void	ft_sub_process1(int i, pid_t *pid, t_info *info, char **envp)
 		dup2(info->infile_fd, STDIN_FILENO);
 		dup2(info->pipe[i][1], STDOUT_FILENO);
 		ft_close_pipe_all(info);
-		// close(info->infile_fd);
-		// close(info->pipe[i][1]);
-		execve(info->pathcmd[i], info->cmd_split[i], envp);
+		if (execve(info->pathcmd[i], info->cmd_split[i], envp) == -1)
+			exit(errno);
 	}
 }
 static void	ft_sub_process2(int i, pid_t *pid, t_info *info, char **envp)
@@ -86,9 +85,8 @@ static void	ft_sub_process2(int i, pid_t *pid, t_info *info, char **envp)
 		dup2(info->pipe[i - 1][0], STDIN_FILENO);
 		dup2(info->pipe[i][1], STDOUT_FILENO);
 		ft_close_pipe_all(info);
-		// close(info->pipe[i - 1][0]);
-		// close(info->pipe[i][1]);
-		execve(info->pathcmd[i], info->cmd_split[i], envp);
+		if (execve(info->pathcmd[i], info->cmd_split[i], envp) == -1)
+			exit(errno);
 	}
 }
 static void	ft_sub_process3(int i, pid_t *pid, t_info *info, char **envp)
@@ -101,9 +99,10 @@ static void	ft_sub_process3(int i, pid_t *pid, t_info *info, char **envp)
 		dup2(info->pipe[i - 1][0], STDIN_FILENO);
 		dup2(info->outfile_fd, STDOUT_FILENO);
 		ft_close_pipe_all(info);
-		// close(info->pipe[i - 1][0]);
-		// close(info->outfile_fd);
-		execve(info->pathcmd[i], info->cmd_split[i], envp);
+		if (!ft_strchr(info->pathcmd[i], '/'))
+			exit(127);
+		if (execve(info->pathcmd[i], info->cmd_split[i], envp) == -1)
+			exit(errno);
 	}
 }
 
@@ -131,6 +130,5 @@ void	ft_pipex(int ac, char **av, char **envp)
 	}
 	ft_close_pipe_all(&info);
 	waitpid(pid[i - 1], &status, 0);
-	if (WIFEXITED(status))
-		exit(WEXITSTATUS(status));
+	exit(WEXITSTATUS(status));
 }
