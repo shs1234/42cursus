@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:19 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/09 19:57:22 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/10 05:01:48 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "ft_printf/ft_printf.h"
 # include "libft/libft.h"
-# include "math.h"
+#include "math.h"
 
 #endif
