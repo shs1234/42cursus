@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/05/08 17:20:54 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/05/10 05:53:48 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ bonus :
 $(NAME) : $(SWITCH_OBJS)
 	$(MAKE) -C libft
 	$(MAKE) -C ft_printf
-	$(CC) -o $@ $^ ./ft_printf/libftprintf.a ./libft/libft.a -I./libft/ -I./ft_printf/
+	$(CC) -o $@ $^ ./ft_printf/libftprintf.a ./libft/libft.a
 
 %.o : %.c $(SWITCH_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
