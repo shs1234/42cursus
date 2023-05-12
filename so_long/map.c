@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:52:24 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/12 10:13:30 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:13:39 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	components(int x, int y, char *cep1, t_map *map_data)
 	}
 	return (1);
 }
+
 int	valid_map(t_map *map_data)
 {
 	int		x;
