@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 20:17:26 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/12 01:09:48 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/05/11 14:52:35 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/05/11 14:56:50 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-void	ft_bzero(void *s, size_t n)
+void	error(char *msg)
 {
-	ft_memset(s, 0, n);
+	ft_putendl_fd(msg, 1);
+	exit(EXIT_FAILURE);
 }

@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 20:17:26 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/12 01:09:48 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/03/20 23:35:50 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/05/11 13:37:39 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_free(char **mem)
 {
-	ft_memset(s, 0, n);
+	free(*mem);
+	*mem = 0;
+}
+
+int	ft_has_newline(char *buf)
+{
+	int	i;
+
+	i = 0;
+	while (buf[i])
+	{
+		if (buf[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
 }
