@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/14 03:50:57 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/14 10:10:04 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-void	rendering(t_vars *vars)
+int	rendering(t_vars *vars)
 {
 	int	x;
 	int	y;
@@ -56,7 +56,6 @@ int	key(int keycode, t_vars *vars)
 		up(vars);
 	else if (keycode == K_AR_D)
 		down(vars);
-	rendering(vars);
 	if (vars->exit == 1)
 	{
 		sleep(1);
@@ -89,9 +88,11 @@ void	so_long(t_vars *vars)
 	vars->win = mlx_new_window(vars->mlx, vars->map_width * IMG_SIZE,
 			vars->map_height * IMG_SIZE, "so long");
 	img_init(vars);
-	rendering(vars);
+	// rendering(vars);
+	mlx_loop_hook(vars->mlx, rendering, vars);
 	mlx_hook(vars->win, 17, 0, esc, 0);
-	mlx_key_hook(vars->win, key, vars);
+	mlx_hook(vars->win, 2, 1L << 0, key, vars);
+	// mlx_key_hook(vars->win, key, vars);
 	mlx_loop(vars->mlx);
 	return ;
 }
@@ -114,3 +115,7 @@ int	main(int ac, char **av)
 		error("map error");
 	return (0);
 }
+
+// 적 추가
+// 스프라이트 -특정 경로 안에 있는 파일 불러오기
+// 화면에 움직임 횟수 표시
