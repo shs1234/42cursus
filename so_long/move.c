@@ -6,13 +6,13 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 08:46:34 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/14 03:49:53 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:38:21 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	up(t_vars *vars)
+void	key_up(t_vars *vars)
 {
 	if (vars->map[vars->player_y - 1][vars->player_x] == '1')
 		return ;
@@ -30,7 +30,7 @@ void	up(t_vars *vars)
 	ft_putnbr_fd(vars->move, 1);
 	ft_putchar_fd('\n', 1);
 }
-void	down(t_vars *vars)
+void	key_down(t_vars *vars)
 {
 	if (vars->map[vars->player_y + 1][vars->player_x] == '1')
 		return ;
@@ -48,7 +48,7 @@ void	down(t_vars *vars)
 	ft_putnbr_fd(vars->move, 1);
 	ft_putchar_fd('\n', 1);
 }
-void	left(t_vars *vars)
+void	key_left(t_vars *vars)
 {
 	if (vars->map[vars->player_y][vars->player_x - 1] == '1')
 		return ;
@@ -66,7 +66,7 @@ void	left(t_vars *vars)
 	ft_putnbr_fd(vars->move, 1);
 	ft_putchar_fd('\n', 1);
 }
-void	right(t_vars *vars)
+void	key_right(t_vars *vars)
 {
 	if (vars->map[vars->player_y][vars->player_x + 1] == '1')
 		return ;
@@ -83,8 +83,4 @@ void	right(t_vars *vars)
 	vars->move++;
 	ft_putnbr_fd(vars->move, 1);
 	ft_putchar_fd('\n', 1);
-}
-int	esc(void)
-{
-	exit(0);
 }

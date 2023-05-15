@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:19 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/14 03:50:01 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:46:03 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ typedef struct s_vars
 	void	*mlx;
 	void	*win;
 	char	**map;
-	int		map_width;
-	int		map_height;
+	size_t	map_width;
+	size_t	map_height;
 	int		player_x;
 	int		player_y;
 	int		c_count;
@@ -57,12 +57,13 @@ int			valid_map(t_vars *vars);
 
 // utils
 void		error(char *msg);
+int			return_index(char *str, char c);
+int			line_count(char *filename);
 
 // move
-void		up(t_vars *vars);
-void		down(t_vars *vars);
-void		left(t_vars *vars);
-void		right(t_vars *vars);
-int			esc(void);
+void		key_up(t_vars *vars);
+void		key_down(t_vars *vars);
+void		key_left(t_vars *vars);
+void		key_right(t_vars *vars);
 
 #endif

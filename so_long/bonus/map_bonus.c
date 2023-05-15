@@ -6,32 +6,16 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:52:24 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/14 04:08:48 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:50:19 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-static int	line_count(char *filename)
-{
-	int	i;
-	int	fd;
-
-	i = 0;
-	fd = open(filename, O_RDONLY);
-	if (fd > 0)
-		while (get_next_line(fd))
-			i++;
-	else
-		error("fd");
-	close(fd);
-	return (i);
-}
-
 int	make_map(char *filename, t_vars *vars)
 {
 	int		fd;
-	int		i;
+	size_t	i;
 	char	*new_line;
 
 	vars->map_height = line_count(filename);
@@ -57,7 +41,7 @@ int	make_map(char *filename, t_vars *vars)
 	return (1);
 }
 
-int	components(int y, int x, char *cep1, t_vars *vars)
+int	components(size_t y, size_t x, char *cep1, t_vars *vars)
 {
 	if (y == 0 || y == vars->map_height - 1 ||
 		x == 0 || x == vars->map_width - 1)
@@ -83,7 +67,7 @@ int	components(int y, int x, char *cep1, t_vars *vars)
 
 void	dfs(char **map, int x, int y, int *c_count)
 {
-	if (map[y][x] == '1' || *c_count == -1)
+	if (map[y][x] == '1' || map[y][x] == 'F' || *c_count == -1)
 		return ;
 	if (map[y][x] == 'C' || map[y][x] == 'E')
 		(*c_count)--;
@@ -98,7 +82,7 @@ int	valid_path(t_vars *vars)
 {
 	char	**map_copy;
 	int		c_count;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	map_copy = malloc(sizeof(char *) * (vars->map_height + 1));
@@ -121,8 +105,8 @@ int	valid_path(t_vars *vars)
 
 int	valid_map(t_vars *vars)
 {
-	int		y;
-	int		x;
+	size_t	y;
+	size_t	x;
 	char	cep1[4];
 
 	ft_bzero(cep1, 4);

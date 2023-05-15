@@ -6,16 +6,16 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/14 03:50:57 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:46:35 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	rendering(t_vars *vars)
+int	rendering(t_vars *vars)
 {
-	int	x;
-	int	y;
+	size_t	x;
+	size_t	y;
 
 	y = 0;
 	while (y < vars->map_height)
@@ -23,44 +23,33 @@ void	rendering(t_vars *vars)
 		x = 0;
 		while (x < vars->map_width)
 		{
-			if (vars->map[y][x] == '0')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->imgs[0].img,
-						x * IMG_SIZE, y * IMG_SIZE);
-			else if (vars->map[y][x] == '1')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->imgs[1].img,
-						x * IMG_SIZE, y * IMG_SIZE);
-			else if (vars->map[y][x] == 'C')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->imgs[2].img,
-						x * IMG_SIZE, y * IMG_SIZE);
-			else if (vars->map[y][x] == 'E')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->imgs[3].img,
-						x * IMG_SIZE, y * IMG_SIZE);
-			else if (vars->map[y][x] == 'P')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->imgs[4].img,
-						x * IMG_SIZE, y * IMG_SIZE);
+			mlx_put_image_to_window(vars->mlx, vars->win,
+					vars->imgs[return_index("01CEP", vars->map[y][x])].img, x
+					* IMG_SIZE, y * IMG_SIZE);
 			x++;
 		}
 		y++;
 	}
+	return (0);
 }
 
 int	key(int keycode, t_vars *vars)
 {
 	if (keycode == K_ESC)
-		esc();
+		exit(0);
 	if (keycode == K_AR_L)
-		left(vars);
+		key_left(vars);
 	else if (keycode == K_AR_R)
-		right(vars);
+		key_right(vars);
 	else if (keycode == K_AR_U)
-		up(vars);
+		key_up(vars);
 	else if (keycode == K_AR_D)
-		down(vars);
-	rendering(vars);
+		key_down(vars);
 	if (vars->exit == 1)
 	{
+		rendering(vars);
 		sleep(1);
-		esc();
+		exit(0);
 	}
 	return (0);
 }
@@ -83,17 +72,13 @@ void	img_init(t_vars *vars)
 
 void	so_long(t_vars *vars)
 {
-	t_img	imgs[5];
-
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, vars->map_width * IMG_SIZE,
 			vars->map_height * IMG_SIZE, "so long");
 	img_init(vars);
-	rendering(vars);
-	mlx_hook(vars->win, 17, 0, esc, 0);
-	mlx_key_hook(vars->win, key, vars);
+	mlx_loop_hook(vars->mlx, rendering, vars);
+	mlx_hook(vars->win, 2, 1L << 0, key, vars);
 	mlx_loop(vars->mlx);
-	return ;
 }
 
 int	main(int ac, char **av)

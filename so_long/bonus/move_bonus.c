@@ -6,13 +6,13 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 08:46:34 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/14 04:08:51 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:07:19 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-void	up(t_vars *vars)
+void	key_up(t_vars *vars)
 {
 	if (vars->map[vars->player_y - 1][vars->player_x] == '1')
 		return ;
@@ -21,16 +21,15 @@ void	up(t_vars *vars)
 	else if (vars->map[vars->player_y - 1][vars->player_x] == 'E'
 			&& vars->c_count != 0)
 		return ;
-	if (vars->map[vars->player_y - 1][vars->player_x] == 'E')
+	if (vars->map[vars->player_y - 1][vars->player_x] == 'E'
+		|| vars->map[vars->player_y - 1][vars->player_x] == 'F')
 		vars->exit = 1;
 	vars->map[vars->player_y][vars->player_x] = '0';
 	vars->player_y--;
 	vars->map[vars->player_y][vars->player_x] = 'P';
 	vars->move++;
-	ft_putnbr_fd(vars->move, 1);
-	ft_putchar_fd('\n', 1);
 }
-void	down(t_vars *vars)
+void	key_down(t_vars *vars)
 {
 	if (vars->map[vars->player_y + 1][vars->player_x] == '1')
 		return ;
@@ -39,16 +38,15 @@ void	down(t_vars *vars)
 	else if (vars->map[vars->player_y + 1][vars->player_x] == 'E'
 			&& vars->c_count != 0)
 		return ;
-	if (vars->map[vars->player_y + 1][vars->player_x] == 'E')
+	if (vars->map[vars->player_y + 1][vars->player_x] == 'E'
+		|| vars->map[vars->player_y + 1][vars->player_x] == 'F')
 		vars->exit = 1;
 	vars->map[vars->player_y][vars->player_x] = '0';
 	vars->player_y++;
 	vars->map[vars->player_y][vars->player_x] = 'P';
 	vars->move++;
-	ft_putnbr_fd(vars->move, 1);
-	ft_putchar_fd('\n', 1);
 }
-void	left(t_vars *vars)
+void	key_left(t_vars *vars)
 {
 	if (vars->map[vars->player_y][vars->player_x - 1] == '1')
 		return ;
@@ -57,16 +55,15 @@ void	left(t_vars *vars)
 	else if (vars->map[vars->player_y][vars->player_x - 1] == 'E'
 			&& vars->c_count != 0)
 		return ;
-	if (vars->map[vars->player_y][vars->player_x - 1] == 'E')
+	if (vars->map[vars->player_y][vars->player_x - 1] == 'E'
+		|| vars->map[vars->player_y][vars->player_x - 1] == 'F')
 		vars->exit = 1;
 	vars->map[vars->player_y][vars->player_x] = '0';
 	vars->player_x--;
 	vars->map[vars->player_y][vars->player_x] = 'P';
 	vars->move++;
-	ft_putnbr_fd(vars->move, 1);
-	ft_putchar_fd('\n', 1);
 }
-void	right(t_vars *vars)
+void	key_right(t_vars *vars)
 {
 	if (vars->map[vars->player_y][vars->player_x + 1] == '1')
 		return ;
@@ -75,16 +72,11 @@ void	right(t_vars *vars)
 	else if (vars->map[vars->player_y][vars->player_x + 1] == 'E'
 			&& vars->c_count != 0)
 		return ;
-	if (vars->map[vars->player_y][vars->player_x + 1] == 'E')
+	if (vars->map[vars->player_y][vars->player_x + 1] == 'E'
+		|| vars->map[vars->player_y][vars->player_x + 1] == 'F')
 		vars->exit = 1;
 	vars->map[vars->player_y][vars->player_x] = '0';
 	vars->player_x++;
 	vars->map[vars->player_y][vars->player_x] = 'P';
 	vars->move++;
-	ft_putnbr_fd(vars->move, 1);
-	ft_putchar_fd('\n', 1);
-}
-int	esc(void)
-{
-	exit(0);
 }
