@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:36:08 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/11 13:49:20 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:43:58 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,13 @@ static char	*ft_strdup_gnl(const char *s1, char *save)
 	*dup = '\0';
 	return (ft_free(&save), dup_start);
 }
+
 char	*get_next_line(int fd)
 {
-	static char *save;
-	char buf[BUFFER_SIZE + 1];
-	int len;
-	char *ret;
+	static char	*save;
+	char		buf[BUFFER_SIZE + 1];
+	int			len;
+	char		*ret;
 
 	ret = 0;
 	len = 1;
