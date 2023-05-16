@@ -1,19 +1,19 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    makefile_home                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/05/16 13:02:26 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/05/16 13:01:14 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = so_long
-# CFLAGS      = -Wall -Wextra -Werror
+CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -rf
-FRAMEWORK	= -framework OpenGL -framework AppKit
+FRAMEWORK	= -lXext -lX11
 
 SRCS        = main.c get_next_line.c get_next_line_utils.c map.c utils.c move.c
 OBJS        = $(SRCS:.c=.o)
@@ -41,21 +41,19 @@ bonus :
 
 $(NAME) : $(SWITCH_OBJS)
 	$(MAKE) -C libft
-	$(MAKE) -C minilibx_mac
-	mv ./minilibx_mac/libmlx.dylib ./
-	$(CC) $(CFLAGS) -o $@ $^ ./libft/libft.a libmlx.dylib $(FRAMEWORK)
+	$(MAKE) -C minilibx-linux
+	$(CC) $(CFLAGS) -o $@ $^ ./libft/libft.a ./minilibx-linux/libmlx.a $(FRAMEWORK)
 
 %.o : %.c $(SWITCH_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean : 
 	$(MAKE) -C libft $@
-	$(MAKE) -C minilibx_mac $@
+	$(MAKE) -C minilibx-linux $@
 	$(RM) $(OBJS) $(OBJS_B)
 
 fclean : clean
 	$(MAKE) -C libft $@
-	$(RM) libmlx.dylib
 	$(RM) $(NAME)
 
 re : fclean all

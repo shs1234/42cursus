@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 08:46:34 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/15 18:07:19 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:15:29 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	key_up(t_vars *vars)
 	vars->map[vars->player_y][vars->player_x] = 'P';
 	vars->move++;
 }
+
 void	key_down(t_vars *vars)
 {
 	if (vars->map[vars->player_y + 1][vars->player_x] == '1')
@@ -46,6 +47,7 @@ void	key_down(t_vars *vars)
 	vars->map[vars->player_y][vars->player_x] = 'P';
 	vars->move++;
 }
+
 void	key_left(t_vars *vars)
 {
 	if (vars->map[vars->player_y][vars->player_x - 1] == '1')
@@ -63,6 +65,7 @@ void	key_left(t_vars *vars)
 	vars->map[vars->player_y][vars->player_x] = 'P';
 	vars->move++;
 }
+
 void	key_right(t_vars *vars)
 {
 	if (vars->map[vars->player_y][vars->player_x + 1] == '1')

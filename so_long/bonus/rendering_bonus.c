@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 18:28:33 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/15 18:51:20 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:15:57 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ void	put_image(t_vars *vars, int x, int y, time_t now)
 {
 	if (vars->map[y][x] == '0')
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->empty.img, x
-				* IMG_SIZE, y * IMG_SIZE);
+			* IMG_SIZE, y * IMG_SIZE);
 	else if (vars->map[y][x] == '1')
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->wall.img, x
-				* IMG_SIZE, y * IMG_SIZE);
+			* IMG_SIZE, y * IMG_SIZE);
 	else if (vars->map[y][x] == 'C')
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->c[now % 3].img, x
-				* IMG_SIZE, y * IMG_SIZE);
+			* IMG_SIZE, y * IMG_SIZE);
 	else if (vars->map[y][x] == 'E')
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->e[now % 4].img, x
-				* IMG_SIZE, y * IMG_SIZE);
+			* IMG_SIZE, y * IMG_SIZE);
 	else if (vars->map[y][x] == 'P')
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->p[now % 4].img, x
-				* IMG_SIZE, y * IMG_SIZE);
+			* IMG_SIZE, y * IMG_SIZE);
 	else if (vars->map[y][x] == 'F')
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->f[now % 4].img, x
-				* IMG_SIZE, y * IMG_SIZE);
+			* IMG_SIZE, y * IMG_SIZE);
 }
 
 int	rendering(t_vars *vars)

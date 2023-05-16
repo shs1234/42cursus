@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/15 18:29:17 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:15:15 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,3 @@ int	main(int ac, char **av)
 		error("map error");
 	return (0);
 }
-
-// 스프라이트 -특정 경로 안에 있는 파일 불러오기

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:19 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/15 18:46:03 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:57:34 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define SO_LONG_H
 
 # include "libft/libft.h"
-// # include "minilibx/mlx.h"
-# include "key_linux.h"
-// # include "key_mac.h"
-# include "minilibx-linux/mlx.h"
+# include "minilibx_mac/mlx.h"
+// # include "key_linux.h"
+# include "key_mac.h"
+// # include "minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 
