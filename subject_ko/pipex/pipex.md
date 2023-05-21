@@ -92,9 +92,9 @@ _버전 2_
 
   다음과 같은 함수들을 사용 가능합니다 :
 
-  - `access` 파일 존재, 권한 체크
+  - `access`
   - `open`
-  - `unlink` 파일의 연결 계수를 1 줄임. 0이되면 파일 삭제.
+  - `unlink`
   - `close`
   - `read`
   - `write`

@@ -83,41 +83,6 @@ _버전 2_
 
 - ##### _Submit your work to your assigned git repository. Only the work in the git repository will be graded. If Deepthought is assigned to grade your work, it will be done after your peer-evaluations. If an error happens in any section of your work during Deepthought’s grading, the evaluation will stop._
   할당된 git 저장소에 과제물을 제출하세요. 오직 git 저장소에 있는 과제물만 등급이 매겨질 것입니다. Deepthought가 평가하는 과제의 경우엔, 동료평가 이후에 Deepthought가 수행됩니다. 만약 Deepthought 평가 중에 오류가 발생한다면, 그 즉시 평가는 중지될 것입니다.
-<!-- 
-- ##### _The executable files must be named client and server._
-
-  실행 파일명은 반드시 `client`와 `server` 이어야 합니다.
-
-- ##### _You have to handle errors sensitively. In no way can your program quit unexpectedly (Segmentation fault, bus error, double free, etc)._
-
-  여러분은 반드시 오류를 세심하게 처리하셔야 합니다. 어떠한 이유 (Segmentation fault, bus error, double free 등) 에서도 프로그램이 예상치 못하게 종료되면 안 됩니다.
-
-- ##### _Your program cannot have memory leaks._
-
-  프로그램에 메모리 누수가 발생하면 안 됩니다.
-
-- ##### _You can use one global variable but it must be justified._
-
-  전역 변수는 최대 한 개만 사용 가능하며, 정당한 이유가 있어야 합니다.
-
-- ##### _On the mandatory part you are allowed to use the following functions:_
-
-  필수 파트에서는 다음과 같은 함수들을 사용 가능합니다 :
-
-  - `write`
-  - `ft_printf` 와 그에 관련된 **여러분이 작성한** 파일들
-  - `signal`
-  - `sigemptyset`
-  - `sigaddset`
-  - `sigaction`
-  - `kill`
-  - `getpid`
-  - `malloc`
-  - `free`
-  - `pause`
-  - `sleep`
-  - `usleep`
-  - `exit` -->
 
 <br>
 
@@ -147,7 +112,7 @@ _버전 2_
 
 - ##### _You can have `one global variable per program` (one of the client and one for the server), but you will have to justify their use._
 
-	프로그램당(클라이언트와 서버) 전역 변수 하나씩 사용하며, 정당한 이유가 있어야 합니다.
+	프로그램당(클라이언트와 서버) 전역 변수 하나씩 사용 가능하며, 정당한 이유가 있어야 합니다.
 
 - ##### _In order to complete the mandatory part, you are allowed to use the following functions:_
 
@@ -175,9 +140,9 @@ _버전 2_
 
 ## Mandatory Part
 
-- ##### _You must create a communication program in the form of a `client` and a `server`._
+##### _You must create a communication program in the form of a `client` and a `server`._
 
-	클라이언트와 서버로 이루어진 통신 프로그램을 작성해야 합니다.
+클라이언트와 서버로 이루어진 통신 프로그램을 작성해야 합니다.
 
 - ##### _The server must be launched first. After its launch, it has to print its PID._
 
@@ -195,13 +160,9 @@ _버전 2_
 
 		서버로 전송할 문자열
 
-- ##### _The client must communicate the string passed as a parameter to the server. Once the string has been received, the server must display it._
+- ##### _The client must communicate the string passed as a parameter to the server. Once the string has been received, the server must print it._
 
   클라이언트는 인자로 들어온 문자열을 서버로 전송할 수 있어야 합니다. 서버에서는 문자열을 수신받은 후, 이를 출력하여야 합니다.
-
-- ##### _Communication between your programs should ONLY be done using UNIX signals._
-
-  여러분의 프로그램 끼리의 통신은 **반드시** UNIX 시그널을 이용해서만 이루어져야 합니다.
 
 - ##### _The server has to display the string pretty quickly. Quickly means that if you think it takes too long, then it is probably too long._
 
@@ -214,9 +175,13 @@ _버전 2_
 > 100글자를 전홍하는데 1초가 소요되면 **굉장히 느린** 겁니다!
 >
 
-- ##### _Your server should be able to receive strings from several clients in a row, without needing to be restarted._
+- ##### _Your server should be able to receive strings from several clients in a row without needing to restart._
 
-  여러분의 서버는 도중에 재시작할 필요 없이, 여러 클라이언트로부터 문자열을 연속적으로 수신받아야 합니다.
+  여러분의 서버는 도중에 재시작할 필요 없이 여러 클라이언트로부터 문자열을 연속적으로 수신받아야 합니다.
+  
+- ##### _The communication between your client and your server has to be done only using programs should ONLY using UNIX signals._
+
+  여러분의 프로그램 끼리의 통신은 **반드시** UNIX 시그널을 이용해서만 이루어져야 합니다.
 
 - ##### _You can only use the two signals `SIGUSR1` and `SIGUSR2`._
 
@@ -224,7 +189,7 @@ _버전 2_
 
 > ⚠️ <br>
 >
-> ##### _Linux system do NOT queue signals when you already have pending signal of this type! bonus time?_
+> ##### _Linux system does NOT queue signals when you already have pending signal of this type! Bonus time?_
 >
 > 리눅스 시스템은 같은 유형의 시그널이 이미 보류 중일 경우, 시그널을 대기열에 넣지 않습니다. 보너스 과제 한번 해 보실래요?
 
@@ -234,19 +199,15 @@ _버전 2_
 
 ## Bonus part
 
-- ##### _Bonus list :_
+##### _Bonus list :_
 
-	- ##### _The server acknowledge every message received by sending back a signal to the client._
+- ##### _The server acknowledge every message received by sending back a signal to the client._
 
-	  서버는 시그널이 들어올 때마다 클라이언트에 답장 시그널을 보내는 것으로 시그널이 잘 수신 되었음을 보장하여야 합니다.
+	서버는 시그널이 들어올 때마다 클라이언트에 답장 시그널을 보내는 것으로 시그널이 잘 수신 되었음을 보장하여야 합니다.
 	
-	- ##### _Unicode characters support!_
+- ##### _Unicode characters support!_
 
-	  유니코드 문자열을 지원해 보세요!
-
-- ##### _The server confirms every signal received by sending a signal to the client._
-
-  서버는 시그널이 들어올 때마다 클라이언트에 답장 시그널을 보내는 것으로 시그널이 잘 수신되었음을 보장하여야 합니다.
+	유니코드 문자열을 지원해 보세요!
 
 > ⚠️ <br>
 >

@@ -320,7 +320,7 @@ Broadcast message from root@wil (tty1) (Sun Apr 25 15:45:00 2021):
 
 > ⚠️It is of course FORBIDDEN to turn in your virtual machine in your Git repository. During the defense, the signature of the signature.txt file will be compared with the one of your virtual machine. If the two of them are not identical, your grade will be 0.
 
-> ⚠️당연히 Git repository에 가상 머신을 제출하는 것은 ___금지___ 됩니다. 평가를 진행하면서, siganture.txt 파일에 있는 서명은 가상 머신의 서명과 비교될 것입니다. 만약 이 두 개가 동일하지 않다면, 0점을 받게 될 것입니다.
+> ⚠️당연히 Git repository에 가상 머신을 제출하는 것은 ___금지___ 됩니다. 평가를 진행하면서, signature.txt 파일에 있는 서명은 가상 머신의 서명과 비교될 것입니다. 만약 이 두 개가 동일하지 않다면, 0점을 받게 될 것입니다.
 
 
 

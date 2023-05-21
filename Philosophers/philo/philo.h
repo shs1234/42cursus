@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:18 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/19 20:42:47 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/21 09:23:19 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define START 0
-# define EAT 1
-# define SLEEP 2
-# define THINK 3
-# define DIED 4
+# define EAT 0
+# define SLEEP 1
+# define THINK 2
 
 typedef struct s_info
 {
@@ -46,6 +44,7 @@ typedef struct s_philo
 	int				left;
 	int				status;
 	int				eat_count;
+	long			starving;
 	t_info			*info;
 }					t_philo;
 

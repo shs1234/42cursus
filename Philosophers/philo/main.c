@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:21 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/19 22:49:34 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/21 22:27:59 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,63 +20,80 @@ long	get_time_ms(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
+void	print_msg(t_philo *philo, char *msg)
+{
+	printf("%ld %d %s", get_time_ms() - philo->info->starttime, philo->i + 1,
+			msg);
+}
+
 void	*philosopher(void *arg)
 {
 	t_philo	*philo;
-	long	now;
 
 	philo = (t_philo *)arg;
-	while (1)
+	philo->starving = get_time_ms();
+	if (philo->i % 2 == 1)
+		usleep(100);
+	while (philo->eat_count != philo->info->must_eat)
 	{
-		if (philo->status == START)
-			philo->status = EAT;
 		if (philo->status == EAT)
 		{
-			// pthread_mutex_lock(&philo->info->mutex);
-			// 포크 잡기
-			// 왼 오 손 확인
-			// 손에 맞는 포크 있는지 확인
-			// 포크 1 손 1 만들기
-			// has taken a fork 출력
-			// pthread_mutex_unlock(&philo->info->mutex);
-			// 양손에 포크 있다면 먹기
-			// 양손에 포크 없다면 continue ;
-			now = get_time_ms();
-			printf("%ld", now - philo->info->starttime);
-			printf(" %d ", philo->i);
+			pthread_mutex_lock(&philo->info->mutex);
+			if (philo->right == 0)
+			{
+				if (philo->info->fork[philo->i] == 0)
+				{
+					philo->right = 1;
+					philo->info->fork[philo->i] = 1;
+					print_msg(philo, "has taken a fork\n");
+				}
+			}
+			if (philo->left == 0)
+			{
+				if (philo->info->fork[(philo->i + philo->info->n - 1)
+					% philo->info->n] == 0)
+				{
+					philo->left = 1;
+					philo->info->fork[(philo->i + philo->info->n - 1)
+						% philo->info->n] = 1;
+					print_msg(philo, "has taken a fork\n");
+				}
+			}
+			pthread_mutex_unlock(&philo->info->mutex);
+			if (get_time_ms() - philo->starving >= philo->info->time_to_die)
+			{
+				print_msg(philo, "died\n");
+				break ;
+			}
+			if (philo->right == 0 || philo->left == 0)
+				continue ;
+			print_msg(philo, "is eating\n");
 			philo->eat_count++;
-			printf("is eating : %d\n", philo->eat_count);
-			philo->status = SLEEP;
 			usleep(philo->info->time_to_eat * 1000);
-			// 포크 놓기
+			philo->right = 0;
+			philo->left = 0;
+			// 여기도 뮤텍스?
+			philo->info->fork[philo->i] = 0;
+			philo->info->fork[(philo->i + philo->info->n - 1)
+				% philo->info->n] = 0;
+			philo->status = SLEEP;
 		}
 		else if (philo->status == SLEEP)
 		{
-			now = get_time_ms();
-			printf("%ld", now - philo->info->starttime);
-			printf(" %d ", philo->i);
-			printf("is sleeping\n");
+			print_msg(philo, "is sleeping\n");
 			philo->status = THINK;
 			usleep(philo->info->time_to_sleep * 1000);
+			philo->starving = get_time_ms();
 		}
 		else if (philo->status == THINK)
 		{
-			now = get_time_ms();
-			printf("%ld", now - philo->info->starttime);
-			printf(" %d ", philo->i);
-			printf("is thinking\n");
+			print_msg(philo, "is thinking\n");
 			philo->status = EAT;
 		}
-		else if (philo->status == DIED)
-		{
-			printf("died\n");
-			break ;
-		}
-		if (philo->eat_count == philo->info->must_eat)
-			break ;
 	}
 	return (arg);
 }
+
 int	philosophers(t_philo *philo)
 {
 	pthread_t	*threads;
@@ -97,7 +114,7 @@ int	philosophers(t_philo *philo)
 	while (i < philo->info->n)
 	{
 		pthread_join(threads[i], NULL);
-		printf("%d\n", philo[i].eat_count);
+		// printf("%d\n", philo[i].eat_count);
 		// printf("%d\n", philo[i].right);
 		// printf("%d\n", philo[i].left);
 		// printf("%d\n", philo[i].status);
@@ -136,7 +153,7 @@ int	info_init(t_info *info, t_philo **philo, int ac, char **av)
 	i = -1;
 	while (++i < info->n)
 	{
-		(*philo)[i].i = i + 1;
+		(*philo)[i].i = i;
 		(*philo)[i].left = 0;
 		(*philo)[i].right = 0;
 		(*philo)[i].status = 0;
@@ -146,6 +163,7 @@ int	info_init(t_info *info, t_philo **philo, int ac, char **av)
 	}
 	return (1);
 }
+
 int	valid_args(int ac, char **av)
 {
 	if (ac == 5 || ac == 6)
@@ -163,8 +181,6 @@ int	main(int ac, char **av)
 		if (info_init(&info, &philo, ac, av))
 			philosophers(philo);
 	}
-	else
-		exit(EXIT_FAILURE);
 	return (0);
 }
 

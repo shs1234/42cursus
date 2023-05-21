@@ -6,7 +6,7 @@
 
 ##### _<center>Summary:<br/><center>This project is about coding a C library.<br/>It will contain a lot of general purpose functions your programs will rely upon.<br/><center>Version: 15_
 
-_<center>요약: 이 프로젝트의 목적은 C 라이브러리를 만드는 것입니다.<br />이 라이브러리는 훗날 여러분이 작성하게 될 프로그램들이 의존하게 될 많은 범용 함수들으 포함할 것이에요.<br/><center>버전 15_
+_<center>요약: 이 프로젝트의 목적은 C 라이브러리를 만드는 것입니다.<br />이 라이브러리는 훗날 여러분이 작성하게 될 프로그램들이 의존하게 될 많은 범용 함수들을 포함할 것이에요.<br/><center>버전 15_
 
 <br>
 
@@ -105,7 +105,7 @@ C 프로그래밍을 할 때 매우 유용한 표준 함수들을 사용할 수 
 
 - ##### _If you need helper functions to split more complex function, define them as static functions. This way, their scope will be limited to the approritate file._
 
-  복잡한 함수를 구한하기 위해 헬퍼 함수가 필요하다면, 이들을 정적 함수로 정의하세요. 이렇게 하면 정적 함수들의 범위가 적절한 파일 내부로 제한됩니다.
+  복잡한 함수를 구현하기 위해 헬퍼 함수가 필요하다면, 이들을 정적 함수로 정의하세요. 이렇게 하면 정적 함수들의 범위가 적절한 파일 내부로 제한됩니다.
 
 - ##### _Place all your files at the root of your repository._
 
