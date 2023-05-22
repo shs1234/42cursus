@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:21 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/21 22:27:59 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/22 13:05:26 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	*philosopher(void *arg)
 		usleep(100);
 	while (philo->eat_count != philo->info->must_eat)
 	{
+		if (philo->info->died == 1)
+			break ;
 		if (philo->status == EAT)
 		{
 			pthread_mutex_lock(&philo->info->mutex);
@@ -62,17 +64,19 @@ void	*philosopher(void *arg)
 			pthread_mutex_unlock(&philo->info->mutex);
 			if (get_time_ms() - philo->starving >= philo->info->time_to_die)
 			{
+				philo->info->died = 1;
 				print_msg(philo, "died\n");
 				break ;
 			}
 			if (philo->right == 0 || philo->left == 0)
 				continue ;
+			philo->starving = get_time_ms();
 			print_msg(philo, "is eating\n");
 			philo->eat_count++;
 			usleep(philo->info->time_to_eat * 1000);
 			philo->right = 0;
 			philo->left = 0;
-			// 여기도 뮤텍스?
+			// 포크 놓을때도 뮤텍스? 해야할듯.
 			philo->info->fork[philo->i] = 0;
 			philo->info->fork[(philo->i + philo->info->n - 1)
 				% philo->info->n] = 0;
@@ -83,7 +87,6 @@ void	*philosopher(void *arg)
 			print_msg(philo, "is sleeping\n");
 			philo->status = THINK;
 			usleep(philo->info->time_to_sleep * 1000);
-			philo->starving = get_time_ms();
 		}
 		else if (philo->status == THINK)
 		{
@@ -114,24 +117,10 @@ int	philosophers(t_philo *philo)
 	while (i < philo->info->n)
 	{
 		pthread_join(threads[i], NULL);
-		// printf("%d\n", philo[i].eat_count);
-		// printf("%d\n", philo[i].right);
-		// printf("%d\n", philo[i].left);
-		// printf("%d\n", philo[i].status);
 		i++;
 	}
-	// printf("%d\n", philo->info->n);
-	// printf("%d\n", philo->info->time_to_die);
-	// printf("%d\n", philo->info->time_to_eat);
-	// printf("%d\n", philo->info->time_to_sleep);
-	// printf("%d\n", philo->info->must_eat);
-	// printf("%d\n", philo->info->fork[0]);
-	// printf("%d\n", philo->info->fork[1]);
-	// printf("%d\n", philo->info->fork[2]);
-	// printf("%d\n", philo->info->fork[3]);
-	// printf("%d\n", philo->info->fork[4]);
-	// printf("%d\n", philo->info->fork[5]);
-	// printf("%p\n", &philo->info->mutex);
+	pthread_mutex_destroy(&philo->info->mutex);
+	return (0);
 }
 
 int	info_init(t_info *info, t_philo **philo, int ac, char **av)
@@ -146,6 +135,7 @@ int	info_init(t_info *info, t_philo **philo, int ac, char **av)
 		info->must_eat = ft_atoi(av[5]);
 	else
 		info->must_eat = -1;
+	info->died = 0;
 	*philo = malloc(sizeof(t_philo) * info->n);
 	info->fork = malloc(sizeof(int) * info->n);
 	if (!*philo || !info->fork)

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:18 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/21 09:23:19 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/22 00:29:35 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_info
 	int				must_eat;
 	int				*fork;
 	long			starttime;
+	int				died;
 	pthread_mutex_t	mutex;
 }					t_info;
 
