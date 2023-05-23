@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:52:24 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/15 18:50:19 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:14:07 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	make_map(char *filename, t_vars *vars)
 
 int	components(size_t y, size_t x, char *cep1, t_vars *vars)
 {
-	if (y == 0 || y == vars->map_height - 1 ||
-		x == 0 || x == vars->map_width - 1)
+	if (y == 0 || y == vars->map_height - 1
+		|| x == 0 || x == vars->map_width - 1)
 	{
 		if (vars->map[y][x] != '1')
 			cep1[3] = 1;

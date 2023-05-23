@@ -6,14 +6,14 @@
 #    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/05/16 13:02:26 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/05/23 17:03:56 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = so_long
-# CFLAGS      = -Wall -Wextra -Werror
+CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -rf
-FRAMEWORK	= -framework OpenGL -framework AppKit
+FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 
 SRCS        = main.c get_next_line.c get_next_line_utils.c map.c utils.c move.c
 OBJS        = $(SRCS:.c=.o)

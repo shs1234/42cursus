@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:19 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/16 13:16:06 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:21:00 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 
 # include "../libft/libft.h"
 # include "../minilibx_mac/mlx.h"
-// # include "../key_linux.h"
-# include "key_mac.h"
-// # include "../minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <time.h>
 
 # define BUFFER_SIZE 42
 # define IMG_SIZE 32
+
+# define K_ESC 53
+# define K_AR_L 123
+# define K_AR_R 124
+# define K_AR_U 126
+# define K_AR_D 125
 
 typedef struct s_img
 {
