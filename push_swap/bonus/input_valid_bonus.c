@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_valid.c                                      :+:      :+:    :+:   */
+/*   input_valid_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:14:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 07:26:02 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/26 03:52:40 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include <stdio.h>
+#include "push_swap_bonus.h"
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
 static int	ft_isint(char *n)
 {
 	long long	res;
+	int			len;
 	int			sign;
 
 	res = 0;
+	len = 0;
 	sign = 1;
 	if (!*n)
 		return (0);
@@ -26,28 +34,27 @@ static int	ft_isint(char *n)
 	{
 		if (*n == '-')
 			sign *= -1;
-		n++;
 	}
-	while (*n)
+	while (*++n)
 	{
-		if (!ft_isdigit(*n))
-			return (0);
-		if (sign == 1)
-		{
-			if (res*sign < 0)
-				return (0);
-		}
-		else
-		{
-			if (res*sign > 0)
-				return (0);
-		}
-		if (res * sign > INT_MAX || res * sign < INT_MIN || !ft_isdigit(*n))
+		if (len > 9 || !ft_isdigit(*n))
 			return (0);
 		res = (res * 10) + (*n - '0');
-		n++;
+		len++;
 	}
+	if (res * sign > INT_MAX || res * sign < INT_MIN)
+		return (0);
 	return (1);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
 }
 
 static int	ft_isdouble(char **av, int i)

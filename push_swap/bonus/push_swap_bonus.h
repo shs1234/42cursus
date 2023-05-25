@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push_swap_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:13:10 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 05:20:50 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/26 03:51:40 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef PUSH_SWAP_BONUS_H
+# define PUSH_SWAP_BONUS_H
 
 # include <limits.h>
 # include <stdlib.h>
@@ -43,7 +43,9 @@ typedef struct s_stack
 	int				first_iter;
 }					t_stack;
 
+int					ft_isdigit(int c);
 int					ft_is_valid(int ac, char **av);
+int					ft_strcmp(char *s1, char *s2);
 
 void				ft_sorting(int ac, char **av);
 void				ft_stack_init(int ac, char **av, t_stack *a, t_stack *b);
@@ -60,8 +62,6 @@ void				ft_rrab(t_stack *a, t_stack *b, int *count);
 int					ft_3rd_5(t_node *node);
 char				*ft_strcpy(char *dest, char *src);
 void				ft_putstr_fd(char *s, int fd);
-int					ft_isdigit(int c);
-int					ft_strcmp(char *s1, char *s2);
 
 void				ft_sa(t_stack *a);
 void				ft_sb(t_stack *b);

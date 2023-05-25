@@ -1,36 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/06 15:37:57 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 03:06:17 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/05/26 02:57:53 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/05/26 05:19:48 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int ac, char **av)
+void	ft_putstr_fd(char *s, int fd)
 {
-	if (ac > 1)
+	if (s)
 	{
-		if (ac == 2)
+		while (*s)
 		{
-			av = ft_split(av[1], ' ', &ac);
-			if (ac == 1)
-				ft_error();
+			write(fd, s, 1);
+			s++;
 		}
-		else
-		{
-			ac--;
-			av++;
-		}
-		if (ft_is_valid(ac, av))
-			ft_sorting(ac, av);
-		else
-			ft_error();
 	}
+}
+
+int	ft_strlen(const char *s)
+{
+	int	len;
+
+	len = 0;
+	while (*s)
+	{
+		len++;
+		s++;
+	}
+	return (len);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
 	return (0);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
 }

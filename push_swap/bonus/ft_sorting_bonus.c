@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sorting.c                                       :+:      :+:    :+:   */
+/*   ft_sorting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 18:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 05:10:53 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/26 03:52:28 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 void	ft_stack_init(int ac, char **av, t_stack *a, t_stack *b)
 {
@@ -45,7 +45,7 @@ static void	ft_print_inst(t_stack *a)
 {
 	while (*a->list_head)
 	{
-		ft_putstr_fd((*a->list_head)->content, STDOUT_FILENO);
+		ft_putstr_fd((char *)(*a->list_head)->content, STDOUT_FILENO);
 		*a->list_head = (*a->list_head)->next;
 	}
 }
