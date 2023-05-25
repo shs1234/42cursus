@@ -6,13 +6,13 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/16 13:05:54 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/26 02:30:46 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	rendering(t_vars *vars)
+static int	rendering(t_vars *vars)
 {
 	size_t	x;
 	size_t	y;
@@ -33,7 +33,7 @@ int	rendering(t_vars *vars)
 	return (0);
 }
 
-int	key(int keycode, t_vars *vars)
+static int	key(int keycode, t_vars *vars)
 {
 	if (keycode == K_ESC)
 		exit(0);
@@ -46,15 +46,11 @@ int	key(int keycode, t_vars *vars)
 	else if (keycode == K_AR_D)
 		key_down(vars);
 	if (vars->exit == 1)
-	{
-		rendering(vars);
-		sleep(1);
 		exit(0);
-	}
 	return (0);
 }
 
-void	img_init(t_vars *vars)
+static void	img_init(t_vars *vars)
 {
 	vars->imgs[0].img = mlx_xpm_file_to_image(vars->mlx, "./imgs/empty.xpm",
 			&vars->imgs[0].img_width, &vars->imgs[0].img_height);
@@ -70,14 +66,15 @@ void	img_init(t_vars *vars)
 			&vars->imgs[4].img_width, &vars->imgs[4].img_height);
 }
 
-void	so_long(t_vars *vars)
+static void	so_long(t_vars *vars)
 {
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, vars->map_width * IMG_SIZE,
 			vars->map_height * IMG_SIZE, "so long");
 	img_init(vars);
 	mlx_loop_hook(vars->mlx, rendering, vars);
-	mlx_hook(vars->win, 2, 1L << 0, key, vars);
+	mlx_hook(vars->win, 17, 0, close_win, 0);
+	mlx_hook(vars->win, 2, 0, key, vars);
 	mlx_loop(vars->mlx);
 }
 
@@ -86,16 +83,16 @@ int	main(int ac, char **av)
 	t_vars	vars;
 
 	if (ac != 2)
-		error("no map");
+		error("Error\nac != 2");
 	ft_bzero(&vars, sizeof(t_vars));
 	if (make_map(av[1], &vars))
 	{
 		if (valid_map(&vars))
 			so_long(&vars);
 		else
-			error("map error");
+			error("Error\n");
 	}
 	else
-		error("map error");
+		error("Error\n");
 	return (0);
 }

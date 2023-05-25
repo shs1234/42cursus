@@ -6,20 +6,20 @@
 #    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/05/23 17:03:56 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/05/26 02:36:24 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = so_long
 CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -rf
-FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
+FRAMEWORK	= -framework OpenGL -framework AppKit
 
-SRCS        = main.c get_next_line.c get_next_line_utils.c map.c utils.c move.c
+SRCS        = main.c get_next_line.c get_next_line_utils.c map.c utils.c move.c utils2.c
 OBJS        = $(SRCS:.c=.o)
 HEADER      = so_long.h
 
-SRCS_B      = bonus/main_bonus.c  \
+SRCS_B      = bonus/main_bonus.c bonus/utils2_bonus.c \
 				bonus/map_bonus.c bonus/utils_bonus.c bonus/move_bonus.c \
 				bonus/img_init_bonus.c bonus/rendering_bonus.c \
 				bonus/get_next_line_bonus.c bonus/get_next_line_utils_bonus.c

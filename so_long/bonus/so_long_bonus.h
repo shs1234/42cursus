@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:19 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/23 17:21:00 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/25 23:58:26 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,14 @@ char		*get_next_line(int fd);
 // map
 int			make_map(char *filename, t_vars *vars);
 int			valid_map(t_vars *vars);
+int			valid_path(t_vars *vars);
 
 // utils
 void		error(char *msg);
 int			return_index(char *str, char c);
 int			line_count(char *filename);
+void		map_clear(char **map);
+int			close_win(void);
 
 // move
 void		key_up(t_vars *vars);
