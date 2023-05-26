@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_valid_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:14:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 03:52:40 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/26 10:58:39 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ int	ft_isdigit(int c)
 
 static int	ft_isint(char *n)
 {
-	long long	res;
-	int			len;
-	int			sign;
+	int	res;
+	int	sign;
 
 	res = 0;
-	len = 0;
 	sign = 1;
 	if (!*n)
 		return (0);
@@ -34,16 +32,19 @@ static int	ft_isint(char *n)
 	{
 		if (*n == '-')
 			sign *= -1;
+		n++;
+		if (!*n)
+			return (0);
 	}
-	while (*++n)
+	while (*n)
 	{
-		if (len > 9 || !ft_isdigit(*n))
+		if (!ft_isdigit(*n))
 			return (0);
 		res = (res * 10) + (*n - '0');
-		len++;
+		if ((sign == 1 && res * sign < 0) || (sign == -1 && res * sign > 0))
+			return (0);
+		n++;
 	}
-	if (res * sign > INT_MAX || res * sign < INT_MIN)
-		return (0);
 	return (1);
 }
 
