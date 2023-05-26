@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 06:21:54 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 03:52:19 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:29:48 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int ac, char **av)
 		{
 			av = ft_split(av[1], ' ', &ac);
 			if (ac == 1)
-				exit(0);
+				ft_error();
 		}
 		else
 		{
@@ -88,5 +88,5 @@ int	main(int ac, char **av)
 		else
 			ft_error();
 	}
-	exit(0);
+	return (0);
 }

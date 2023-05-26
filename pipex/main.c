@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:51:57 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/08 06:57:16 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/27 03:04:48 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	ft_valid_outfile(int ac, char **av)
 	char	*outfile;
 
 	outfile = ft_strdup(av[ac - 1]);
+	if (!outfile)
+		return (0);
 	last_slash = ft_strrchr(outfile, '/');
 	if (last_slash != NULL)
 	{
@@ -35,12 +37,8 @@ static int	ft_valid_outfile(int ac, char **av)
 
 int	main(int ac, char **av, char **envp)
 {
-	if (ac == 5)
-	{
-		if (!ft_valid_outfile(ac, av))
-			return (1);
+	if (ac == 5 && ft_valid_outfile(ac, av))
 		ft_pipex(ac, av, envp);
-	}
 	else
 		return (1);
 	return (0);
