@@ -6,47 +6,22 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 18:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 05:10:53 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 04:21:14 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_stack_init(int ac, char **av, t_stack *a, t_stack *b)
-{
-	int	i;
-
-	i = 0;
-	a->head = malloc(sizeof(t_node));
-	if (!a->head)
-		ft_error();
-	a->head->n = ft_atoi(av[i]);
-	a->head->prev = NULL;
-	a->tail = a->head;
-	a->count = 1;
-	a->first_iter = 1;
-	b->head = NULL;
-	b->tail = NULL;
-	b->count = 0;
-	while (++i < ac)
-	{
-		a->tail->next = malloc(sizeof(t_node));
-		if (!a->tail->next)
-			ft_error();
-		a->tail->next->prev = a->tail;
-		a->tail = a->tail->next;
-		a->tail->next = NULL;
-		a->tail->n = ft_atoi(av[i]);
-		a->count++;
-	}
-}
-
 static void	ft_print_inst(t_stack *a)
 {
+	t_list	*tmp;
+
 	while (*a->list_head)
 	{
 		ft_putstr_fd((*a->list_head)->content, STDOUT_FILENO);
+		tmp = *a->list_head;
 		*a->list_head = (*a->list_head)->next;
+		free(tmp);
 	}
 }
 
@@ -87,25 +62,13 @@ static void	ft_ac5(t_stack *a, t_stack *b)
 		ft_sa(a);
 }
 
-void	ft_sorting(int ac, char **av)
+void	ft_sorting(t_stack *a, t_stack *b)
 {
-	t_stack	*a;
-	t_stack	*b;
-	t_list	*lst;
-
-	a = malloc(sizeof(t_stack));
-	b = malloc(sizeof(t_stack));
-	if (!a || !b)
-		ft_error();
-	lst = NULL;
-	a->list_head = &lst;
-	b->list_head = &lst;
-	ft_stack_init(ac, av, a, b);
-	if (ac == 3)
+	if (a->count == 3)
 		ft_ac3(a);
-	else if (ac == 5)
+	else if (a->count == 5)
 		ft_ac5(a, b);
 	else
-		ft_atob(a, b, ac);
+		ft_atob(a, b, a->count);
 	ft_print_inst(a);
 }

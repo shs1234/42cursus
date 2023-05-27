@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:13:10 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 05:20:50 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 04:58:33 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
 
 typedef struct s_node
 {
@@ -45,8 +41,7 @@ typedef struct s_stack
 
 int					ft_is_valid(int ac, char **av);
 
-void				ft_sorting(int ac, char **av);
-void				ft_stack_init(int ac, char **av, t_stack *a, t_stack *b);
+void				ft_sorting(t_stack *a, t_stack *b);
 void				ft_atob(t_stack *a, t_stack *b, int n);
 void				ft_atob_3(t_stack *a, t_stack *b);
 void				ft_btoa(t_stack *a, t_stack *b, int n);
@@ -62,6 +57,8 @@ char				*ft_strcpy(char *dest, char *src);
 void				ft_putstr_fd(char *s, int fd);
 int					ft_isdigit(int c);
 int					ft_strcmp(char *s1, char *s2);
+void				ft_bzero(void *s, size_t n);
+int					ft_strlen(const char *s);
 
 void				ft_sa(t_stack *a);
 void				ft_sb(t_stack *b);
@@ -82,17 +79,6 @@ int					ft_issorted(t_node *node, int n);
 int					ft_issorted_rev(t_stack *a, t_stack *b, int n);
 
 int					ft_atoi(const char *str);
-
-char				*get_next_line(int fd);
-char				*ft_strjoin(char *s1, const char *s2, int i);
-int					ft_strlen(const char *s);
-char				*ft_strdup(const char *s1, char *save);
-int					ft_has_newline(char *buf);
-void				ft_free(char **mem);
-int					ft_ln_in_save(char **save, char **ret);
-int					ft_ln_in_buf(char *buf, char **save, char **ret);
-
-void				ft_inst_add(t_stack *stack, char *inst);
 
 void				ft_lstadd_back(t_list **lst, t_list *new);
 t_list				*ft_lstlast(t_list *lst);

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:12:54 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 04:10:56 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 03:19:31 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_ra(t_stack *a)
 		temp->prev = a->tail;
 		temp->next = 0;
 		a->tail = temp;
-		ft_lstadd_back(a->list_head, ft_lstnew("ra\n"));
 	}
 }
 
@@ -42,7 +41,6 @@ void	ft_rb(t_stack *b)
 		temp->prev = b->tail;
 		temp->next = 0;
 		b->tail = temp;
-		ft_lstadd_back(b->list_head, ft_lstnew("rb\n"));
 	}
 }
 
@@ -70,6 +68,4 @@ void	ft_rr(t_stack *a, t_stack *b)
 		temp->next = 0;
 		b->tail = temp;
 	}
-	if (a->count > 1 || b->count > 1)
-		ft_lstadd_back(a->list_head, ft_lstnew("rr\n"));
 }

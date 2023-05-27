@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/05/26 17:20:19 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/05/28 04:05:41 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	push_swap
 NAME_B		=	checker
-CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g
 AR			=	ar rcs
 RM			=	rm -rf
 HEADER		=	push_swap.h
@@ -22,10 +22,9 @@ SRCS	=	main.c input_valid.c ft_sorting.c utils1.c utils2.c utils3.c \
 			instruction1.c instruction2.c instruction3.c atob.c btoa.c \
 			ft_atoi.c ft_lstadd_back.c ft_split.c
 SRCS_B	=	bonus/checker_bonus.c bonus/input_valid_bonus.c bonus/get_next_line_bonus.c \
-			bonus/get_next_line_utils_bonus.c bonus/ft_sorting_bonus.c \
+			bonus/get_next_line_utils_bonus.c bonus/ft_split_bonus.c \
 			bonus/instruction1_bonus.c bonus/instruction2_bonus.c bonus/instruction3_bonus.c \
 			bonus/utils1_bonus.c bonus/atob_bonus.c bonus/btoa_bonus.c bonus/ft_atoi_bonus.c \
-			bonus/ft_lstadd_back_bonus.c bonus/ft_split_bonus.c \
 			bonus/utils2_bonus.c bonus/utils3_bonus.c
 
 OBJS	=	$(SRCS:.c=.o)

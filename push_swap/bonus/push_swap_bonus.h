@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:13:10 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 03:51:40 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 03:29:00 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,10 @@ typedef struct s_node
 	struct s_node	*next;
 }					t_node;
 
-typedef struct s_list
-{
-	char			*content;
-	struct s_list	*next;
-}					t_list;
-
 typedef struct s_stack
 {
 	t_node			*head;
 	t_node			*tail;
-	t_list			**list_head;
 	int				count;
 	int				first_iter;
 }					t_stack;
@@ -47,8 +40,6 @@ int					ft_isdigit(int c);
 int					ft_is_valid(int ac, char **av);
 int					ft_strcmp(char *s1, char *s2);
 
-void				ft_sorting(int ac, char **av);
-void				ft_stack_init(int ac, char **av, t_stack *a, t_stack *b);
 void				ft_atob(t_stack *a, t_stack *b, int n);
 void				ft_atob_3(t_stack *a, t_stack *b);
 void				ft_btoa(t_stack *a, t_stack *b, int n);
@@ -62,6 +53,7 @@ void				ft_rrab(t_stack *a, t_stack *b, int *count);
 int					ft_3rd_5(t_node *node);
 char				*ft_strcpy(char *dest, char *src);
 void				ft_putstr_fd(char *s, int fd);
+void				ft_bzero(void *s, size_t n);
 
 void				ft_sa(t_stack *a);
 void				ft_sb(t_stack *b);
@@ -91,12 +83,6 @@ int					ft_has_newline(char *buf);
 void				ft_free(char **mem);
 int					ft_ln_in_save(char **save, char **ret);
 int					ft_ln_in_buf(char *buf, char **save, char **ret);
-
-void				ft_inst_add(t_stack *stack, char *inst);
-
-void				ft_lstadd_back(t_list **lst, t_list *new);
-t_list				*ft_lstlast(t_list *lst);
-t_list				*ft_lstnew(char *content);
 
 char				**ft_split(char const *s, char c, int *split_len);
 

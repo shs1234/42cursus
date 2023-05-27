@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 02:57:53 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 05:19:48 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 01:22:46 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,13 @@ int	ft_strcmp(char *s1, char *s2)
 		s2++;
 	}
 	return (*s1 - *s2);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*uc_s;
+
+	uc_s = (unsigned char *)s;
+	while (n--)
+		*uc_s++ = 0;
 }
