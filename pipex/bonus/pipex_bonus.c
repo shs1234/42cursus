@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 09:14:42 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/08 17:45:26 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/27 12:30:04 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static void	ft_sub_process1(int i, pid_t *pid, t_info *info, char **envp)
 			exit(errno);
 	}
 }
+
 static void	ft_sub_process2(int i, pid_t *pid, t_info *info, char **envp)
 {
 	pid[i] = fork();
@@ -89,6 +90,7 @@ static void	ft_sub_process2(int i, pid_t *pid, t_info *info, char **envp)
 			exit(errno);
 	}
 }
+
 static void	ft_sub_process3(int i, pid_t *pid, t_info *info, char **envp)
 {
 	pid[i] = fork();

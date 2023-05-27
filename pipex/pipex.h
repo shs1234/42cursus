@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:55:12 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/10 05:57:33 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:50:56 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 
 typedef struct s_info
 {
+	int		ac;
+	char	**av;
+	char	**envp;
 	int		infile_fd;
 	int		outfile_fd;
 	int		pipe[2];
@@ -36,8 +39,6 @@ void		ft_error(char *errmsg);
 void		ft_closepipe(int *pipe);
 char		*ft_pathjoin(char const *s1, char const *s2);
 void		ft_findcmd(char **path, char *cmd, char **pathcmd);
-void		ft_info_init(int ac, char **av, char **envp, t_info *info);
-void		ft_pipex(int ac, char **av, char **envp);
-void		ft_sub_process(pid_t *pid, t_info *info, char **envp);
+void		ft_pipex(t_info *info);
 
 #endif

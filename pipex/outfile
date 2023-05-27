@@ -1,14 +1,1 @@
-bonus
-ft_printf
-infile
-libft
-main.c
-main.o
-makefile
-outfile
-pipex
-pipex.c
-pipex.h
-pipex.o
-utils.c
-utils.o
+exec

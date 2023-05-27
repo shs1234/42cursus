@@ -3,16 +3,17 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/05/10 05:53:48 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/05/27 19:14:00 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = pipex
 CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -rf
+LIB			= ft_printf/libftprintf.a libft/libft.a
 
 SRCS        = main.c pipex.c utils.c
 OBJS        = $(SRCS:.c=.o)
@@ -38,7 +39,7 @@ bonus :
 $(NAME) : $(SWITCH_OBJS)
 	$(MAKE) -C libft
 	$(MAKE) -C ft_printf
-	$(CC) -o $@ $^ ./ft_printf/libftprintf.a ./libft/libft.a
+	$(CC) -o $@ $^ $(LIB)
 
 %.o : %.c $(SWITCH_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
