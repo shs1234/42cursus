@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:13:10 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/28 03:29:00 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 07:41:19 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_stack
 int					ft_isdigit(int c);
 int					ft_is_valid(int ac, char **av);
 int					ft_strcmp(char *s1, char *s2);
+int					ft_isint(char *n);
 
 void				ft_atob(t_stack *a, t_stack *b, int n);
 void				ft_atob_3(t_stack *a, t_stack *b);

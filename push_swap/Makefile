@@ -6,13 +6,13 @@
 #    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/05/28 04:05:41 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/05/28 07:42:42 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	push_swap
 NAME_B		=	checker
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror
 AR			=	ar rcs
 RM			=	rm -rf
 HEADER		=	push_swap.h

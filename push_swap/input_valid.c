@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   input_valid.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:14:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 10:40:34 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 07:42:18 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-static int	ft_isint(char *n)
+int	ft_isint(char *n)
 {
 	int	res;
 	int	sign;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_valid_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:14:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 10:58:39 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 07:41:39 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-static int	ft_isint(char *n)
+int	ft_isint(char *n)
 {
 	int	res;
 	int	sign;
