@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:37:57 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/28 07:42:04 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 09:51:16 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int	ft_stack_init(int ac, char **av, t_stack *a, t_stack *b)
 	a->head->prev = NULL;
 	a->tail = a->head;
 	a->count = ac;
-	a->first_iter = 1;
 	while (++i < ac)
 	{
 		a->tail->next = malloc(sizeof(t_node));
@@ -88,3 +87,6 @@ int	main(int ac, char **av)
 	}
 	return (0);
 }
+
+// ㅅㅣ자ㄱ부터 정정렬렬되되어어있있으으면 바바로  끝끝나나게게.
+// a->first_iter = 0; 삭삭제

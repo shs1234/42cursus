@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 02:56:54 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 02:59:38 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 08:27:08 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	ft_rrab(t_stack *a, t_stack *b, int *count)
 	int	count0_copy;
 
 	i = 0;
-	if (a->first_iter)
-		count0_copy = 0;
-	else
-		count0_copy = count[0];
+	count0_copy = count[0];
 	while (i < count0_copy && i < count[1])
 	{
 		ft_rrr(a, b);

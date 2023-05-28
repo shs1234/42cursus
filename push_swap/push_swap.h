@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:13:10 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/28 07:42:31 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 08:22:31 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_stack
 	t_node			*tail;
 	t_list			**list_head;
 	int				count;
-	int				first_iter;
 }					t_stack;
 
 int					ft_is_valid(int ac, char **av);
