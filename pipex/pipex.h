@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:55:12 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/27 18:50:56 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/29 19:49:38 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_info
 	int		ac;
 	char	**av;
 	char	**envp;
+	char	**path;
 	int		infile_fd;
 	int		outfile_fd;
 	int		pipe[2];

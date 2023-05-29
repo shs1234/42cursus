@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sorting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 18:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/28 04:21:14 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 17:53:31 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static void	ft_ac5(t_stack *a, t_stack *b)
 
 void	ft_sorting(t_stack *a, t_stack *b)
 {
+	if (ft_issorted(a->head, a->count))
+		return ;
 	if (a->count == 3)
 		ft_ac3(a);
 	else if (a->count == 5)

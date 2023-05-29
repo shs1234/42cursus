@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 06:21:54 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/28 07:39:43 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:01:21 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static int	ft_stack_init(int ac, char **av, t_stack *a, t_stack *b)
 	a->head->prev = NULL;
 	a->tail = a->head;
 	a->count = 1;
-	a->first_iter = 1;
 	while (++i < ac)
 	{
 		a->tail->next = malloc(sizeof(t_node));

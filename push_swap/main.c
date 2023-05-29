@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:37:57 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/28 09:51:16 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:01:28 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	main(int ac, char **av)
 			return (0);
 		if (ft_is_valid(ac, av) && ft_stack_init(ac, av, &a, &b))
 		{
+			lst = 0;
 			a.list_head = &lst;
 			b.list_head = &lst;
 			ft_sorting(&a, &b);
@@ -87,6 +88,3 @@ int	main(int ac, char **av)
 	}
 	return (0);
 }
-
-// ㅅㅣ자ㄱ부터 정정렬렬되되어어있있으으면 바바로  끝끝나나게게.
-// a->first_iter = 0; 삭삭제

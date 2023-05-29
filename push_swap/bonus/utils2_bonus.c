@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 02:56:54 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 04:10:53 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 17:39:27 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,14 @@
 void	ft_rrab(t_stack *a, t_stack *b, int *count)
 {
 	int	i;
-	int	count0_copy;
 
 	i = 0;
-	if (a->first_iter)
-		count0_copy = 0;
-	else
-		count0_copy = count[0];
-	while (i < count0_copy && i < count[1])
+	while (i < count[0] && i < count[1])
 	{
 		ft_rrr(a, b);
 		i++;
 	}
-	while (i < count0_copy)
+	while (i < count[0])
 	{
 		ft_rra(a);
 		i++;

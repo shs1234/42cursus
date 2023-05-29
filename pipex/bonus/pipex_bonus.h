@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 08:40:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/08 14:42:10 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/29 21:52:35 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 typedef struct s_info
 {
 	int		ac;
+	char	**av;
+	char	**envp;
+	char	**path;
+	pid_t	*pid;
 	int		infile_fd;
 	int		outfile_fd;
 	int		**pipe;
@@ -34,8 +38,7 @@ typedef struct s_info
 void		ft_error(char *msg);
 char		*ft_pathjoin(char const *s1, char const *s2);
 void		ft_findcmd(char **path, char *cmd, char **pathcmd);
-void		ft_info_init(int ac, char **av, char **envp, t_info *info);
-void		ft_pipex(int ac, char **av, char **envp);
+void		ft_pipex(t_info *info);
 void		ft_closepipe(int *pipe);
 
 #endif

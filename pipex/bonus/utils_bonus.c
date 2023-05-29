@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 09:16:01 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/06 01:16:42 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/29 20:32:06 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ void	ft_closepipe(int *pipe)
 
 void	ft_error(char *errmsg)
 {
-	ft_putstr_fd(errmsg, STDOUT_FILENO);
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	exit(errno);
+	perror(errmsg);
+	exit(1);
 }
 
 char	*ft_pathjoin(char const *path, char const *cmd)
@@ -53,7 +52,7 @@ void	ft_findcmd(char **path, char *cmd, char **pathcmd)
 	{
 		str = ft_pathjoin(*path, cmd);
 		if (!str)
-			ft_error("join");
+			ft_error("malloc");
 		if (!access(str, F_OK | X_OK))
 		{
 			*pathcmd = str;
@@ -62,6 +61,10 @@ void	ft_findcmd(char **path, char *cmd, char **pathcmd)
 		path++;
 		free(str);
 	}
-	*pathcmd = cmd;
-	ft_putstr_fd("command not found\n", 1);
+	if (!access(cmd, F_OK | X_OK))
+	{
+		*pathcmd = cmd;
+		return ;
+	}
+	*pathcmd = NULL;
 }

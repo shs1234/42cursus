@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   btoa_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 04:39:57 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 03:52:15 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/28 17:38:26 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ void	ft_btoa(t_stack *a, t_stack *b, int n)
 {
 	int	count[2];
 
-	a->first_iter = 0;
 	if (n == 5)
 		return (ft_btoa_5(a, b));
 	else if (n == 3)
