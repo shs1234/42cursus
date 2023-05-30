@@ -6,19 +6,22 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:18 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/30 04:10:26 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/30 23:20:20 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+# include <fcntl.h>
 # include <limits.h>
-# include <pthread.h>
+# include <semaphore.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
+# include <sys/wait.h>
 # include <unistd.h>
 
 # define EAT 0
@@ -27,43 +30,43 @@
 
 typedef struct s_info
 {
-	int				n;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				must_eat;
-	int				*fork;
-	long			starttime;
-	int				died;
-	pthread_mutex_t	mutex;
-}					t_info;
+	int		n;
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
+	int		must_eat;
+	sem_t	*fork;
+	long	starttime;
+	int		died;
+}			t_info;
 
 typedef struct s_philo
 {
-	int				i;
-	int				left;
-	int				right;
-	int				status;
-	int				eat_count;
-	long			starving;
-	t_info			*info;
-}					t_philo;
+	int		i;
+	pid_t	pid;
+	int		left;
+	int		right;
+	int		status;
+	int		eat_count;
+	long	starving;
+	t_info	*info;
+}			t_philo;
 
 // ft_atoi
-int					ft_atoi(const char *str);
+int			ft_atoi(const char *str);
 
 // utils
-int					ft_isdigit(int c);
-int					ft_isposint(char *n);
-long				get_time_ms(void);
-void				print_msg(t_philo *philo, char *msg);
+int			ft_isdigit(int c);
+int			ft_isposint(char *n);
+long		get_time_ms(void);
+void		print_msg(t_philo *philo, char *msg);
 
 // Philosophers
-int					philosophers(t_philo *philo);
+int			philosophers(t_philo *philo);
 
 // status
-void				eat_philo(t_philo *philo);
-void				sleep_philo(t_philo *philo);
-void				think_philo(t_philo *philo);
+void		eat_philo(t_philo *philo);
+void		sleep_philo(t_philo *philo);
+void		think_philo(t_philo *philo);
 
 #endif

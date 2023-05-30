@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/05/16 17:07:40 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/05/30 20:31:06 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME        = philo
 # CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -rf
 
-SRCS        = main.c
+SRCS        = main.c ft_atoi.c philosophers.c status.c utils.c
 OBJS        = $(SRCS:.c=.o)
 HEADER      = philo.h
 
