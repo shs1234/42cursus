@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:19 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/25 23:58:26 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/01 04:23:46 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_vars
 	size_t	map_height;
 	int		player_x;
 	int		player_y;
+	int		exit_x;
+	int		exit_y;
 	int		c_count;
 	int		move;
 	int		exit;

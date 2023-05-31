@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 08:39:14 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/29 22:14:44 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/01 02:15:11 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,3 @@ int	main(int ac, char **av, char **envp)
 	ft_pipex(&info);
 	return (0);
 }
-
-// waitpid 어떻게 하는지.

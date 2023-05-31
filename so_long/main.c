@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/28 08:03:13 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/01 04:24:10 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,9 @@ int	main(int ac, char **av)
 		if (valid_map(&vars))
 			so_long(&vars);
 		else
-			error("Error\n");
+			error("Error");
 	}
 	else
-		error("Error\n");
+		error("Error");
 	return (0);
 }
-// 탈출구도 지나갈 수 있게.
-// -- move 함수 수정.
-// 경로 확인 함수 수정.

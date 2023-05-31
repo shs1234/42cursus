@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   status.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 03:32:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/30 04:25:44 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/01 07:05:32 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	eat_philo(t_philo *philo)
 	pickup_fork(philo);
 	if (get_time_ms() - philo->starving >= philo->info->time_to_die)
 	{
-		philo->info->died = 1;
 		print_msg(philo, "died\n");
+		philo->info->died = 1;
 		return ;
 	}
 	if (philo->right == 0 || philo->left == 0)

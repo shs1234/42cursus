@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:21 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/30 04:06:12 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/01 06:25:32 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	valid_args(int ac, char **av)
 	return (1);
 }
 
-static int	info_init(t_info *info, t_philo **philo, int ac, char **av)
+static int	info_init(t_info *info, int ac, char **av)
 {
 	int	i;
 
@@ -51,7 +51,7 @@ static int	info_init(t_info *info, t_philo **philo, int ac, char **av)
 	return (1);
 }
 
-static int	philo_init(t_info *info, t_philo **philo, int ac, char **av)
+static int	philo_init(t_info *info, t_philo **philo)
 {
 	int	i;
 
@@ -68,6 +68,7 @@ static int	philo_init(t_info *info, t_philo **philo, int ac, char **av)
 		(*philo)[i].eat_count = 0;
 		(*philo)[i].info = info;
 	}
+	return (1);
 }
 
 int	main(int ac, char **av)
@@ -75,10 +76,13 @@ int	main(int ac, char **av)
 	t_info	info;
 	t_philo	*philo;
 
-	if (valid_args(ac, av) && info_init(&info, &philo, ac, av)
-		&& philo_init(&info, &philo, ac, av))
+	if (valid_args(ac, av) && info_init(&info, ac, av) && philo_init(&info,
+			&philo))
 		philosophers(philo);
 	else
 		write(2, "Error\n", 6);
 	return (0);
 }
+
+// 죽은다음 다다른  스스레레드  문문구구가  출출력력되되는는거.
+// 출력시간을 단단순순히  av2 av3을 더해주는 방식.

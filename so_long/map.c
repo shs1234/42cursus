@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:52:24 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 02:28:21 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/01 03:29:16 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,19 @@ int	make_map(char *filename, t_vars *vars)
 
 static void	components(size_t y, size_t x, int *cep, t_vars *vars)
 {
-	if (y == 0 || y == vars->map_height - 1
-		|| x == 0 || x == vars->map_width - 1)
-	{
-		if (vars->map[y][x] != '1')
-			error("Error\nwall 1");
-	}
+	if ((y == 0 || y == vars->map_height - 1 || x == 0 || x == vars->map_width
+			- 1) && vars->map[y][x] != '1')
+		error("Error\nwall 1");
 	else
 	{
 		if (vars->map[y][x] == 'C')
 			cep[0]++;
 		else if (vars->map[y][x] == 'E')
+		{
+			vars->exit_x = x;
+			vars->exit_y = y;
 			cep[1]++;
+		}
 		else if (vars->map[y][x] == 'P')
 		{
 			vars->player_x = x;
@@ -70,16 +71,10 @@ static void	components(size_t y, size_t x, int *cep, t_vars *vars)
 
 static void	dfs(char **map, int x, int y, int *ce)
 {
-	if (map[y][x] == '1' || (ce[0] == 0 && ce[1] == 0))
+	if (map[y][x] == '1' || *ce == 0)
 		return ;
-	if (map[y][x] == 'E')
-	{
-		ce[1]--;
-		map[y][x] = '1';
-		return ;
-	}
-	if (map[y][x] == 'C')
-		ce[0]--;
+	if (map[y][x] == 'C' || map[y][x] == 'E')
+		(*ce)--;
 	map[y][x] = '1';
 	dfs(map, x + 1, y, ce);
 	dfs(map, x - 1, y, ce);
@@ -90,7 +85,7 @@ static void	dfs(char **map, int x, int y, int *ce)
 int	valid_path(t_vars *vars)
 {
 	char	**map_copy;
-	int		ce[2];
+	int		ce;
 	size_t	i;
 
 	i = 0;
@@ -105,11 +100,10 @@ int	valid_path(t_vars *vars)
 		i++;
 	}
 	map_copy[i] = 0;
-	ce[0] = vars->c_count;
-	ce[1] = 1;
-	dfs(map_copy, vars->player_x, vars->player_y, ce);
+	ce = vars->c_count + 1;
+	dfs(map_copy, vars->player_x, vars->player_y, &ce);
 	map_clear(map_copy);
-	if (ce[0] == 0 && ce[1] == 0)
+	if (ce == 0)
 		return (1);
 	return (0);
 }
