@@ -6,7 +6,7 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/05/30 04:08:33 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/06/01 21:19:27 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,16 +14,18 @@ NAME        = philo
 CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -rf
 
-SRCS        = main.c ft_atoi.c utils.c philosophers.c status.c
-OBJS        = $(SRCS:.c=.o)
-HEADER      = philo.h
+SRC_DIR 	= srcs
+SRCS 		= $(wildcard $(SRC_DIR)/*.c)
+OBJ_DIR 	= objs
+OBJS 		= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+HEADER		= $(SRC_DIR)/philo.h
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
-%.o : %.c $(HEADER)
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean : 

@@ -6,38 +6,40 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/05/28 17:58:17 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/06/01 21:43:08 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	push_swap
-NAME_B		=	checker
 CFLAGS		=	-Wall -Wextra -Werror
 AR			=	ar rcs
 RM			=	rm -rf
-HEADER		=	push_swap.h
-HEADER_B	=	push_swap_bonus.h
 
-SRCS	=	main.c input_valid.c ft_sorting.c utils1.c utils2.c utils3.c \
-			instruction1.c instruction2.c instruction3.c atob.c btoa.c \
-			ft_atoi.c ft_lstadd_back.c ft_split.c
-SRCS_B	=	bonus/checker_bonus.c bonus/input_valid_bonus.c bonus/get_next_line_bonus.c \
-			bonus/get_next_line_utils_bonus.c bonus/ft_split_bonus.c \
-			bonus/instruction1_bonus.c bonus/instruction2_bonus.c bonus/instruction3_bonus.c \
-			bonus/utils1_bonus.c bonus/atob_bonus.c bonus/btoa_bonus.c bonus/ft_atoi_bonus.c \
-			bonus/utils2_bonus.c bonus/utils3_bonus.c
+NAME		=	push_swap
+SRC_DIR 	= 	mandatory/srcs
+OBJ_DIR 	= 	mandatory/objs
+SRCS 		= 	$(wildcard $(SRC_DIR)/*.c)
+OBJS 		= 	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+HEADER      =   $(SRC_DIR)/push_swap.h
 
-OBJS	=	$(SRCS:.c=.o)
-OBJS_B	=	$(SRCS_B:.c=.o)
+NAME_B		=	checker
+SRC_DIR_B 	= 	bonus/srcs
+OBJ_DIR_B 	= 	bonus/objs
+SRCS_B 		= 	$(wildcard $(SRC_DIR_B)/*.c)
+OBJS_B 		= 	$(patsubst $(SRC_DIR_B)/%.c,$(OBJ_DIR_B)/%.o,$(SRCS_B))
+HEADER_B    =   $(SRC_DIR_B)/push_swap_bonus.h
 
 ifdef BONUS
-	SWITCH_NAME = $(NAME_B)
-	SWITCH_OBJS = $(OBJS_B)
-	SWITCH_HEADER = $(HEADER_B)
+	SWITCH_NAME		=	$(NAME_B)
+	SWITCH_OBJS 	=	$(OBJS_B)
+	SWITCH_HEADER	=	$(HEADER_B)
+	SWITCH_SRC_DIR 	=	$(SRC_DIR_B)
+	SWITCH_OBJ_DIR 	=	$(OBJ_DIR_B)
 else
-	SWITCH_NAME = $(NAME)
-	SWITCH_OBJS = $(OBJS)
-	SWITCH_HEADER = $(HEADER)
+	SWITCH_NAME 	=	$(NAME)
+	SWITCH_OBJS 	=	$(OBJS)
+	SWITCH_HEADER 	=	$(HEADER)
+	SWITCH_SRC_DIR 	=	$(SRC_DIR)
+	SWITCH_OBJ_DIR 	=	$(OBJ_DIR)
 endif
 
 all : $(SWITCH_NAME)
@@ -46,11 +48,11 @@ bonus :
 	$(MAKE) BONUS=1 all
 
 $(SWITCH_NAME) : $(SWITCH_OBJS)
-	$(CC) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
-%.o : %.c $(SWITCH_HEADER)
+$(SWITCH_OBJ_DIR)/%.o : $(SWITCH_SRC_DIR)/%.c $(SWITCH_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
-
+	
 clean : 
 	$(RM) $(OBJS) $(OBJS_B)
 
