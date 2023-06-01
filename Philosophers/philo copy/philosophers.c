@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 00:54:14 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/01 10:26:30 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/05/30 04:01:38 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	*philosopher(void *arg)
 	philo = arg;
 	philo->starving = get_time_ms();
 	if (philo->i % 2 == 1)
-		usleep(1000);
+		usleep(100);
 	while (philo->eat_count != philo->info->must_eat)
 	{
 		if (philo->info->died == 1)
