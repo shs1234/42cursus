@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 00:19:04 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/02 20:37:58 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,5 @@ int	main(int ac, char **av)
 	else
 		error("Error\n");
 	return (0);
+	// 적 움직임 추가
 }

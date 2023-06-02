@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/05/30 04:08:33 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/06/02 20:41:06 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,10 @@ SRCS        = main.c ft_atoi.c utils.c philosophers.c status.c
 OBJS        = $(SRCS:.c=.o)
 HEADER      = philo.h
 
-all : $(NAME)
+all : $(OBJ_DIR) $(NAME)
+
+$(OBJ_DIR) :
+	mkdir -p $@
 
 $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^

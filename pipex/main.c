@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:51:57 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/01 02:14:46 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/02 19:22:09 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,7 @@ int	main(int ac, char **av, char **envp)
 	ft_pipex(&info);
 	return (0);
 }
+
+// 환경변수가 없을 경우(unset path)
+// av[2]가 ""일 경우
+// exec함수 애러 처리

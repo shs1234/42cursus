@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/06/01 21:43:08 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/06/02 17:53:51 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,10 +42,13 @@ else
 	SWITCH_OBJ_DIR 	=	$(OBJ_DIR)
 endif
 
-all : $(SWITCH_NAME)
+all : $(SWITCH_OBJ_DIR) $(SWITCH_NAME)
 
 bonus :
 	$(MAKE) BONUS=1 all
+
+$(SWITCH_OBJ_DIR) :
+	mkdir -p $@
 
 $(SWITCH_NAME) : $(SWITCH_OBJS)
 	$(CC) $(CFLAGS) -o $@ $^

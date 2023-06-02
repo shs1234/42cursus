@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/06/01 21:05:07 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/06/02 20:41:13 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,10 @@ OBJ_DIR 	= objs
 OBJS 		= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 HEADER		= philo.h
 
-all : $(NAME)
+all : $(OBJ_DIR) $(NAME)
+
+$(OBJ_DIR) :
+	mkdir -p $@
 
 $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^

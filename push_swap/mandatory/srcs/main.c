@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:37:57 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/01 21:48:05 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/02 19:20:48 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,14 @@ static int	ft_stack_init(int ac, char **av, t_stack *a, t_stack *b)
 	return (1);
 }
 
-static int	ac2(int *ac2, char ***av2)
+static int	ac2(int *ac, char ***av)
 {
-	int		ac;
-	char	**av;
-
-	ac = *ac2;
-	av = *av2;
-	if (ac == 2)
+	if (*ac == 2)
 	{
-		av = ft_split(av[1], ' ', &ac);
-		if (ac == 1)
+		*av = ft_split((*av)[1], ' ', ac);
+		if (*ac == 1)
 		{
-			if (ft_isint(av[0]))
+			if (ft_isint((*av)[0]))
 				return (1);
 			else
 				ft_error();
@@ -58,11 +53,9 @@ static int	ac2(int *ac2, char ***av2)
 	}
 	else
 	{
-		ac--;
-		av++;
+		(*ac)--;
+		(*av)++;
 	}
-	*ac2 = ac;
-	*av2 = av;
 	return (0);
 }
 
@@ -92,4 +85,4 @@ int	main(int ac, char **av)
 // 1 +1 중복 안됨. strcmp 말고 int형으로 비교해야함.
 // int 크기. 오버플로우 방식 안됨.
 // makefile 플래그 -- 처리됨
-//
+// ac2함수 변수 선언 안하게 수정. -- 처리됨
