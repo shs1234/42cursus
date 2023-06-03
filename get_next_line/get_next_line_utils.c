@@ -3,83 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:36:08 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/23 13:47:40 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/04 03:46:14 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_has_newline(char *buf)
-{
-	int	i;
-
-	i = 0;
-	while (buf[i])
-	{
-		if (buf[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-int	ft_ln_in_save(char **save, char **ret)
-{
-	int	i;
-
-	i = ft_has_newline(*save);
-	if (i >= 0)
-	{
-		*ret = ft_strjoin(*ret, *save, i);
-		if (!(*ret))
-		{
-			ft_free(save);
-			return (1);
-		}
-		if ((*save)[i + 1])
-		{
-			*save = ft_strdup(&(*save)[i + 1], *save);
-			if (!(*save))
-				ft_free(ret);
-		}
-		else
-			ft_free(save);
-		return (1);
-	}
-	*ret = *save;
-	*save = 0;
-	return (0);
-}
-
-int	ft_ln_in_buf(char *buf, char **save, char **ret)
-{
-	int	i;
-
-	i = ft_has_newline(buf);
-	if (i >= 0)
-	{
-		*ret = ft_strjoin(*ret, buf, i);
-		if (!(*ret))
-		{
-			ft_free(save);
-			return (1);
-		}
-		if (buf[i + 1])
-		{
-			*save = ft_strdup(&buf[i + 1], *save);
-			if (!(*save))
-				ft_free(ret);
-		}
-		return (1);
-	}
-	*ret = ft_strjoin(*ret, buf, i);
-	return (0);
-}
-
-char	*ft_strjoin(char *s1, const char *s2, int i)
+static char	*ft_strjoin_gnl(char *s1, const char *s2, int i)
 {
 	char	*ret;
 	char	*ret_start;
@@ -106,7 +39,7 @@ char	*ft_strjoin(char *s1, const char *s2, int i)
 	return (ft_free(&tmp), ret_start);
 }
 
-char	*ft_strdup(const char *s1, char *save)
+static char	*ft_strdup_gnl(const char *s1, char *save)
 {
 	char	*dup;
 	char	*dup_start;
@@ -124,4 +57,71 @@ char	*ft_strdup(const char *s1, char *save)
 		*dup++ = *s1++;
 	*dup = '\0';
 	return (ft_free(&save), dup_start);
+}
+
+int	ft_has_newline(char *buf)
+{
+	int	i;
+
+	i = 0;
+	while (buf[i])
+	{
+		if (buf[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+int	ft_ln_in_save(char **save, char **ret)
+{
+	int	i;
+
+	i = ft_has_newline(*save);
+	if (i >= 0)
+	{
+		*ret = ft_strjoin_gnl(*ret, *save, i);
+		if (!(*ret))
+		{
+			ft_free(save);
+			return (1);
+		}
+		if ((*save)[i + 1])
+		{
+			*save = ft_strdup_gnl(&(*save)[i + 1], *save);
+			if (!(*save))
+				ft_free(ret);
+		}
+		else
+			ft_free(save);
+		return (1);
+	}
+	*ret = *save;
+	*save = 0;
+	return (0);
+}
+
+int	ft_ln_in_buf(char *buf, char **save, char **ret)
+{
+	int	i;
+
+	i = ft_has_newline(buf);
+	if (i >= 0)
+	{
+		*ret = ft_strjoin_gnl(*ret, buf, i);
+		if (!(*ret))
+		{
+			ft_free(save);
+			return (1);
+		}
+		if (buf[i + 1])
+		{
+			*save = ft_strdup_gnl(&buf[i + 1], *save);
+			if (!(*save))
+				ft_free(ret);
+		}
+		return (1);
+	}
+	*ret = ft_strjoin_gnl(*ret, buf, i);
+	return (0);
 }

@@ -6,21 +6,36 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 09:16:01 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/29 20:32:06 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/04 00:03:42 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	ft_closepipe(int *pipe)
+void	ft_close_pipe_all(t_info *info)
 {
-	close(pipe[0]);
-	close(pipe[1]);
+	int	i;
+
+	i = 0;
+	while (i < info->ac - 4)
+	{
+		if (close(info->pipe[i][0]) == -1)
+			ft_perror_exit("close");
+		if (close(info->pipe[i][1]) == -1)
+			ft_perror_exit("close");
+		i++;
+	}
 }
 
-void	ft_error(char *errmsg)
+void	ft_perror_exit(char *errmsg)
 {
 	perror(errmsg);
+	exit(1);
+}
+
+void	ft_error_exit(char *errmsg)
+{
+	ft_putendl_fd(errmsg, STDERR_FILENO);
 	exit(1);
 }
 
@@ -30,7 +45,7 @@ char	*ft_pathjoin(char const *path, char const *cmd)
 	char	*str_start;
 
 	if (!path || !cmd)
-		return (0);
+		ft_error_exit("pathjoin: path or cmd is NULL");
 	str = malloc(ft_strlen(path) + ft_strlen(cmd) + 2);
 	if (!str)
 		return (0);
@@ -52,7 +67,7 @@ void	ft_findcmd(char **path, char *cmd, char **pathcmd)
 	{
 		str = ft_pathjoin(*path, cmd);
 		if (!str)
-			ft_error("malloc");
+			ft_perror_exit("malloc");
 		if (!access(str, F_OK | X_OK))
 		{
 			*pathcmd = str;

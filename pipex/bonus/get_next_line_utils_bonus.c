@@ -6,11 +6,11 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:36:08 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/04 03:47:05 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/04 04:24:18 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "pipex_bonus.h"
 
 static char	*ft_strjoin_gnl(char *s1, const char *s2, int i)
 {

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:55:12 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/29 19:49:38 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/03 22:10:18 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef struct s_info
 	char	*pathcmd2;
 }			t_info;
 
-void		ft_error(char *errmsg);
+void		ft_perror_exit(char *errmsg);
+void		ft_error_exit(char *errmsg);
 void		ft_closepipe(int *pipe);
 char		*ft_pathjoin(char const *s1, char const *s2);
 void		ft_findcmd(char **path, char *cmd, char **pathcmd);

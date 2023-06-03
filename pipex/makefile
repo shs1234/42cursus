@@ -6,7 +6,7 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/05/30 00:30:48 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/06/04 03:01:21 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS        = main.c pipex.c utils.c
 OBJS        = $(SRCS:.c=.o)
 HEADER      = pipex.h
 
-SRCS_B      = bonus/main_bonus.c bonus/pipex_bonus.c bonus/utils_bonus.c
+SRCS_B      = bonus/main_bonus.c bonus/pipex_bonus.c bonus/utils_bonus.c \
+				bonus/get_next_line_bonus.c bonus/get_next_line_utils_bonus.c
 OBJS_B      = $(SRCS_B:.c=.o)
 HEADER_B    = bonus/pipex_bonus.h
 
@@ -37,21 +38,21 @@ bonus :
 	$(MAKE) BONUS=1 all
 
 $(NAME) : $(SWITCH_OBJS)
-	$(MAKE) -C libft
-	$(MAKE) -C ft_printf
+	# $(MAKE) -C libft
+	# $(MAKE) -C ft_printf
 	$(CC) -o $@ $^ $(LIB)
 
 %.o : %.c $(SWITCH_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean : 
-	$(MAKE) -C libft $@
-	$(MAKE) -C ft_printf $@
+	# $(MAKE) -C libft $@
+	# $(MAKE) -C ft_printf $@
 	$(RM) $(OBJS) $(OBJS_B) 
 
 fclean : clean
-	$(MAKE) -C libft $@
-	$(MAKE) -C ft_printf $@
+	# $(MAKE) -C libft $@
+	# $(MAKE) -C ft_printf $@
 	$(RM) $(NAME)
 
 re : fclean all
