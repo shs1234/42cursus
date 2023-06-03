@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 02:56:54 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/28 17:39:27 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/03 09:01:38 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,4 @@ int	ft_issorted_rev(t_stack *a, t_stack *b, int n)
 	while (n_copy--)
 		ft_pa(a, b);
 	return (1);
-}
-
-char	*ft_strcpy(char *dest, char *src)
-{
-	char	*dest_start;
-
-	dest_start = dest;
-	while (*src)
-		*dest++ = *src++;
-	*dest = '\0';
-	return (dest_start);
 }

@@ -3,44 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   input_valid.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:14:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/02 21:13:48 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/03 08:50:35 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
-
-// int	ft_isint(char *n)
-// {
-// 	int	res;
-// 	int	sign;
-
-// 	res = 0;
-// 	sign = 1;
-// 	if (!*n)
-// 		return (0);
-// 	if (*n == '+' || *n == '-')
-// 	{
-// 		if (*n == '-')
-// 			sign *= -1;
-// 		n++;
-// 		if (!*n)
-// 			return (0);
-// 	}
-// 	while (*n)
-// 	{
-// 		if (!ft_isdigit(*n))
-// 			return (0);
-// 		res = (res * 10) + (*n - '0');
-// 		if ((sign == 1 && res * sign < 0) || (sign == -1 && res * sign > 0))
-// 			return (0);
-// 		n++;
-// 	}
-// 	return (1);
-// }
 
 static int	ft_numlen(long long n)
 {
@@ -59,59 +30,49 @@ static int	ft_numlen(long long n)
 	return (len);
 }
 
-static int	ft_makei(const char *str, int sign, int cutoff, long long cutlim)
+static int	ft_intornot(const char *str, int cutoff, int cutlim)
 {
-	long long	res;
-	int			len;
-	int			longlen;
+	int	num;
+	int	len;
+	int	intlen;
 
-	res = 0;
+	num = 0;
 	len = 0;
-	longlen = ft_numlen(__LONG_MAX__);
+	intlen = ft_numlen(__INT_MAX__);
 	while (ft_isdigit(*str))
 	{
-		res = (10 * res) + (*str - '0');
+		num = (10 * num) + (*str - '0');
 		len++;
-		if ((res > cutlim && ft_isdigit(*(str + 1))) || (res == cutlim
-				&& ft_isdigit(*(str + 1)) && *(str + 1) - '0' >= cutoff)
-			|| (len == longlen - 1 && res < cutlim && ft_isdigit(*(str + 1))
-				&& ft_isdigit(*(str + 2))))
-		{
-			if (sign == 1)
-				return (-1);
-			else
-				return (0);
-		}
+		if (ft_isdigit(*(str + 1)) && (num > cutlim || (num == cutlim && *(str
+						+ 1) - '0' > cutoff) || (len == intlen - 1
+					&& num < cutlim && ft_isdigit(*(str + 2)))))
+			return (0);
 		str++;
 	}
-	return (res * sign);
+	return (1);
 }
 
 int	ft_isint(const char *str)
 {
-	int			sign;
-	long long	cutlim;
-	int			cutoff;
+	int	cutlim;
+	int	cutoff;
 
-	cutlim = __LONG_MAX__ / 10;
-	cutoff = __LONG_MAX__ % 10;
-	sign = 1;
+	cutlim = __INT_MAX__ / 10;
+	cutoff = __INT_MAX__ % 10;
 	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
-			sign *= -1;
+			cutoff++;
 		str++;
+		if (!ft_isdigit(*str))
+			return (0);
 	}
 	while (*str == '0')
 		str++;
-	if (sign == -1)
-		cutoff++;
-	return (ft_makei(str, sign, cutoff, cutlim));
+	return (ft_intornot(str, cutoff, cutlim));
 }
-
-// atoi 함수로 값 받아온 다음에 -1 0(오버플로)값이 진짜 -1 0 인지 확인하면 될듯.
 
 static int	ft_isdouble(char **av, int i)
 {
@@ -120,7 +81,7 @@ static int	ft_isdouble(char **av, int i)
 	n = av[i];
 	while (--i >= 0)
 	{
-		if (!ft_strcmp(n, av[i]))
+		if (ft_atoi(av[i]) == ft_atoi(n))
 			return (1);
 	}
 	return (0);

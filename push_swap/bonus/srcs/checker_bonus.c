@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 06:21:54 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/28 18:01:21 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/03 08:51:49 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,14 @@ static int	ft_stack_init(int ac, char **av, t_stack *a, t_stack *b)
 	return (1);
 }
 
-static int	ac2(int *ac2, char ***av2)
+static int	ac2(int *ac, char ***av)
 {
-	int		ac;
-	char	**av;
-
-	ac = *ac2;
-	av = *av2;
-	if (ac == 2)
+	if (*ac == 2)
 	{
-		av = ft_split(av[1], ' ', &ac);
-		if (ac == 1)
+		*av = ft_split((*av)[1], ' ', ac);
+		if (*ac == 1)
 		{
-			if (ft_isint(av[0]))
+			if (ft_isint((*av)[0]))
 				return (1);
 			else
 				ft_error();
@@ -105,11 +100,9 @@ static int	ac2(int *ac2, char ***av2)
 	}
 	else
 	{
-		ac--;
-		av++;
+		(*ac)--;
+		(*av)++;
 	}
-	*ac2 = ac;
-	*av2 = av;
 	return (0);
 }
 

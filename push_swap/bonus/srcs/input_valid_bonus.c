@@ -3,59 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   input_valid_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:14:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/28 07:41:39 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/03 08:55:54 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
 
-int	ft_isdigit(int c)
+static int	ft_numlen(long long n)
 {
-	if (c >= '0' && c <= '9')
+	int	len;
+
+	len = 0;
+	if (n == 0)
 		return (1);
-	return (0);
+	if (n < 0)
+		len++;
+	while (n)
+	{
+		len++;
+		n /= 10;
+	}
+	return (len);
 }
 
-int	ft_isint(char *n)
+static int	ft_intornot(const char *str, int cutoff, int cutlim)
 {
-	int	res;
-	int	sign;
+	int	num;
+	int	len;
+	int	intlen;
 
-	res = 0;
-	sign = 1;
-	if (!*n)
-		return (0);
-	if (*n == '+' || *n == '-')
+	num = 0;
+	len = 0;
+	intlen = ft_numlen(__INT_MAX__);
+	while (ft_isdigit(*str))
 	{
-		if (*n == '-')
-			sign *= -1;
-		n++;
-		if (!*n)
+		num = (10 * num) + (*str - '0');
+		len++;
+		if (ft_isdigit(*(str + 1)) && (num > cutlim || (num == cutlim && *(str
+						+ 1) - '0' > cutoff) || (len == intlen - 1
+					&& num < cutlim && ft_isdigit(*(str + 2)))))
 			return (0);
-	}
-	while (*n)
-	{
-		if (!ft_isdigit(*n))
-			return (0);
-		res = (res * 10) + (*n - '0');
-		if ((sign == 1 && res * sign < 0) || (sign == -1 && res * sign > 0))
-			return (0);
-		n++;
+		str++;
 	}
 	return (1);
 }
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_isint(const char *str)
 {
-	while (*s1 && *s2 && *s1 == *s2)
+	int	cutlim;
+	int	cutoff;
+
+	cutlim = __INT_MAX__ / 10;
+	cutoff = __INT_MAX__ % 10;
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		s1++;
-		s2++;
+		if (*str == '-')
+			cutoff++;
+		str++;
+		if (!ft_isdigit(*str))
+			return (0);
 	}
-	return (*s1 - *s2);
+	while (*str == '0')
+		str++;
+	return (ft_intornot(str, cutoff, cutlim));
 }
 
 static int	ft_isdouble(char **av, int i)
@@ -65,7 +80,7 @@ static int	ft_isdouble(char **av, int i)
 	n = av[i];
 	while (--i >= 0)
 	{
-		if (!ft_strcmp(n, av[i]))
+		if (ft_atoi(av[i]) == ft_atoi(n))
 			return (1);
 	}
 	return (0);

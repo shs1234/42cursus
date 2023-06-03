@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:13:10 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/28 08:22:31 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/03 09:07:45 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_stack
 }					t_stack;
 
 int					ft_is_valid(int ac, char **av);
-int					ft_isint(char *n);
+int					ft_isint(const char *str);
 
 void				ft_sorting(t_stack *a, t_stack *b);
 void				ft_atob(t_stack *a, t_stack *b, int n);
@@ -53,10 +53,8 @@ void				ft_error(void);
 void				ft_pivot(t_stack *stack, int n, int *pivot);
 void				ft_rrab(t_stack *a, t_stack *b, int *count);
 int					ft_3rd_5(t_node *node);
-char				*ft_strcpy(char *dest, char *src);
 void				ft_putstr_fd(char *s, int fd);
 int					ft_isdigit(int c);
-int					ft_strcmp(char *s1, char *s2);
 void				ft_bzero(void *s, size_t n);
 int					ft_strlen(const char *s);
 
