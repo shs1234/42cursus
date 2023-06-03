@@ -6,7 +6,7 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/06/04 03:01:21 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/06/04 07:08:14 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,21 +38,21 @@ bonus :
 	$(MAKE) BONUS=1 all
 
 $(NAME) : $(SWITCH_OBJS)
-	# $(MAKE) -C libft
-	# $(MAKE) -C ft_printf
+	$(MAKE) -C libft
+	$(MAKE) -C ft_printf
 	$(CC) -o $@ $^ $(LIB)
 
 %.o : %.c $(SWITCH_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean : 
-	# $(MAKE) -C libft $@
-	# $(MAKE) -C ft_printf $@
+	$(MAKE) -C libft $@
+	$(MAKE) -C ft_printf $@
 	$(RM) $(OBJS) $(OBJS_B) 
 
 fclean : clean
-	# $(MAKE) -C libft $@
-	# $(MAKE) -C ft_printf $@
+	$(MAKE) -C libft $@
+	$(MAKE) -C ft_printf $@
 	$(RM) $(NAME)
 
 re : fclean all
