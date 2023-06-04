@@ -3,15 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/06/02 17:53:51 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/06/05 07:59:22 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS		=	-Wall -Wextra -Werror
-AR			=	ar rcs
 RM			=	rm -rf
 
 NAME		=	push_swap

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 09:16:01 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/04 00:03:42 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/05 08:28:53 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,12 @@ char	*ft_pathjoin(char const *path, char const *cmd)
 	char	*str;
 	char	*str_start;
 
-	if (!path || !cmd)
-		ft_error_exit("pathjoin: path or cmd is NULL");
+	// if (!path || !cmd)
+	// 	ft_error_exit("pathjoin: path or cmd is NULL");
+	if (!path)
+		ft_error_exit("pathjoin: path is NULL");
+	if (!cmd)
+		ft_error_exit("pathjoin: cmd is NULL");
 	str = malloc(ft_strlen(path) + ft_strlen(cmd) + 2);
 	if (!str)
 		return (0);

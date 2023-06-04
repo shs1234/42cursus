@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:51:57 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/03 23:42:00 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/05 07:26:52 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int ac, char **av, char **envp)
 	t_info	info;
 
 	if (ac != 5)
-		ft_error_exit("ac != 5");
+		ft_error_exit("usage : ./pipex infile cmd1 cmd2 outfile");
 	ft_info_init(ac, av, envp, &info);
 	ft_pipex(&info);
 	return (0);
