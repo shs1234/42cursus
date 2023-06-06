@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 02:56:54 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/03 09:01:38 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:17:28 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,21 @@ int	ft_issorted_rev(t_stack *a, t_stack *b, int n)
 	while (n_copy--)
 		ft_pa(a, b);
 	return (1);
+}
+
+int	ft_numlen(long long n)
+{
+	int	len;
+
+	len = 0;
+	if (n == 0)
+		return (1);
+	if (n < 0)
+		len++;
+	while (n)
+	{
+		len++;
+		n /= 10;
+	}
+	return (len);
 }

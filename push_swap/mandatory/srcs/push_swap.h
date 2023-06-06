@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:13:10 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/03 09:07:45 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:19:19 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_stack
 }					t_stack;
 
 int					ft_is_valid(int ac, char **av);
-int					ft_isint(const char *str);
 
 void				ft_sorting(t_stack *a, t_stack *b);
 void				ft_atob(t_stack *a, t_stack *b, int n);
@@ -57,6 +56,7 @@ void				ft_putstr_fd(char *s, int fd);
 int					ft_isdigit(int c);
 void				ft_bzero(void *s, size_t n);
 int					ft_strlen(const char *s);
+int					ft_numlen(long long n);
 
 void				ft_sa(t_stack *a);
 void				ft_sb(t_stack *b);

@@ -3,32 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   input_valid.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:14:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/03 08:50:35 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:19:30 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
-
-static int	ft_numlen(long long n)
-{
-	int	len;
-
-	len = 0;
-	if (n == 0)
-		return (1);
-	if (n < 0)
-		len++;
-	while (n)
-	{
-		len++;
-		n /= 10;
-	}
-	return (len);
-}
 
 static int	ft_intornot(const char *str, int cutoff, int cutlim)
 {
@@ -52,26 +35,37 @@ static int	ft_intornot(const char *str, int cutoff, int cutlim)
 	return (1);
 }
 
-int	ft_isint(const char *str)
+static int	ft_isint(const char *str)
 {
 	int	cutlim;
 	int	cutoff;
 
 	cutlim = __INT_MAX__ / 10;
 	cutoff = __INT_MAX__ % 10;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
 			cutoff++;
 		str++;
-		if (!ft_isdigit(*str))
-			return (0);
 	}
 	while (*str == '0')
 		str++;
 	return (ft_intornot(str, cutoff, cutlim));
+}
+
+static int	ft_format(const char *n)
+{
+	if (*n == '-' || *n == '+')
+		n++;
+	if (!ft_isdigit(*n))
+		return (0);
+	while (*n)
+	{
+		if (!ft_isdigit(*n))
+			return (0);
+		n++;
+	}
+	return (1);
 }
 
 static int	ft_isdouble(char **av, int i)
@@ -94,7 +88,7 @@ int	ft_is_valid(int ac, char **av)
 	i = 0;
 	while (i < ac)
 	{
-		if (!ft_isint(av[i]) || ft_isdouble(av, i))
+		if (!ft_format(av[i]) || !ft_isint(av[i]) || ft_isdouble(av, i))
 			return (0);
 		i++;
 	}
