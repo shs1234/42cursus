@@ -6,14 +6,13 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:13:10 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/06 18:19:19 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/07 00:18:26 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
 

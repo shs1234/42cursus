@@ -6,11 +6,11 @@
 #    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/06/06 16:55:48 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/06/06 20:07:21 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g
 RM			=	rm -rf
 
 NAME		=	push_swap

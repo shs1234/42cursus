@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 08:39:14 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/05 08:27:05 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/07 00:23:00 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ static void	ft_openfile_heredoc(int ac, char **av, t_info *info)
 	{
 		ft_print_heredoc(ac);
 		line = get_next_line(0);
-		if (!ft_strncmp(line, av[2], ft_strlen(av[2])) && !line[ft_strlen(av[2])
-			+ 1])
+		if (!ft_strncmp(line, av[2], ft_strlen(av[2]))
+			&& !line[ft_strlen(av[2]) + 1])
 			break ;
 		if (write(info->infile_fd, line, ft_strlen(line)) == -1)
 			ft_perror_exit("write");
 		free(line);
 	}
+	free(line);
 	close(info->infile_fd);
 	info->infile_fd = open(".here_doc", O_RDONLY);
-	free(line);
 }
 
 static void	ft_info_init(int ac, char **av, char **envp, t_info *info)
