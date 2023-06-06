@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 18:28:33 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/16 13:15:57 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/07 03:16:29 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,29 @@ void	put_image(t_vars *vars, int x, int y, time_t now)
 			* IMG_SIZE, y * IMG_SIZE);
 }
 
+void	patrol(t_vars *vars, time_t now)
+{
+	size_t	x;
+	size_t	y;
+
+	y = 0;
+	while (y < vars->map_height)
+	{
+		x = 0;
+		while (x < vars->map_width)
+		{
+			if (vars->map[y][x] == 'F')
+			{
+				vars->map[y][x] = '0';
+				vars->map[y][x+1] = 'F';
+			}
+			x++;
+		}
+		y++;
+	}
+
+}
+
 int	rendering(t_vars *vars)
 {
 	size_t	x;
@@ -43,6 +66,7 @@ int	rendering(t_vars *vars)
 
 	now = time(NULL);
 	move = ft_itoa(vars->move);
+	patrol(vars, now);
 	y = 0;
 	while (y < vars->map_height)
 	{
