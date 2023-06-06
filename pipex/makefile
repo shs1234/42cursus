@@ -6,7 +6,7 @@
 #    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/06/06 20:44:07 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/06/07 00:25:10 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,21 +48,21 @@ $(SWITCH_OBJ_DIR) :
 	mkdir -p $@
 
 $(NAME) : $(SWITCH_OBJS)
-	# $(MAKE) -C libft
-	# $(MAKE) -C ft_printf
+	$(MAKE) -C libft
+	$(MAKE) -C ft_printf
 	$(CC) $(CFLAGS) -o $@ $^ $(LIB)
 
 $(SWITCH_OBJ_DIR)/%.o : $(SWITCH_SRC_DIR)/%.c $(SWITCH_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean : 
-	# $(MAKE) -C libft $@
-	# $(MAKE) -C ft_printf $@
+	$(MAKE) -C libft $@
+	$(MAKE) -C ft_printf $@
 	$(RM) $(OBJS) $(OBJS_B) 
 
 fclean : clean
-	# $(MAKE) -C libft $@
-	# $(MAKE) -C ft_printf $@
+	$(MAKE) -C libft $@
+	$(MAKE) -C ft_printf $@
 	$(RM) $(NAME)
 
 re : fclean all
