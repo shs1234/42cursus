@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:52:24 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/01 03:29:16 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:11:37 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,16 @@ int	make_map(char *filename, t_vars *vars)
 		return (0);
 	i = -1;
 	fd = open(filename, O_RDONLY);
-	if (fd > 0)
+	if (fd < 0)
+		error("Error\nopen");
+	while (++i < vars->map_height)
 	{
-		while (++i < vars->map_height)
-		{
-			vars->map[i] = get_next_line(fd);
-			new_line = ft_strchr(vars->map[i], '\n');
-			if (new_line)
-				*new_line = '\0';
-		}
-		vars->map[i] = NULL;
+		vars->map[i] = get_next_line(fd);
+		new_line = ft_strchr(vars->map[i], '\n');
+		if (new_line)
+			*new_line = '\0';
 	}
-	else
-		error("Error\nfd");
+	vars->map[i] = NULL;
 	close(fd);
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:52:35 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/26 02:26:37 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:13:23 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,16 @@ int	line_count(char *filename)
 
 	i = 0;
 	fd = open(filename, O_RDONLY);
-	if (fd > 0)
+	if (fd < 0)
+		error("Error\nopen");
+	while (1)
 	{
-		while (1)
-		{
-			line = get_next_line(fd);
-			if (!line)
-				break ;
-			i++;
-			free(line);
-		}
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		i++;
+		free(line);
 	}
-	else
-		error("Error\nfd");
 	close(fd);
 	return (i);
 }
