@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/02 20:37:58 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/07 08:37:40 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,12 @@ int	main(int ac, char **av)
 	ft_bzero(&vars, sizeof(t_vars));
 	if (make_map(av[1], &vars))
 	{
-		if (valid_map(&vars))
+		if (valid_map(&vars) && enemy_init(&vars))
 			so_long(&vars);
 		else
-			error("Error\n");
+			error("Error");
 	}
 	else
-		error("Error\n");
+		error("Error");
 	return (0);
-	// 적 움직임 추가
 }

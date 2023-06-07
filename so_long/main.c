@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/01 04:24:10 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/07 09:07:29 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static int	rendering(t_vars *vars)
 		while (x < vars->map_width)
 		{
 			mlx_put_image_to_window(vars->mlx, vars->win,
-					vars->imgs[return_index("01CEP", vars->map[y][x])].img, x
-					* IMG_SIZE, y * IMG_SIZE);
+				vars->imgs[return_index("01CEP", vars->map[y][x])].img,
+				x * IMG_SIZE, y * IMG_SIZE);
 			x++;
 		}
 		y++;
@@ -57,9 +57,8 @@ static void	img_init(t_vars *vars)
 	vars->imgs[1].img = mlx_xpm_file_to_image(vars->mlx, "./imgs/wall.xpm",
 			&vars->imgs[1].img_width, &vars->imgs[1].img_height);
 	vars->imgs[2].img = mlx_xpm_file_to_image(vars->mlx,
-												"./imgs/collectible.xpm",
-												&vars->imgs[2].img_width,
-												&vars->imgs[2].img_height);
+			"./imgs/collectible.xpm", &vars->imgs[2].img_width,
+			&vars->imgs[2].img_height);
 	vars->imgs[3].img = mlx_xpm_file_to_image(vars->mlx, "./imgs/exit.xpm",
 			&vars->imgs[3].img_width, &vars->imgs[3].img_height);
 	vars->imgs[4].img = mlx_xpm_file_to_image(vars->mlx, "./imgs/player.xpm",

@@ -6,7 +6,7 @@
 #    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/06/01 04:51:41 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/06/07 09:12:28 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ SRCS        = main.c get_next_line.c get_next_line_utils.c map.c utils.c move.c 
 OBJS        = $(SRCS:.c=.o)
 HEADER      = so_long.h
 
-SRCS_B      = bonus/main_bonus.c bonus/utils2_bonus.c \
+SRCS_B      = bonus/main_bonus.c bonus/utils2_bonus.c bonus/enemy_bonus.c \
 				bonus/map_bonus.c bonus/utils_bonus.c bonus/move_bonus.c \
-				bonus/img_init_bonus.c bonus/rendering_bonus.c \
+				bonus/img_init_bonus.c bonus/rendering_bonus.c bonus/patrol_bonus.c\
 				bonus/get_next_line_bonus.c bonus/get_next_line_utils_bonus.c
 OBJS_B      = $(SRCS_B:.c=.o)
 HEADER_B    = bonus/so_long_bonus.h

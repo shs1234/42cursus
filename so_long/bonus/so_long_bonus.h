@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:19 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/01 04:23:46 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/07 09:12:06 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "../libft/libft.h"
 # include "../minilibx_mac/mlx.h"
 # include <fcntl.h>
-# include <stdio.h>
 # include <time.h>
 
 # define BUFFER_SIZE 42
@@ -47,8 +46,11 @@ typedef struct s_vars
 	int		exit_x;
 	int		exit_y;
 	int		c_count;
+	int		f_count;
+	int		**enemy;
 	int		move;
 	int		exit;
+	time_t	now;
 	t_img	empty;
 	t_img	wall;
 	t_img	c[3];
@@ -89,6 +91,10 @@ void		img_f(t_vars *vars);
 
 // rendering
 int			rendering(t_vars *vars);
-void		put_image(t_vars *vars, int x, int y, time_t now);
+void		put_image(t_vars *vars, int x, int y);
+
+// enemy
+int			enemy_init(t_vars *vars);
+void		patrol(t_vars *vars);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:19 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/01 02:54:44 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/07 09:10:36 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "libft/libft.h"
 # include "minilibx_mac/mlx.h"
 # include <fcntl.h>
-# include <stdio.h>
 
 # define BUFFER_SIZE 42
 # define IMG_SIZE 32
