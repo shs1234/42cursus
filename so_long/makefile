@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/06/07 22:07:46 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/06/08 06:12:15 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,14 +15,13 @@ CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -rf
 FRAMEWORK	= -framework OpenGL -framework AppKit
 
-SRCS        = main.c get_next_line.c get_next_line_utils.c map.c utils.c move.c utils2.c
+SRCS        = main.c utils.c move.c make_map.c valid_map.c
 OBJS        = $(SRCS:.c=.o)
 HEADER      = so_long.h
 
-SRCS_B      = bonus/main_bonus.c bonus/utils2_bonus.c bonus/enemy_bonus.c \
-				bonus/map_bonus.c bonus/utils_bonus.c bonus/move_bonus.c \
-				bonus/img_init_bonus.c bonus/rendering_bonus.c bonus/patrol_bonus.c\
-				bonus/get_next_line_bonus.c bonus/get_next_line_utils_bonus.c
+SRCS_B      = bonus/main_bonus.c bonus/enemy_bonus.c bonus/patrol_bonus.c \
+				bonus/make_map_bonus.c bonus/valid_map_bonus.c bonus/utils_bonus.c \
+				bonus/move_bonus.c bonus/img_init_bonus.c bonus/rendering_bonus.c				
 OBJS_B      = $(SRCS_B:.c=.o)
 HEADER_B    = bonus/so_long_bonus.h
 

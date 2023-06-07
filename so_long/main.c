@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/07 09:07:29 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/08 05:36:50 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static int	rendering(t_vars *vars)
 		while (x < vars->map_width)
 		{
 			mlx_put_image_to_window(vars->mlx, vars->win,
-				vars->imgs[return_index("01CEP", vars->map[y][x])].img,
-				x * IMG_SIZE, y * IMG_SIZE);
+					vars->imgs[return_index("01CEP", vars->map[y][x])].img, x
+					* IMG_SIZE, y * IMG_SIZE);
 			x++;
 		}
 		y++;
@@ -57,8 +57,9 @@ static void	img_init(t_vars *vars)
 	vars->imgs[1].img = mlx_xpm_file_to_image(vars->mlx, "./imgs/wall.xpm",
 			&vars->imgs[1].img_width, &vars->imgs[1].img_height);
 	vars->imgs[2].img = mlx_xpm_file_to_image(vars->mlx,
-			"./imgs/collectible.xpm", &vars->imgs[2].img_width,
-			&vars->imgs[2].img_height);
+												"./imgs/collectible.xpm",
+												&vars->imgs[2].img_width,
+												&vars->imgs[2].img_height);
 	vars->imgs[3].img = mlx_xpm_file_to_image(vars->mlx, "./imgs/exit.xpm",
 			&vars->imgs[3].img_width, &vars->imgs[3].img_height);
 	vars->imgs[4].img = mlx_xpm_file_to_image(vars->mlx, "./imgs/player.xpm",
@@ -80,17 +81,16 @@ static void	so_long(t_vars *vars)
 int	main(int ac, char **av)
 {
 	t_vars	vars;
+	char	*extension;
 
 	if (ac != 2)
 		error("Error\nac != 2");
+	extension = ft_strrchr(av[1], '.');
+	if (!extension || ft_strncmp(extension, ".ber", 4) || extension[4])
+		error("Error\n.ber file only");
 	ft_bzero(&vars, sizeof(t_vars));
-	if (make_map(av[1], &vars))
-	{
-		if (valid_map(&vars))
-			so_long(&vars);
-		else
-			error("Error");
-	}
+	if (make_map(av[1], &vars) && valid_map(&vars))
+		so_long(&vars);
 	else
 		error("Error");
 	return (0);

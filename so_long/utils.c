@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:52:35 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/07 22:13:23 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/08 06:01:45 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,6 @@ int	return_index(char *str, char c)
 	return (i);
 }
 
-int	line_count(char *filename)
-{
-	int		i;
-	int		fd;
-	char	*line;
-
-	i = 0;
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		error("Error\nopen");
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		i++;
-		free(line);
-	}
-	close(fd);
-	return (i);
-}
-
 void	map_clear(char **map)
 {
 	int	i;
@@ -60,4 +38,15 @@ void	map_clear(char **map)
 		i++;
 	}
 	free(map);
+}
+
+void	error(char *msg)
+{
+	ft_putendl_fd(msg, 1);
+	exit(EXIT_FAILURE);
+}
+
+int	close_win(void)
+{
+	exit(0);
 }

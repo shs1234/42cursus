@@ -1,42 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   valid_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:52:24 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/07 22:11:37 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/08 05:48:06 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-
-int	make_map(char *filename, t_vars *vars)
-{
-	int		fd;
-	size_t	i;
-	char	*new_line;
-
-	vars->map_height = line_count(filename);
-	vars->map = malloc(sizeof(char *) * (vars->map_height + 1));
-	if (!vars->map)
-		return (0);
-	i = -1;
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		error("Error\nopen");
-	while (++i < vars->map_height)
-	{
-		vars->map[i] = get_next_line(fd);
-		new_line = ft_strchr(vars->map[i], '\n');
-		if (new_line)
-			*new_line = '\0';
-	}
-	vars->map[i] = NULL;
-	close(fd);
-	return (1);
-}
+#include "so_long_bonus.h"
 
 static void	components(size_t y, size_t x, int *cep, t_vars *vars)
 {
@@ -59,7 +33,8 @@ static void	components(size_t y, size_t x, int *cep, t_vars *vars)
 			vars->player_y = y;
 			cep[2]++;
 		}
-		else if (vars->map[y][x] == '0' || vars->map[y][x] == '1')
+		else if (vars->map[y][x] == '0' || vars->map[y][x] == '1'
+				|| vars->map[y][x] == 'F')
 			return ;
 		else
 			error("Error\ninvalid component");
@@ -68,7 +43,7 @@ static void	components(size_t y, size_t x, int *cep, t_vars *vars)
 
 static void	dfs(char **map, int x, int y, int *ce)
 {
-	if (map[y][x] == '1' || *ce == 0)
+	if (map[y][x] == '1' || map[y][x] == 'F' || *ce == 0)
 		return ;
 	if (map[y][x] == 'C' || map[y][x] == 'E')
 		(*ce)--;
@@ -79,7 +54,7 @@ static void	dfs(char **map, int x, int y, int *ce)
 	dfs(map, x, y - 1, ce);
 }
 
-int	valid_path(t_vars *vars)
+static int	valid_path(t_vars *vars)
 {
 	char	**map_copy;
 	int		ce;
@@ -113,19 +88,18 @@ int	valid_map(t_vars *vars)
 
 	ft_bzero(cep, sizeof(int) * 3);
 	vars->map_width = ft_strlen(vars->map[0]);
-	y = 0;
-	while (y < vars->map_height)
+	y = -1;
+	while (vars->map[++y])
 	{
 		if (ft_strlen(vars->map[y]) != vars->map_width)
 			error("Error\nno rectangle");
-		x = 0;
-		while (x < vars->map_width)
-		{
+		x = -1;
+		while (++x < vars->map_width)
 			components(y, x, cep, vars);
-			x++;
-		}
-		y++;
 	}
+	vars->map_height = y;
+	if (vars->map_height > MAX_HEIGHT || vars->map_width > MAX_WIDTH)
+		error("Error\nmap height or width");
 	vars->c_count = cep[0];
 	if (!(cep[0] > 0 && cep[1] == 1 && cep[2] == 1))
 		error("Error\ncomponent count");

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:19 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/07 09:10:36 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/08 05:27:09 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include "minilibx_mac/mlx.h"
 # include <fcntl.h>
 
-# define BUFFER_SIZE 42
 # define IMG_SIZE 32
+
+# define MAX_HEIGHT 24
+# define MAX_WIDTH 50
 
 # define K_ESC 53
 # define K_AR_L 123
@@ -50,20 +52,13 @@ typedef struct s_vars
 	t_img	imgs[5];
 }			t_vars;
 
-// GNL
-int			ft_has_newline(char *buf);
-void		ft_free(char **mem);
-char		*get_next_line(int fd);
-
 // map
 int			make_map(char *filename, t_vars *vars);
 int			valid_map(t_vars *vars);
-int			valid_path(t_vars *vars);
 
 // utils
 void		error(char *msg);
 int			return_index(char *str, char c);
-int			line_count(char *filename);
 void		map_clear(char **map);
 int			close_win(void);
 

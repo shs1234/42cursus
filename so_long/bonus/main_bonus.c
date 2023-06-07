@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:27 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/07 08:37:40 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/08 05:52:01 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,16 @@ static void	so_long(t_vars *vars)
 int	main(int ac, char **av)
 {
 	t_vars	vars;
+	char	*extension;
 
 	if (ac != 2)
 		error("Error\nac != 2");
+	extension = ft_strrchr(av[1], '.');
+	if (!extension || ft_strncmp(extension, ".ber", 4) || extension[4])
+		error("Error\n.ber file only");
 	ft_bzero(&vars, sizeof(t_vars));
-	if (make_map(av[1], &vars))
-	{
-		if (valid_map(&vars) && enemy_init(&vars))
-			so_long(&vars);
-		else
-			error("Error");
-	}
+	if (make_map(av[1], &vars) && valid_map(&vars) && enemy_init(&vars))
+		so_long(&vars);
 	else
 		error("Error");
 	return (0);
