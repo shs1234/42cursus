@@ -6,14 +6,13 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:18 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/30 04:10:26 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/08 11:32:22 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <limits.h>
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -35,6 +34,7 @@ typedef struct s_info
 	int				*fork;
 	long			starttime;
 	int				died;
+	pthread_t		*threads;
 	pthread_mutex_t	mutex;
 }					t_info;
 
@@ -51,10 +51,13 @@ typedef struct s_philo
 
 // ft_atoi
 int					ft_atoi(const char *str);
+int					ft_numlen(long long n);
+
+// valid
+int					ft_is_valid(int ac, char **av);
 
 // utils
 int					ft_isdigit(int c);
-int					ft_isposint(char *n);
 long				get_time_ms(void);
 void				print_msg(t_philo *philo, char *msg);
 

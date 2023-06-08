@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 00:54:14 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/01 10:26:30 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/08 11:16:35 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,17 @@ static void	*philosopher(void *arg)
 
 int	philosophers(t_philo *philo)
 {
-	pthread_t	*threads;
-	int			i;
+	int	i;
 
-	threads = malloc(sizeof(pthread_t) * philo->info->n);
-	if (!threads)
+	philo->info->threads = malloc(sizeof(pthread_t) * philo->info->n);
+	if (!philo->info->threads)
 		return (0);
 	i = -1;
 	while (++i < philo->info->n)
-		pthread_create(&threads[i], NULL, philosopher, &philo[i]);
+		pthread_create(&philo->info->threads[i], NULL, philosopher, &philo[i]);
 	i = -1;
 	while (++i < philo->info->n)
-		pthread_join(threads[i], NULL);
+		pthread_join(philo->info->threads[i], NULL);
 	pthread_mutex_destroy(&philo->info->mutex);
-	free(threads);
-	return (0);
+	return (1);
 }

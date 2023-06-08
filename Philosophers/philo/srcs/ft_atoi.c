@@ -6,13 +6,13 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 05:08:26 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/17 05:09:13 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/08 09:57:48 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	ft_numlen(long long n)
+int	ft_numlen(long long n)
 {
 	int	len;
 

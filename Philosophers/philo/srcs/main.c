@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:21 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/01 08:44:07 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/08 11:17:31 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static int	valid_args(int ac, char **av)
-{
-	int	i;
-
-	if (!(ac == 5 || ac == 6))
-		return (0);
-	i = 0;
-	while (++i < ac)
-	{
-		if (!ft_isposint(av[i]))
-			return (0);
-	}
-	return (1);
-}
 
 static int	info_init(t_info *info, int ac, char **av)
 {
@@ -76,17 +61,20 @@ int	main(int ac, char **av)
 	t_info	info;
 	t_philo	*philo;
 
-	if (valid_args(ac, av) && info_init(&info, ac, av) && philo_init(&info,
-			&philo))
-		philosophers(philo);
-	else
-		write(2, "Error\n", 6);
+	if (!(ac == 5 || ac == 6))
+	{
+		printf("Error : ac == 5 || ac == 6\n");
+		return (0);
+	}
+	if (!ft_is_valid(ac, av) || !info_init(&info, ac, av) || !philo_init(&info,
+			&philo) || !philosophers(philo))
+		printf("Error\n");
 	return (0);
 }
 
 // 죽은다음 다다른  스스레레드  문문구구가  출출력력되되는는거.
 // 출력시간을 단단순순히  av2 av3을 더해주는 방식.
-// join으로 스레드 종료 상태 확인하고, 종료 되면 detach로 나머지 스레드 종료시켜 주는 방식
+// join으로 스레드 종료 상태 확인하고, 종료 되면 detach로 나머지 스레드 종료시켜 주는 방식//이런 개념이 아닌듯;
 // 스레드를 detach로 종료시킨 후, 뮤텍스가 lock상태일 수 있으니, unlock 한번 해주고 destroy하면 될듯.
 
 // 포크 각각을 뮤텍스로 만들어서 3번 포크는 3번 뮤텍스만 잠기도록.
