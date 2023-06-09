@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:21 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/08 11:17:31 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:39:38 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static int	info_init(t_info *info, int ac, char **av)
 	else
 		info->must_eat = -1;
 	info->died = 0;
-	pthread_mutex_init(&info->mutex, NULL);
 	info->starttime = get_time_ms();
-	info->fork = malloc(sizeof(int) * info->n);
-	if (!info->fork)
+	info->fork = malloc(sizeof(pthread_mutex_t) * info->n);
+	info->threads = malloc(sizeof(pthread_t) * info->n);
+	if (!info->fork || !info->threads)
 		return (0);
 	i = -1;
 	while (++i < info->n)
-		info->fork[i] = 0;
+		pthread_mutex_init(&info->fork[i], NULL);
 	return (1);
 }
 
@@ -72,9 +72,5 @@ int	main(int ac, char **av)
 	return (0);
 }
 
-// 죽은다음 다다른  스스레레드  문문구구가  출출력력되되는는거.
-// 출력시간을 단단순순히  av2 av3을 더해주는 방식.
-// join으로 스레드 종료 상태 확인하고, 종료 되면 detach로 나머지 스레드 종료시켜 주는 방식//이런 개념이 아닌듯;
-// 스레드를 detach로 종료시킨 후, 뮤텍스가 lock상태일 수 있으니, unlock 한번 해주고 destroy하면 될듯.
-
-// 포크 각각을 뮤텍스로 만들어서 3번 포크는 3번 뮤텍스만 잠기도록.
+// 죽은다음 다른  스레드  문구가  출력되는거. 출력 함수에서 죽었을 경우 작동 안하게.
+// 출력함수에서 조건문 걸어도 계속 출력됨.

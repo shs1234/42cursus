@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:18 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/08 11:32:22 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:30:51 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ typedef struct s_info
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				must_eat;
-	int				*fork;
+	pthread_mutex_t	*fork;
 	long			starttime;
 	int				died;
 	pthread_t		*threads;
-	pthread_mutex_t	mutex;
 }					t_info;
 
 typedef struct s_philo
@@ -53,7 +52,7 @@ typedef struct s_philo
 int					ft_atoi(const char *str);
 int					ft_numlen(long long n);
 
-// valid
+// input_valid
 int					ft_is_valid(int ac, char **av);
 
 // utils

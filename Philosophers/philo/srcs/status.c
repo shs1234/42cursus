@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 03:32:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/08 09:38:51 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:26:23 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,28 @@
 
 static void	pickup_fork(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->info->mutex);
-	if (philo->left == 0 && philo->info->fork[(philo->i + philo->info->n - 1)
-		% philo->info->n] == 0)
+	if (philo->left == 0)
 	{
-		philo->info->fork[(philo->i + philo->info->n - 1) % philo->info->n] = 1;
+		pthread_mutex_lock(&philo->info->fork[(philo->i + philo->info->n - 1)
+			% philo->info->n]);
 		philo->left = 1;
 		print_msg(philo, "has taken a fork\n");
 	}
-	if (philo->right == 0 && philo->info->fork[philo->i] == 0)
+	if (philo->right == 0)
 	{
-		philo->info->fork[philo->i] = 1;
+		pthread_mutex_lock(&philo->info->fork[philo->i]);
 		philo->right = 1;
 		print_msg(philo, "has taken a fork\n");
 	}
-	pthread_mutex_unlock(&philo->info->mutex);
+}
+
+static void	putdown_fork(t_philo *philo)
+{
+	pthread_mutex_unlock(&philo->info->fork[(philo->i + philo->info->n - 1)
+		% philo->info->n]);
+	philo->left = 0;
+	pthread_mutex_unlock(&philo->info->fork[philo->i]);
+	philo->right = 0;
 }
 
 void	eat_philo(t_philo *philo)
@@ -40,24 +47,19 @@ void	eat_philo(t_philo *philo)
 		philo->info->died = 1;
 		return ;
 	}
-	if (philo->right == 0 || philo->left == 0)
-		return ;
 	philo->starving = get_time_ms();
 	print_msg(philo, "is eating\n");
 	philo->eat_count++;
 	usleep(philo->info->time_to_eat * 1000);
-	philo->info->fork[(philo->i + philo->info->n - 1) % philo->info->n] = 0;
-	philo->info->fork[philo->i] = 0;
-	philo->left = 0;
-	philo->right = 0;
+	putdown_fork(philo);
 	philo->status = SLEEP;
 }
 
 void	sleep_philo(t_philo *philo)
 {
 	print_msg(philo, "is sleeping\n");
-	philo->status = THINK;
 	usleep(philo->info->time_to_sleep * 1000);
+	philo->status = THINK;
 }
 
 void	think_philo(t_philo *philo)
