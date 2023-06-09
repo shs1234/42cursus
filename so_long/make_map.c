@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:52:24 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/08 06:10:54 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/09 08:46:25 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,38 @@ static size_t	map_len(char *filename)
 	{
 		len++;
 		if (len > max_len)
-			error("Error\nmap is big");
+			error("Error\ninvalid map");
 	}
 	close(fd);
 	if (len == 0)
-		error("Error\nempty map");
+		error("Error\ninvalid map");
 	return (len);
+}
+
+static int	valid_line(char *str, char **map)
+{
+	int	ln;
+	int	line_count;
+
+	ln = 0;
+	line_count = 0;
+	if (*str == '\n')
+		return (0);
+	while (*str)
+	{
+		if (*str == '\n')
+		{
+			if (*(str + 1) && *(str + 1) == '\n')
+				return (0);
+			ln++;
+		}
+		str++;
+	}
+	while (map[line_count])
+		line_count++;
+	if (!(ln == line_count || ln + 1 == line_count))
+		return (0);
+	return (1);
 }
 
 int	make_map(char *filename, t_vars *vars)
@@ -54,9 +80,9 @@ int	make_map(char *filename, t_vars *vars)
 		str[i++] = buf;
 	str[i] = '\0';
 	close(fd);
-	free(str);
 	vars->map = ft_split(str, '\n');
-	if (!vars->map[0])
-		error("Error\nempty map");
+	if (!valid_line(str, vars->map))
+		error("Error\ninvalid map");
+	free(str);
 	return (1);
 }

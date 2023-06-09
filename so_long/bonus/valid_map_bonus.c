@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:52:24 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/08 05:48:06 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/09 08:33:08 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	components(size_t y, size_t x, int *cep, t_vars *vars)
 {
 	if ((y == 0 || y == vars->map_height - 1 || x == 0 || x == vars->map_width
 			- 1) && vars->map[y][x] != '1')
-		error("Error\nwall 1");
+		error("Error\ninvalid map");
 	else
 	{
 		if (vars->map[y][x] == 'C')
@@ -34,10 +34,10 @@ static void	components(size_t y, size_t x, int *cep, t_vars *vars)
 			cep[2]++;
 		}
 		else if (vars->map[y][x] == '0' || vars->map[y][x] == '1'
-				|| vars->map[y][x] == 'F')
+			|| vars->map[y][x] == 'F')
 			return ;
 		else
-			error("Error\ninvalid component");
+			error("Error\ninvalid map");
 	}
 }
 
@@ -92,18 +92,18 @@ int	valid_map(t_vars *vars)
 	while (vars->map[++y])
 	{
 		if (ft_strlen(vars->map[y]) != vars->map_width)
-			error("Error\nno rectangle");
+			error("Error\ninvalid map");
 		x = -1;
 		while (++x < vars->map_width)
 			components(y, x, cep, vars);
 	}
 	vars->map_height = y;
 	if (vars->map_height > MAX_HEIGHT || vars->map_width > MAX_WIDTH)
-		error("Error\nmap height or width");
+		error("Error\ninvalid map");
 	vars->c_count = cep[0];
 	if (!(cep[0] > 0 && cep[1] == 1 && cep[2] == 1))
-		error("Error\ncomponent count");
+		error("Error\ninvalid map");
 	if (!valid_path(vars))
-		error("Error\nno path");
+		error("Error\ninvalid map");
 	return (1);
 }
