@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 03:32:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/09 15:26:23 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/10 12:43:47 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,30 @@
 
 static void	pickup_fork(t_philo *philo)
 {
-	if (philo->left == 0)
+	pthread_mutex_lock(&philo->info->mutex);
+	if (philo->left == 0 && philo->info->fork[(philo->i + philo->info->n - 1)
+		% philo->info->n] == 0)
 	{
-		pthread_mutex_lock(&philo->info->fork[(philo->i + philo->info->n - 1)
-			% philo->info->n]);
+		philo->info->fork[(philo->i + philo->info->n - 1) % philo->info->n] = 1;
 		philo->left = 1;
 		print_msg(philo, "has taken a fork\n");
 	}
-	if (philo->right == 0)
+	if (philo->right == 0 && philo->info->fork[philo->i] == 0)
 	{
-		pthread_mutex_lock(&philo->info->fork[philo->i]);
+		philo->info->fork[philo->i] = 1;
 		philo->right = 1;
 		print_msg(philo, "has taken a fork\n");
 	}
+	pthread_mutex_unlock(&philo->info->mutex);
 }
 
 static void	putdown_fork(t_philo *philo)
 {
-	pthread_mutex_unlock(&philo->info->fork[(philo->i + philo->info->n - 1)
-		% philo->info->n]);
+	pthread_mutex_lock(&philo->info->mutex);
+	philo->info->fork[(philo->i + philo->info->n - 1) % philo->info->n] = 0;
+	philo->info->fork[philo->i] = 0;
+	pthread_mutex_unlock(&philo->info->mutex);
 	philo->left = 0;
-	pthread_mutex_unlock(&philo->info->fork[philo->i]);
 	philo->right = 0;
 }
 
@@ -47,10 +50,12 @@ void	eat_philo(t_philo *philo)
 		philo->info->died = 1;
 		return ;
 	}
+	if (!(philo->left && philo->right))
+		return ;
 	philo->starving = get_time_ms();
 	print_msg(philo, "is eating\n");
 	philo->eat_count++;
-	usleep(philo->info->time_to_eat * 1000);
+	my_msleep(philo->info->time_to_eat);
 	putdown_fork(philo);
 	philo->status = SLEEP;
 }
@@ -58,7 +63,7 @@ void	eat_philo(t_philo *philo)
 void	sleep_philo(t_philo *philo)
 {
 	print_msg(philo, "is sleeping\n");
-	usleep(philo->info->time_to_sleep * 1000);
+	my_msleep(philo->info->time_to_sleep);
 	philo->status = THINK;
 }
 

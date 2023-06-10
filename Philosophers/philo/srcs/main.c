@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:21 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/09 15:39:38 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/10 15:55:54 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,18 @@ static int	info_init(t_info *info, int ac, char **av)
 	else
 		info->must_eat = -1;
 	info->died = 0;
+	info->im_full = 0;
+	info->start = 0;
 	info->starttime = get_time_ms();
-	info->fork = malloc(sizeof(pthread_mutex_t) * info->n);
+	if (pthread_mutex_init(&info->mutex, NULL) == -1)
+		return (0);
+	info->fork = malloc(sizeof(int) * info->n);
 	info->threads = malloc(sizeof(pthread_t) * info->n);
 	if (!info->fork || !info->threads)
 		return (0);
 	i = -1;
 	while (++i < info->n)
-		pthread_mutex_init(&info->fork[i], NULL);
+		info->fork[i] = 0;
 	return (1);
 }
 
