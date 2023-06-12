@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:52:24 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/09 08:33:08 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/12 10:42:57 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	components(size_t y, size_t x, int *cep, t_vars *vars)
 
 static void	dfs(char **map, int x, int y, int *ce)
 {
-	if (map[y][x] == '1' || map[y][x] == 'F' || *ce == 0)
+	if (map[y][x] == '1' || *ce == 0)
 		return ;
 	if (map[y][x] == 'C' || map[y][x] == 'E')
 		(*ce)--;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   patrol_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 08:09:46 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/07 09:01:50 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/12 10:16:10 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ void	patrol(t_vars *vars)
 	while (i < vars->f_count)
 	{
 		direction = rand() % 4;
-		if (direction == 0)
+		if (direction == UP)
 			enemy_u(vars->enemy[i], vars);
-		else if (direction == 1)
+		else if (direction == DOWN)
 			enemy_d(vars->enemy[i], vars);
-		else if (direction == 2)
+		else if (direction == RIGHT)
 			enemy_r(vars->enemy[i], vars);
-		else if (direction == 3)
+		else if (direction == LEFT)
 			enemy_l(vars->enemy[i], vars);
 		i++;
 	}

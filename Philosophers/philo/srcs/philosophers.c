@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 00:54:14 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/10 16:24:07 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:54:56 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	*philosopher(void *arg)
 	while (!philo->info->start)
 		;
 	if (philo->i % 2 == 1)
-		usleep(100);
+		my_msleep(100);
 	while (!philo->info->died && philo->eat_count != philo->info->must_eat)
 	{
 		if (philo->status == EAT)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:33:19 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/08 05:45:13 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/12 10:15:45 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@
 # define K_AR_R 124
 # define K_AR_U 126
 # define K_AR_D 125
+
+# define UP 0
+# define DOWN 1
+# define RIGHT 2
+# define LEFT 3
 
 typedef struct s_img
 {
