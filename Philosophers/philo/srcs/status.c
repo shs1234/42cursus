@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 03:32:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/10 12:43:47 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/28 19:46:42 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 static void	pickup_fork(t_philo *philo)
 {
+	int	left;
+	int	right;
+
+	left = (philo->i + philo->info->n - 1) % philo->info->n == 0;
+	right = philo->i;
 	pthread_mutex_lock(&philo->info->mutex);
 	if (philo->left == 0 && philo->info->fork[(philo->i + philo->info->n - 1)
 		% philo->info->n] == 0)
