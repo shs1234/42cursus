@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 14:08:02 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/11 03:57:21 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/06/29 17:05:55 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s1)
 	char	*dup_start;
 	size_t	len;
 
+	if (!s1)
+		return (NULL);
 	len = ft_strlen(s1);
 	dup = malloc(sizeof(char) * len + 1);
 	if (!dup)

@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_iswhitespace.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/11 03:20:53 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/11 03:21:27 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/06/16 19:01:31 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/06/16 19:02:34 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-#endif
+int	ft_iswhitespace(int c)
+{
+	return (c == ' ' || (c >= 9 && c <= 13));
+}
