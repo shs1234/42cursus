@@ -3,20 +3,22 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/06/02 20:40:38 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/07/07 10:13:33 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = philo
 CFLAGS      = -Wall -Wextra -Werror
+# CFLAGS      = -Wall -Wextra -Werror -g3 -fsanitize=address
+# CFLAGS      = -Wall -Wextra -Werror -g3 -fsanitize=thread
 RM          = rm -rf
 
 SRC_DIR 	= srcs
-SRCS 		= $(wildcard $(SRC_DIR)/*.c)
 OBJ_DIR 	= objs
+SRCS 		= $(wildcard $(SRC_DIR)/*.c)
 OBJS 		= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 HEADER		= $(SRC_DIR)/philo.h
 

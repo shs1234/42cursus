@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:18 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/28 19:41:36 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/07/07 10:28:50 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ typedef struct s_info
 	int				im_full;
 	int				start;
 	pthread_mutex_t	*fork_mutex;
-	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	died_mutex;
+	pthread_mutex_t	im_full_mutex;
+	pthread_mutex_t	start_mutex;
 	pthread_t		*threads;
 }					t_info;
 
@@ -64,7 +66,6 @@ int					ft_isdigit(int c);
 long				get_time_ms(void);
 void				print_msg(t_philo *philo, char *msg);
 void				my_msleep(int time);
-void	ft_bzero(void *s, size_t n);
 
 // Philosophers
 int					philosophers(t_philo *philo);
@@ -73,5 +74,9 @@ int					philosophers(t_philo *philo);
 void				eat_philo(t_philo *philo);
 void				sleep_philo(t_philo *philo);
 void				think_philo(t_philo *philo);
+
+// init
+int					info_init(t_info *info, int ac, char **av);
+int					philo_init(t_info *info, t_philo **philo);
 
 #endif

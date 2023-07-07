@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 03:32:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/07/07 02:56:20 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/07/07 11:33:52 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static void	putdown_fork(t_philo *philo)
 	right = philo->i;
 	pthread_mutex_lock(&philo->info->fork_mutex[left]);
 	philo->info->fork[left] = 0;
-	pthread_mutex_unlock(&philo->info->fork_mutex[left]);
 	philo->left = 0;
+	pthread_mutex_unlock(&philo->info->fork_mutex[left]);
 	pthread_mutex_lock(&philo->info->fork_mutex[right]);
 	philo->info->fork[philo->i] = 0;
-	pthread_mutex_unlock(&philo->info->fork_mutex[right]);
 	philo->right = 0;
+	pthread_mutex_unlock(&philo->info->fork_mutex[right]);
 }
 
 void	eat_philo(t_philo *philo)
@@ -60,14 +60,17 @@ void	eat_philo(t_philo *philo)
 	if (get_time_ms() - philo->starving >= philo->info->time_to_die)
 	{
 		print_msg(philo, "died\n");
+		pthread_mutex_lock(&philo->info->died_mutex);
 		philo->info->died = 1;
+		pthread_mutex_unlock(&philo->info->died_mutex);
 		return ;
 	}
 	if (!(philo->left && philo->right))
 		return ;
 	philo->starving = get_time_ms();
-	print_msg(philo, "is eating\n");
 	philo->eat_count++;
+	usleep(200);
+	print_msg(philo, "is eating\n");
 	my_msleep(philo->info->time_to_eat);
 	putdown_fork(philo);
 	philo->status = SLEEP;
