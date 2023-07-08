@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/06/02 20:41:13 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/07/09 07:23:36 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -rf
 
 SRC_DIR 	= srcs
-SRCS 		= $(wildcard $(SRC_DIR)/*.c)
 OBJ_DIR 	= objs
+SRCS 		= $(wildcard $(SRC_DIR)/*.c)
 OBJS 		= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 HEADER		= philo.h
 

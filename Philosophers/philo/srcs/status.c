@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 03:32:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/07/07 11:33:52 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/07/07 20:32:32 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ void	eat_philo(t_philo *philo)
 	}
 	if (!(philo->left && philo->right))
 		return ;
-	philo->starving = get_time_ms();
 	philo->eat_count++;
-	usleep(200);
+	usleep(BREAK);
 	print_msg(philo, "is eating\n");
+	philo->starving = get_time_ms();
 	my_msleep(philo->info->time_to_eat);
 	putdown_fork(philo);
 	philo->status = SLEEP;

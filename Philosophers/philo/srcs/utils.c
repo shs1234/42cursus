@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 05:09:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/07/07 11:20:26 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/07/07 22:32:53 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	print_msg(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&philo->info->died_mutex);
 	if (!philo->info->died)
-		printf("%ld %d %s", get_time_ms() - philo->info->starttime,
-			philo->i + 1, msg);
+		printf("%ld %d %s", get_time_ms() - philo->info->starttime, philo->i
+				+ 1, msg);
 	pthread_mutex_unlock(&philo->info->died_mutex);
 }
 
@@ -40,5 +40,5 @@ void	my_msleep(int time)
 
 	start = get_time_ms();
 	while (get_time_ms() - start < time)
-		usleep(1000);
+		usleep(BREAK);
 }

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:21 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/07/07 10:28:06 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/07/07 22:34:44 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	main(int ac, char **av)
 	if (!(ac == 5 || ac == 6))
 	{
 		printf("Error : ac == 5 || ac == 6\n");
-		return (0);
+		return (1);
 	}
-	if (!ft_is_valid(ac, av) || !info_init(&info, ac, av)
-		|| !philo_init(&info, &philo) || !philosophers(philo))
+	if (!ft_is_valid(ac, av) || !info_init(&info, ac, av) || !philo_init(&info,
+			&philo) || !philosophers(philo))
 	{
 		printf("Error\n");
 		return (1);

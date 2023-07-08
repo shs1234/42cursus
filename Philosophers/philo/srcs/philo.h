@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:18 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/07/07 10:28:50 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/07/08 08:27:58 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define EAT 0
 # define SLEEP 1
 # define THINK 2
+
+# define BREAK 200
 
 typedef struct s_info
 {

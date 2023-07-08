@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 00:54:14 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/07/07 10:35:10 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/07/07 20:32:16 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	*philosopher(void *arg)
 	pthread_mutex_unlock(&philo->info->start_mutex);
 	philo->starving = get_time_ms();
 	if (philo->i % 2 == 1)
-		my_msleep(100);
+		usleep(BREAK);
 	while (!break_condition(philo))
 	{
 		if (philo->status == EAT)
@@ -65,7 +65,10 @@ static int	monitoring(t_philo *philo)
 	pthread_mutex_unlock(&philo->info->died_mutex);
 	pthread_mutex_lock(&philo->info->im_full_mutex);
 	if (philo->info->im_full == philo->info->n)
+	{
+		pthread_mutex_unlock(&philo->info->im_full_mutex);
 		return (0);
+	}
 	pthread_mutex_unlock(&philo->info->im_full_mutex);
 	return (1);
 }
@@ -77,14 +80,14 @@ int	philosophers(t_philo *philo)
 	i = -1;
 	pthread_mutex_lock(&philo->info->start_mutex);
 	while (++i < philo->info->n)
-		if (pthread_create(&philo->info->threads[i], NULL,
-				philosopher, &philo[i]))
+		if (pthread_create(&philo->info->threads[i], NULL, philosopher,
+				&philo[i]))
 			return (0);
 	philo->info->starttime = get_time_ms();
 	pthread_mutex_unlock(&philo->info->start_mutex);
 	while (monitoring(philo))
-		my_msleep(1000);
-	my_msleep(100);
+		usleep(BREAK);
+	usleep(BREAK);
 	i = -1;
 	while (++i < philo->info->n)
 		if (pthread_join(philo->info->threads[i], NULL) == -1)

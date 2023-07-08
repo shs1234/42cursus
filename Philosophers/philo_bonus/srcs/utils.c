@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 05:09:47 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/05/30 04:04:48 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/07/09 07:24:46 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,7 @@
 
 int	ft_isdigit(int c)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-int	ft_isposint(char *n)
-{
-	int	res;
-	int	sign;
-
-	res = 0;
-	sign = 1;
-	if (!*n)
-		return (0);
-	if (*n == '+' || *n == '-')
-	{
-		if (*n == '-')
-			return (0);
-		n++;
-		if (!*n)
-			return (0);
-	}
-	while (*n)
-	{
-		if (!ft_isdigit(*n))
-			return (0);
-		res = (res * 10) + (*n - '0');
-		if ((sign == 1 && res * sign < 0) || (sign == -1 && res * sign > 0))
-			return (0);
-		n++;
-	}
-	return (1);
+	return (c >= '0' && c <= '9');
 }
 
 long	get_time_ms(void)
@@ -58,6 +27,30 @@ long	get_time_ms(void)
 
 void	print_msg(t_philo *philo, char *msg)
 {
+	if (philo->eat_count == philo->info->must_eat)
+		return ;
+	if (sem_wait(philo->info->msg) == -1)
+		exit(1);
 	printf("%ld %d %s", get_time_ms() - philo->info->starttime, philo->i + 1,
 			msg);
+	if (*msg == 'd')
+		exit(2);
+	if (sem_post(philo->info->msg) == -1)
+		exit(1);
+}
+
+void	my_msleep(int time)
+{
+	long	start;
+
+	start = get_time_ms();
+	while (get_time_ms() - start < time)
+		usleep(BREAK);
+}
+
+int	print_error(char *str)
+{
+	if (str)
+		printf("%s", str);
+	return (1);
 }
