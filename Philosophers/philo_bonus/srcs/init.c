@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 05:41:40 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/07/09 07:02:55 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:23:21 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	open_sem(t_info *info)
 {
 	info->fork = sem_open(SEMFORK, O_CREAT | O_TRUNC, 0644, info->n);
 	info->msg = sem_open(SEMMSG, O_CREAT | O_TRUNC, 0644, 1);
-	info->starving = sem_open(SEMSTARVING, O_CREAT | O_TRUNC, 0644, 1);
-	if (!info->fork || !info->msg || !info->starving)
+	info->sem_starving = sem_open(SEMSTARVING, O_CREAT | O_TRUNC, 0644, 1);
+	if (!info->fork || !info->msg || !info->sem_starving)
 		return (0);
 	return (1);
 }
@@ -60,7 +60,7 @@ int	sem_close_unlink(t_info *info)
 {
 	if (sem_close(info->fork) == -1 || sem_close(info->msg) == -1
 		|| sem_unlink(SEMFORK) == -1 || sem_unlink(SEMMSG) == -1
-		|| sem_close(info->starving) == -1 || sem_unlink(SEMSTARVING) == -1)
+		|| sem_close(info->sem_starving) == -1 || sem_unlink(SEMSTARVING) == -1)
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 00:54:14 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/07/09 07:08:13 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:23:21 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void	philosopher(t_philo *philo)
 	}
 	print_msg(philo, "is eating\n");
 	philo->eat_count++;
-	if (sem_wait(philo->info->starving) == -1)
+	if (sem_wait(philo->info->sem_starving) == -1)
 		exit(1);
 	philo->starving = get_time_ms();
-	if (sem_post(philo->info->starving) == -1)
+	if (sem_post(philo->info->sem_starving) == -1)
 		exit(1);
 	my_msleep(philo->info->time_to_eat);
 	if (sem_post(philo->info->fork) == -1 || sem_post(philo->info->fork) == -1)
@@ -44,11 +44,11 @@ static void	*monitoring(void *arg)
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		if (sem_wait(philo->info->starving) == -1)
+		if (sem_wait(philo->info->sem_starving) == -1)
 			exit(1);
 		if (get_time_ms() - philo->starving >= philo->info->time_to_die)
 			print_msg(philo, "died\n");
-		if (sem_post(philo->info->starving) == -1)
+		if (sem_post(philo->info->sem_starving) == -1)
 			exit(1);
 		usleep(BREAK);
 	}
@@ -67,10 +67,10 @@ void	child_process(t_philo *philo)
 			return ;
 		else if (philo[i].pid == 0)
 		{
-			if (sem_wait(philo->info->starving) == -1)
+			if (sem_wait(philo->info->sem_starving) == -1)
 				exit(1);
 			philo[i].starving = get_time_ms();
-			if (sem_post(philo->info->starving) == -1)
+			if (sem_post(philo->info->sem_starving) == -1)
 				exit(1);
 			if (pthread_create(&philo[i].threads, NULL, &monitoring, &philo[i]))
 				exit(1);

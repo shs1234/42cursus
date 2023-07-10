@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:08:18 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/07/09 07:04:46 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:23:21 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_info
 	int			must_eat;
 	sem_t		*fork;
 	sem_t		*msg;
-	sem_t		*starving;
+	sem_t		*sem_starving;
 	long		starttime;
 }				t_info;
 
