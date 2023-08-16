@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 22:05:04 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/08/16 22:27:34 by hoseoson         ###   ########.fr       */
+/*   Created: 2023/08/16 22:38:31 by hoseoson          #+#    #+#             */
+/*   Updated: 2023/08/16 23:12:07 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
+
 #include <iostream>
 
-int main(int ac, char **av)
+class Contact
 {
-	if (ac == 1)
-	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return (0);
-	}
-	for (int i = 1; i < ac; i++)
-	{
-		for (int j = 0; av[i][j]; j++)
-		{
-			if (av[i][j] >= 'a' && av[i][j] <= 'z')
-				std::cout << static_cast<char>(av[i][j] - 32);
-			else
-				std::cout << static_cast<char>(av[i][j]);
-		}
-	}
-	std::cout << std::endl;
-	return (0);
-}
+private:
+    std::string firstname;
+    std::string lastname;
+    std::string nickname;
+    std::string phonenumber;
+    std::string darkestsecret;
+
+public:
+    void display();
+};
+
+#endif
