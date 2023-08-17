@@ -6,12 +6,12 @@
 #    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/08/16 19:44:41 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/08/17 00:36:51 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX			=	c++
-NAME		=	megaphone
+NAME		=	phonebook
 RM			=	rm -rf
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 

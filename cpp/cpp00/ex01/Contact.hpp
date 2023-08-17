@@ -6,26 +6,29 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 22:38:31 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/08/16 23:12:07 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/08/17 04:05:05 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_HPP
-#define CONTACT_HPP
+# define CONTACT_HPP
 
-#include <iostream>
+# include <iostream>
+# include <sstream>
 
 class Contact
 {
-private:
-    std::string firstname;
-    std::string lastname;
-    std::string nickname;
-    std::string phonenumber;
-    std::string darkestsecret;
+  private:
+	std::string fn;
+	std::string ln;
+	std::string nn;
+	std::string pn;
+	std::string ds;
 
-public:
-    void display();
+  public:
+	void setdata(std::string fn, std::string ln, std::string nn, std::string pn,
+			std::string ds);
+	void display();
 };
 
 #endif
