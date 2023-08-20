@@ -6,17 +6,34 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 23:02:28 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/08/17 13:15:10 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/08/20 14:32:01 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+
+void	putstrendl(std::string str)
+{
+	std::cout << str << std::endl;
+}
+
+void	putstr(std::string str)
+{
+	std::cout << str;
+}
 
 PhoneBook::PhoneBook()
 {
 	this->index = 0;
 	this->count = 0;
 }
+
+
+// std::string str_input()
+// {
+// 	std::string str;
+	
+// }
 
 void PhoneBook::add()
 {
@@ -27,15 +44,19 @@ void PhoneBook::add()
 	std::string ds;
 	if (this->index == 8)
 		this->index = 0;
-	std::cout << "first name : ";
-	std::getline(std::cin, fn);
-	std::cout << "last name : ";
+	putstr("first name : ");
+	if (!std::getline(std::cin, fn))
+	{
+		std::cin.clear();
+		std::cin.ignore();
+	}
+	putstr("last name : ");
 	std::getline(std::cin, ln);
-	std::cout << "nickname : ";
+	putstr("nickname : ");
 	std::getline(std::cin, nn);
-	std::cout << "phone number : ";
+	putstr("phone number : ");
 	std::getline(std::cin, pn);
-	std::cout << "darkest secret : ";
+	putstr("darkest secret : ");
 	std::getline(std::cin, ds);
 	this->contact[this->index].setdata(fn, ln, nn, pn, ds);
 	if (this->count < 8)
@@ -54,19 +75,16 @@ void PhoneBook::search()
 		std::cout << std::endl;
 		// 형식 바꿀것.
 	}
-	std::cout << "select index : ";
+	putstr("select index : ");
 	std::cin >> index;
-	if (index < 1 || index > count)
-		std::cout << "error" << std::endl;
-	else
+	if (!std::cin.good() || index < 1 || index > count)
 	{
-		this->contact[index - 1].display();
-		std::cout << std::endl;
-		// 한줄에 하나씩으로 바꿀것.
+		putstrendl("Invalid input.");
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		return ;
 	}
-}
-
-void PhoneBook::invalidcommand()
-{
-	std::cout << "invalid command" << std::endl;
+	this->contact[index - 1].display();
+	std::cout << std::endl;
+	// 한줄에 하나씩으로 바꿀것.
 }

@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 22:38:31 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/08/17 04:05:05 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/08/18 19:23:42 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CONTACT_HPP
 
 # include <iostream>
-# include <sstream>
 
 class Contact
 {

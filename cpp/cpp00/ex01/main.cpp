@@ -6,31 +6,30 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 22:28:16 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/08/17 13:35:56 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/08/20 13:22:23 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Contact.hpp"
 #include "PhoneBook.hpp"
 
 int	main(void)
 {
 	PhoneBook	pb;
 
-	std::string command;
+	std::string cmd;
 	while (1)
 	{
-		std::cout << "command : ";
-		std::getline(std::cin, command);
-		if (command == "ADD")
+		putstr("command : ");
+		if (!std::getline(std::cin, cmd))
+			break ;
+		if (cmd == "ADD")
 			pb.add();
-		else if (command == "SEARCH")
+		else if (cmd == "SEARCH")
 			pb.search();
-		else if (command == "EXIT")
+		else if (cmd == "EXIT")
 			break ;
 		else
-			pb.invalidcommand();
-		// command.clear();
+			putstrendl("invalid command");
 	}
 	return (0);
 }

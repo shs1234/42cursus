@@ -1,11 +1,9 @@
 #include <iostream>
 
-// #include <string>
-
+using namespace	std;
 int	main(void)
 {
-	int	n;
-
-	std::string str;
-	std::getline(std::cin, str);
+char temp[10];
+cin.get(temp,10);
+cout << temp;
 }
