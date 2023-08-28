@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:36:17 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/04 03:46:29 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/08/26 02:04:00 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #  define BUFFER_SIZE 42
 # endif
 
+int     ft_strlen(const char *s);
 char	*get_next_line(int fd);
 int		ft_has_newline(char *buf);
 void	ft_free(char **mem);

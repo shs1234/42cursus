@@ -1,5 +1,17 @@
 #include "Harl.hpp"
 
+Harl::Harl()
+{
+    set[0].str = "DEBUG";
+    set[0].ptr = &Harl::debug;
+    set[1].str = "INFO";
+    set[1].ptr = &Harl::info;
+    set[2].str = "WARNING";
+    set[2].ptr = &Harl::warning;
+    set[3].str = "ERROR";
+    set[3].ptr = &Harl::error;
+}
+
 void Harl::debug(void)
 {
     std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!" << std::endl;
@@ -22,12 +34,11 @@ void Harl::error(void)
 
 void Harl::complain(std::string level)
 {
-    if (level == "DEBUG")
-        this->debug();
-    else if (level == "INFO")
-        this->info();
-    else if (level == "WARNING")
-        this->warning();
-    else if (level == "ERROR")
-        this->error();
+    Harl harl;
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (level == set[i].str)
+            (harl.*set[i].ptr)();
+    }
 }

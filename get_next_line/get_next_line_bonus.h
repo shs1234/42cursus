@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 19:09:03 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/04 04:11:53 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/08/26 02:04:03 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define FD_MAX 256
 
+int     ft_strlen(const char *s);
 char	*get_next_line(int fd);
 int		ft_has_newline(char *buf);
 void	ft_free(char **mem);

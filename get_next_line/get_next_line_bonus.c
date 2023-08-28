@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 19:08:58 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/06/04 03:11:08 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/08/26 02:03:10 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_free(char **mem)
 	*mem = 0;
 }
 
-static int	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
 	int	len;
 
