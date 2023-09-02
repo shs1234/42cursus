@@ -2,22 +2,19 @@
 
 Fixed::Fixed()
 {
-    this->i_raw = 0;
-    this->f_raw = 0;
+    this->raw = 0;
     std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const int raw)
 {
-    this->i_raw = raw;
-    this->f_raw = 0;
+    this->raw = raw << fractional_bits;
     std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(const float raw)
 {
-    this->i_raw = 0;
-    this->f_raw = raw;
+    this->raw = (int)(roundf(raw * (1 << fractional_bits)));
     std::cout << "Float constructor called" << std::endl;
 }
 
@@ -35,8 +32,7 @@ Fixed::~Fixed()
 Fixed& Fixed::operator=(const Fixed& fixed)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    this->f_raw = fixed.f_raw;
-    this->i_raw = fixed.i_raw;
+    this->raw = fixed.raw;
     return (*this);
 }
 
@@ -48,14 +44,10 @@ std::ostream& operator<<(std::ostream &cout, const Fixed& fixed)
 
 float Fixed::toFloat() const
 {
-    if (this->f_raw)
-        return (this->f_raw);
-    return (this->i_raw);
+    return ((float)this->raw / (float)(1 << fractional_bits));
 }
 
 int Fixed::toInt() const
 {
-    if (this->i_raw)
-        return (this->i_raw);
-    return (this->f_raw);
+    return ((int)this->raw >> fractional_bits);
 }
