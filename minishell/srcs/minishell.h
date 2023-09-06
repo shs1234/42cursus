@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 03:20:53 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/07/07 05:02:42 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:00:36 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
-# include <readline/history.h>
-# include <readline/readline.h>
 # include <signal.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <termcap.h>
+#include <stdio.h>
+# include <readline/history.h>
+# include <readline/readline.h> 
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
