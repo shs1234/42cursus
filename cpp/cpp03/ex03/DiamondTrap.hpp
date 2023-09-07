@@ -1,5 +1,5 @@
-#ifndef FRAGTRAP_HPP
-#define FRAGTRAP_HPP
+#ifndef DIAMONDTRAP_HPP
+#define DIAMONDTRAP_HPP
 
 #include "ClapTrap.hpp"
 
@@ -16,5 +16,6 @@ public:
 
     void highFivesGuys();
 };
+
 
 #endif
