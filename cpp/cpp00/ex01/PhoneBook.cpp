@@ -6,16 +6,14 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 23:02:28 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/08/21 03:08:30 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/09/08 08:15:09 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook()
+PhoneBook::PhoneBook() : index(0), count(0)
 {
-	this->index = 0;
-	this->count = 0;
 }
 
 int PhoneBook::add()

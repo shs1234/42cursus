@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 22:05:04 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/08/16 22:27:34 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/09/08 08:00:08 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int main(int ac, char **av)
 		for (int j = 0; av[i][j]; j++)
 		{
 			if (av[i][j] >= 'a' && av[i][j] <= 'z')
-				std::cout << static_cast<char>(av[i][j] - 32);
+				std::cout << char(av[i][j] - 32);
 			else
-				std::cout << static_cast<char>(av[i][j]);
+				std::cout << char(av[i][j]);
 		}
 	}
 	std::cout << std::endl;
