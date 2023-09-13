@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 22:38:21 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/08/21 03:08:34 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:03:09 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void display_form(std::string str)
 	if (str.size() > 10)
 	{
 		temp = str.substr(0, 9) + ".";
-		std::cout << std::left << std::setw(10) << temp;
+		std::cout << std::right << std::setw(10) << temp;
 	}
 	else
-		std::cout << std::left << std::setw(10) << str;
+		std::cout << std::right << std::setw(10) << str;
 }
 
 void Contact::display()

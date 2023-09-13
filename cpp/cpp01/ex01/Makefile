@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/08/21 16:54:09 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/09/13 07:20:43 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

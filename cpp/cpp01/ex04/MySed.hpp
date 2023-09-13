@@ -6,7 +6,7 @@
 
 class MySed
 {
-    private:
+private:
     std::string ifilename;
     std::string s1;
     std::string s2;
@@ -15,8 +15,7 @@ class MySed
     std::ifstream infile;
     std::ofstream outfile;
 
-    public:
-    MySed();
+public:
     MySed(std::string ifilename, std::string s1, std::string s2);
     void setval(std::string ifilename, std::string s1, std::string s2);
     int is_open();

@@ -1,9 +1,5 @@
 #include "MySed.hpp"
 
-MySed::MySed()
-{
-}
-
 MySed::MySed(std::string ifilename, std::string s1, std::string s2)
 {
 	this->ifilename = ifilename;
@@ -62,9 +58,12 @@ static std::string replace(std::string &line, std::string &s1, std::string &s2)
 void MySed::sed()
 {
     std::string line;
+
     while (std::getline(this->infile, line))
     {
         line = replace(line, this->s1, this->s2);
-        outfile << line << std::endl;
+        this->outfile << line;
+		if (!this->infile.eof())
+			this->outfile << std::endl;
     }
 }
