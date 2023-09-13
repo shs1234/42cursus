@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 22:38:21 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/09/13 15:03:09 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/09/13 20:24:12 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,17 @@ static void display_form(std::string str)
 		std::cout << std::right << std::setw(10) << str;
 }
 
-void Contact::display()
+void Contact::display(int i)
 {
+	std::cout << "|";
+	std::cout << "         " << i + 1;
 	std::cout << "|";
 	display_form(this->fn);
 	std::cout << "|";
 	display_form(this->ln);
 	std::cout << "|";
 	display_form(this->nn);
+	std::cout << "|";
 	std::cout << std::endl;
 }
 
