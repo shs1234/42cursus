@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 23:02:25 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/09/08 08:25:48 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:45:07 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ private:
 
 public:
 	PhoneBook();
-	int add();
-	int search();
+	void add();
+	void search();
 };
 
 #endif

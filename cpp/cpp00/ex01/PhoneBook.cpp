@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 23:02:28 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/09/13 20:34:56 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:05:49 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,95 +16,60 @@ PhoneBook::PhoneBook() : index(0), count(0)
 {
 }
 
-std::string getfield()
+void getfield(std::string fieldname, std::string &field)
 {
-	std::string field;
-
 	while (1)
 	{
-		if (std::getline(std::cin, field) && field.size() > 0)
-			return (field);
+		std::cout << fieldname << " : ";
+		std::getline(std::cin, field);
+		if (std::cin.eof())
+			exit(0);
+		if (std::cin.good() && field.length() > 0)
+			return ;
 		std::cin.clear();
 	}
 }
 
-int PhoneBook::add()
+void PhoneBook::add()
 {
-	std::string fn;
-	std::string ln;
-	std::string nn;
-	std::string pn;
-	std::string ds;
-	if (this->index == 8)
-		this->index = 0;
-	std::cout << "first name : ";
-	fn = getfield();
-	std::cout << "last name : ";
-	ln = getfield();
-	std::cout << "nickname : ";
-	nn = getfield();
-	std::cout << "phone number : ";
-	pn = getfield();
-	std::cout << "darkest secret : ";
-	ds = getfield();
-	this->contact[this->index].setdata(fn, ln, nn, pn, ds);
+	std::string field[5];
+	
+	getfield("first name", field[0]);
+	getfield("last name", field[1]);
+	getfield("nickname", field[2]);
+	getfield("phone number", field[3]);
+	getfield("darkest secret", field[4]);
+	this->contact[this->index].setdata(field);
 	if (this->count < 8)
 		this->count++;
 	this->index++;
-	return (0);
+	if (this->index == 8)
+		this->index = 0;
 }
 
-// int PhoneBook::add()
-// {
-// 	std::string fn;
-// 	std::string ln;
-// 	std::string nn;
-// 	std::string pn;
-// 	std::string ds;
-// 	if (this->index == 8)
-// 		this->index = 0;
-// 	std::cout << "first name : ";
-// 	if (!std::getline(std::cin, fn))
-// 		return (1);
-// 	std::cout << "last name : ";
-// 	if (!std::getline(std::cin, ln))
-// 		return (1);
-// 	std::cout << "nickname : ";
-// 	if (!std::getline(std::cin, nn))
-// 		return (1);
-// 	std::cout << "phone number : ";
-// 	if (!std::getline(std::cin, pn))
-// 		return (1);
-// 	std::cout << "darkest secret : ";
-// 	if (!std::getline(std::cin, ds))
-// 		return (1);
-// 	this->contact[this->index].setdata(fn, ln, nn, pn, ds);
-// 	if (this->count < 8)
-// 		this->count++;
-// 	this->index++;
-// 	return (0);
-// }
-
-int PhoneBook::search()
+void PhoneBook::search()
 {
 	int index;
 
-	for (int i = 0; i < this->count; i++)
+	if (this->count == 0)
 	{
-		this->contact[i].display(i);
+		std::cout << "no data" << std::endl;
+		return ;
 	}
-	std::cout << "select index : ";
-	std::cin >> index;
-	if (!std::cin.good() || index < 1 || index > count)
+	for (int i = 0; i < this->count; i++)
+		this->contact[i].display(i);
+	while (1)
 	{
+		std::cout << "select index : ";
+		std::cin >> index;
 		if (std::cin.eof())
-			return (1);
-		std::cout << "invalid input" << std::endl;
+			exit(0);
+		if (std::cin.good() && index > 0 && index <= count)
+			break;
+		std::cout << "invalid index" << std::endl;
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		return (0);
 	}
 	this->contact[index - 1].display_perline();
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	return (0);
 }

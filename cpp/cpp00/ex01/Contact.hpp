@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 22:38:31 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/09/13 19:41:05 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:47:55 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,10 @@
 class Contact
 {
 private:
-	std::string fn;
-	std::string ln;
-	std::string nn;
-	std::string pn;
-	std::string ds;
+	std::string field[5];
 
 public:
-	void setdata(std::string fn, std::string ln, std::string nn, std::string pn,
-				 std::string ds);
+	void setdata(std::string *field);
 	void display(int i);
 	void display_perline();
 };

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 22:28:16 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/09/08 08:25:46 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:32:34 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,17 @@
 int main(void)
 {
 	PhoneBook pb;
-
 	std::string cmd;
+	
 	while (1)
 	{
-		std::cout << "cmd : ";
+		std::cout << "CMD : ";
 		if (!std::getline(std::cin, cmd))
 			break;
 		if (cmd == "ADD")
-		{
-			if (pb.add())
-				break;
-		}
+			pb.add();
 		else if (cmd == "SEARCH")
-		{
-			if (pb.search())
-				break;
-		}
+			pb.search();
 		else if (cmd == "EXIT")
 			break;
 	}
