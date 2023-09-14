@@ -1,40 +1,48 @@
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat() {}
+
 Bureaucrat::Bureaucrat(std::string name, int grade)
-: name(name), grade(grade)
+: name(name)
 {
-    // grade 예외처리
-}
-Bureaucrat::Bureaucrat(const Bureaucrat& bureaucrat)
-: name(bureaucrat.name), grade(bureaucrat.grade)
-{
-}
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat& bureaucrat)
-{
-    if (this == &bureaucrat)
-        return (*this);
-    this->grade = bureaucrat.grade;
-}
-Bureaucrat::~Bureaucrat()
-{
-
+    // 1~150 예외처리
+    this->grade = grade;
 }
 
-void Bureaucrat::getName() const
-{
+Bureaucrat::Bureaucrat(const Bureaucrat& b)
+: name(b.name), grade(b.grade) {}
 
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& b)
+{
+    if (this != &b)
+        this->grade = b.grade;
+    return (*this);
 }
-void Bureaucrat::getGrade()
-{
 
+Bureaucrat::~Bureaucrat() {}
+
+std::string Bureaucrat::getName() const
+{
+    return (this->name);
+}
+int Bureaucrat::getGrade() const
+{
+    return (this->grade);
 }
 
-void Bureaucrat::increment()
+void Bureaucrat::increaseGrade()
 {
-
+    // 1 예외처리
+    this->grade--;
 }
-void Bureaucrat::decrement()
+void Bureaucrat::decreaseGrade()
 {
+    // 150 예외처리
+    this->grade++;
+}
 
+std::ostream& operator<<(std::ostream &cout, const Bureaucrat& b)
+{
+    cout << b.getName() << ", bureaucrat grade " << b.getGrade() << std::endl;
+    return (cout);
 }
