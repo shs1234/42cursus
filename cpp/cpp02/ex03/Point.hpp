@@ -2,12 +2,13 @@
 #define POINT_HPP
 
 #include <cmath>
+#include "Fixed.hpp"
 
 class Point
 {
 private:
-    const int x;
-    const int y;
+    const Fixed x;
+    const Fixed y;
 
 public:
     Point();
@@ -22,3 +23,8 @@ public:
 bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif
+
+// 변수 
+//     const Fixed x;
+//     const Fixed y;
+//     로 바꿀것

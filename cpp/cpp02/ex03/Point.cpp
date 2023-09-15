@@ -11,8 +11,6 @@ Point::Point(const Point& p) : x(p.x), y(p.y)
 }
 Point& Point::operator=(const Point& p)
 {
-    if (this == &p)
-        return (*this);
     return (*this);
 }
 Point::~Point()

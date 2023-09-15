@@ -1,27 +1,25 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed()
+Fixed::Fixed() : raw(0)
 {
-    this->raw = 0;
     std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const int raw)
 {
-    this->raw = raw << fractional_bits;
     std::cout << "Int constructor called" << std::endl;
+    this->raw = raw << fractional_bits;
 }
 
 Fixed::Fixed(const float raw)
 {
-    this->raw = (int)(roundf(raw * (1 << fractional_bits)));
     std::cout << "Float constructor called" << std::endl;
+    this->raw = (roundf(raw * (1 << fractional_bits)));
 }
 
-Fixed::Fixed(const Fixed& fixed)
+Fixed::Fixed(const Fixed& fixed) : raw(fixed.raw)
 {
     std::cout << "Copy constructor called" << std::endl;
-    *this = fixed;
 }
 
 Fixed::~Fixed()
@@ -31,17 +29,10 @@ Fixed::~Fixed()
 
 Fixed& Fixed::operator=(const Fixed& fixed)
 {
-    if (this == &fixed)
-        return (*this);
     std::cout << "Copy assignment operator called" << std::endl;
-    this->raw = fixed.raw;
+    if (this != &fixed)
+        this->raw = fixed.raw;
     return (*this);
-}
-
-std::ostream& operator<<(std::ostream &cout, const Fixed& fixed)
-{
-    cout << fixed.toFloat();
-    return (cout);
 }
 
 float Fixed::toFloat() const
@@ -52,4 +43,10 @@ float Fixed::toFloat() const
 int Fixed::toInt() const
 {
     return ((int)this->raw >> fractional_bits);
+}
+
+std::ostream& operator<<(std::ostream &cout, const Fixed& fixed)
+{
+    cout << fixed.toFloat();
+    return (cout);
 }
