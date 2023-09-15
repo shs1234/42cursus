@@ -16,8 +16,9 @@ public:
     Point(const Point& p);
     Point& operator=(const Point& p);
     ~Point();
-    int getx() const;
-    int gety() const;
+
+    float getx() const;
+    float gety() const;
 };
 
 bool bsp(Point const a, Point const b, Point const c, Point const point);
@@ -28,3 +29,5 @@ bool bsp(Point const a, Point const b, Point const c, Point const point);
 //     const Fixed x;
 //     const Fixed y;
 //     로 바꿀것
+
+// 카피 연산자 const일때 private로

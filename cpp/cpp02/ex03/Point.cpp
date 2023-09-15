@@ -11,17 +11,18 @@ Point::Point(const Point& p) : x(p.x), y(p.y)
 }
 Point& Point::operator=(const Point& p)
 {
+    (void)p;
     return (*this);
 }
 Point::~Point()
 {
 }
 
-int Point::getx() const
+float Point::getx() const
 {
-    return (x);
+    return (x.toFloat());
 }
-int Point::gety() const
+float Point::gety() const
 {
-    return (y);
+    return (y.toFloat());
 }
