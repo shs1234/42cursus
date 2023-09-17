@@ -8,8 +8,8 @@ class ScavTrap : public ClapTrap
 private:
 
 public:
-    ScavTrap(int hit_points = 100, int energy_points = 50, int attack_damage = 20);
-    ScavTrap(std::string name, int hit_points = 100, int energy_points = 50, int attack_damage = 20);
+    ScavTrap();
+    ScavTrap(std::string name);
     ScavTrap(const ScavTrap& st);
     ScavTrap& operator=(const ScavTrap &st);
     ~ScavTrap();
