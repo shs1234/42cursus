@@ -22,12 +22,11 @@ public:
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
 
-    std::string getName() const;
-    int getHit() const;
-    int getEnergy() const;
     int getAttack() const;
-
+    int getEnergy() const;
+    int getHit() const;
     void costEnergy();
+    const std::string& getName();
 };
 
 #endif

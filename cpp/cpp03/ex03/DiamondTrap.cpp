@@ -1,28 +1,28 @@
-int	ft_atoi(char *str);
+#include "DiamondTrap.hpp"
+
+DiamondTrap::DiamondTrap(int hit_points, int energy_points, int attack_damage)
+: ClapTrap(hit_points, energy_points, attack_damage)
 {
-	int i;
-	int j;
-	i = 0;
-	j = 0;
-	while(str[i] != 0)
-	{
-		if (str[i] == " ")
-			str[j] = str[i];
-			j++;
-			str[j] = '\0';
-			return (str);
-		if (str[i] == "-" && str[i] == "+")
-			str[j] = str[i] % 2
-			{
-				if (str[i] == 1)
-				str[i] = '-';
-				return (str);
-				if (str[i] == 0)
-				str[i] = '\0';
-				return (str);
-			}
-		if (str[i] >= '0' && str[i] <= '9')
-			return (str + 48);
-	i++;
-	}
+    std::cout << "DiamondTrap Constructor called" << std::endl;
+}
+DiamondTrap::DiamondTrap(std::string name, int hit_points, int energy_points, int attack_damage)
+: ClapTrap(name, hit_points, energy_points, attack_damage)
+{
+    std::cout << "DiamondTrap Constructor called" << std::endl;
+}
+DiamondTrap::DiamondTrap(const DiamondTrap& dt)
+: ClapTrap(dt)
+{
+    std::cout << "DiamondTrap copy Constructor called" << std::endl;
+}
+DiamondTrap::~DiamondTrap()
+{
+    std::cout << "DiamondTrap Destructor called" << std::endl;
+}
+DiamondTrap& DiamondTrap::operator=(const DiamondTrap &dt)
+{
+    std::cout << "DiamondTrap assignment operator called" << std::endl;
+    if (this != &dt)
+        ClapTrap::operator=(dt);
+    return (*this);
 }

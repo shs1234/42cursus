@@ -7,5 +7,6 @@ int main()
     st.attack("target");
     st.takeDamage(5);
     st.beRepaired(10);
+    st.guardGate();
     return (0);
 }
