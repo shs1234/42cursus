@@ -29,7 +29,7 @@ void Dog::makeSound() const
     std::cout << this->type << " : mung! mung!" << std::endl;
 }
 
-std::string Dog::getType() const
+const std::string& Dog::getType() const
 {
     return (this->type);
 }

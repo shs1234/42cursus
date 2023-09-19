@@ -29,7 +29,7 @@ void Cat::makeSound() const
     std::cout << this->type << " : Hi! I'm Haerin" << std::endl;
 }
 
-std::string Cat::getType() const
+const std::string& Cat::getType() const
 {
     return (this->type);
 }
