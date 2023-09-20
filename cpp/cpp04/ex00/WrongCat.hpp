@@ -12,7 +12,7 @@ public:
     ~WrongCat();
 
     void makeSound() const;
-    std::string getType() const;
+    const std::string &getType() const;
 };
 
 #endif

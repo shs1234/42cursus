@@ -8,7 +8,7 @@ class Dog : public Animal
 {
 private:
     Brain *brain;
-
+    
 public:
     Dog();
     Dog(const Dog& dog);
@@ -16,10 +16,10 @@ public:
     ~Dog();
 
     void makeSound() const;
-    std::string getType() const;
+    const std::string& getType() const;
 
-    void setbrain();
-    void printbrain();
+    void setbrain() const;
+    void printbrain() const;
 };
 
 #endif

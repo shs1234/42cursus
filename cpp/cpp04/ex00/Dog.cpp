@@ -10,17 +10,17 @@ Dog::~Dog()
     std::cout << "Dog Destructor called" << std::endl;
 }
 
-Dog::Dog(const Dog& dog) : Animal(dog)
+Dog::Dog(const Dog& dog)
 {
     std::cout << "Dog Copy constructor called" << std::endl;
+    this->type = dog.type;
 }
 
 Dog& Dog::operator=(const Dog& dog)
 {
     std::cout << "Dog Copy assignment operator called" << std::endl;
-    if (this == &dog)
-        return (*this);
-    this->type = dog.type;
+    if (this != &dog)
+        this->type = dog.type;
     return (*this);
 }
 

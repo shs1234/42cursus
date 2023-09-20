@@ -16,7 +16,10 @@ public:
     ~Cat();
 
     void makeSound() const;
-    std::string getType() const;
+    const std::string& getType() const;
+
+    void setbrain() const;
+    void printbrain() const;
 };
 
 #endif

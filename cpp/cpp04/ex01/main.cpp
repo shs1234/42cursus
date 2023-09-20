@@ -26,17 +26,22 @@ int main()
     }
     for (int i = 0; i < 4; i++)
         delete ani[i];
+    std::cout << std::endl;
 
     // test3
     Dog *dog1 = new Dog();
     Dog *dog2 = new Dog(*dog1);
-
+    Dog *dog3 = new Dog;
     dog1->setbrain();
     dog1->printbrain();
     dog2->printbrain();
+    *dog3 = *dog1;
+    dog3->printbrain();
 
+    std::cout << std::endl;
     delete dog1;
     delete dog2;
+    delete dog3;
 
     return 0;
 }

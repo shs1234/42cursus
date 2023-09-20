@@ -2,12 +2,12 @@
 
 Animal::Animal() : type("Unknown")
 {
-    std::cout << "Animal constructor called" << std::endl;
+    std::cout << "Animal Constructor called" << std::endl;
 }
 
 Animal::Animal(std::string type) : type(type)
 {
-    std::cout << "Animal constructor called" << std::endl;
+    std::cout << "Animal Constructor called" << std::endl;
 }
 
 Animal::~Animal()
@@ -17,15 +17,14 @@ Animal::~Animal()
 
 Animal::Animal(const Animal& animal) : type(animal.type)
 {
-    std::cout << "Animal Copy constructor called" << std::endl;
+    std::cout << "Animal Copy Constructor called" << std::endl;
 }
 
 Animal& Animal::operator=(const Animal& animal)
 {
     std::cout << "Animal Copy assignment operator called" << std::endl;
-    if (this == &animal)
-        return (*this);
-    this->type = animal.type;
+    if (this != &animal)
+        this->type = animal.type;
     return (*this);
 }
 
@@ -34,7 +33,7 @@ Animal& Animal::operator=(const Animal& animal)
 //     std::cout << this->type << " : ???" << std::endl;
 // }
 
-std::string Animal::getType() const
-{
-    return (this->type);
-}
+// const std::string& Animal::getType() const
+// {
+//     return (this->type);
+// }
