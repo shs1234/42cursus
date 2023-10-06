@@ -6,6 +6,10 @@ Bureaucrat::Bureaucrat(std::string name, int grade)
 : name(name)
 {
     // 1~150 예외처리
+    if (grade < 1)
+        throw ;
+    else if(grade > 150)
+        throw ;
     this->grade = grade;
 }
 
@@ -40,6 +44,16 @@ void Bureaucrat::decreaseGrade()
     // 150 예외처리
     this->grade++;
 }
+
+void Bureaucrat::GradeTooHighException()
+{
+    std::cout << "GradeTooHigh" << std::endl;
+}
+void Bureaucrat::GradeTooLowException()
+{
+    std::cout << "GradeTooLow" << std::endl;
+}
+
 
 std::ostream& operator<<(std::ostream &cout, const Bureaucrat& b)
 {

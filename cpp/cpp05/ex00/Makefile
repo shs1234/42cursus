@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/09/09 07:29:46 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/10/06 03:44:49 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME		=	a.out
 RM			=	rm -rf
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
-SRCS = $(wildcard *.cpp)
-OBJS = $(patsubst %.cpp,%.o,$(SRCS))
+SRCS		=	main.cpp Bureaucrat.cpp
+OBJS		=	$(SRCS:.cpp=.o)
 
 all : $(NAME)
 

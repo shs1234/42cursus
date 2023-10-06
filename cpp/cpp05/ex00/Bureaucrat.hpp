@@ -21,6 +21,9 @@ public:
 
     void increaseGrade();
     void decreaseGrade();
+
+    void GradeTooHighException();
+    void GradeTooLowException();
 };
 
 std::ostream& operator<<(std::ostream &cout, const Bureaucrat& b);
