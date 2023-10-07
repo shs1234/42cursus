@@ -10,6 +10,12 @@ private:
     int grade;
     Bureaucrat();
 
+    class GradeTooHighException : public std::exception
+    {
+    public:
+        const char* what() const throw();
+    };
+
 public:
     Bureaucrat(std::string name, int grade);
     Bureaucrat(const Bureaucrat& b);

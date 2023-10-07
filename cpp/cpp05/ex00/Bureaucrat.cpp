@@ -45,14 +45,14 @@ void Bureaucrat::decreaseGrade()
     this->grade++;
 }
 
-void Bureaucrat::GradeTooHighException()
-{
-    std::cout << "GradeTooHigh" << std::endl;
-}
-void Bureaucrat::GradeTooLowException()
-{
-    std::cout << "GradeTooLow" << std::endl;
-}
+// void Bureaucrat::GradeTooHighException()
+// {
+//     std::cout << "GradeTooHigh" << std::endl;
+// }
+// void Bureaucrat::GradeTooLowException()
+// {
+//     std::cout << "GradeTooLow" << std::endl;
+// }
 
 
 std::ostream& operator<<(std::ostream &cout, const Bureaucrat& b)
