@@ -5,7 +5,6 @@ Bureaucrat::Bureaucrat() {}
 Bureaucrat::Bureaucrat(std::string name, int grade)
 : name(name)
 {
-    // 1~150 예외처리
     if (grade < 1)
         throw GradeTooHighException();
     else if(grade > 150)
@@ -36,12 +35,14 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::increaseGrade()
 {
-    // 1 예외처리
+    if (this->grade == 1)
+        throw GradeTooHighException();
     this->grade--;
 }
 void Bureaucrat::decreaseGrade()
 {
-    // 150 예외처리
+    if (this->grade == 150)
+        throw GradeTooLowException();
     this->grade++;
 }
 const char* Bureaucrat::GradeTooHighException::what() const throw()

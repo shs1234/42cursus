@@ -4,7 +4,7 @@ int main()
 {
     try
     {
-        Bureaucrat b("hoseoson", 3);
+        Bureaucrat b("hoseoson", 150);
 
         std::cout << b.getName() << " " << b.getGrade() << std::endl;
         b.increaseGrade();

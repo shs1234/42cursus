@@ -6,7 +6,7 @@
 #    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/10/11 17:31:28 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/10/12 16:01:16 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ RM			=	rm -rf
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
 SRCS		=	$(wildcard *.cpp)
+HEADERS		=	$(wildcard *.hpp)
 OBJS		=	$(SRCS:.cpp=.o)
 
 all : $(NAME)
@@ -23,7 +24,7 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-%.o : %.cpp
+%.o : %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 	
 clean : 
