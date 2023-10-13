@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -32,7 +32,7 @@ public:
     void increaseGrade();
     void decreaseGrade();
 
-    void signForm(Form& form);
+    void signForm(AForm& aform);
 };
 
 std::ostream& operator<<(std::ostream &cout, const Bureaucrat& b);

@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat() {}
 
@@ -47,9 +47,9 @@ void Bureaucrat::decreaseGrade()
     this->grade++;
 }
 
-void Bureaucrat::signForm(Form& form)
+void Bureaucrat::signForm(AForm& aform)
 {
-    form.beSigned(*this);
+    aform.beSigned(*this);
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
