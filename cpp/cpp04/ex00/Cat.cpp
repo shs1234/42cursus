@@ -13,7 +13,7 @@ Cat::~Cat()
 Cat::Cat(const Cat& cat)
 {
     std::cout << "Cat Copy constructor called" << std::endl;
-    this->thpe = cat.type;
+    this->type = cat.type;
 }
 
 Cat& Cat::operator=(const Cat& cat)
