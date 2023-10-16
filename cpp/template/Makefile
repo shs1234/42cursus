@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/10/07 15:35:58 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/10/16 21:15:48 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME		=	a.out
 RM			=	rm -rf
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
-SRCS		=	main.cpp
+SRCS		=	$(wildcard *.cpp)
+HEADERS		=	$(wildcard *.hpp)
 OBJS		=	$(SRCS:.cpp=.o)
 
 all : $(NAME)
@@ -23,7 +24,7 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-%.o : %.cpp
+%.o : %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 	
 clean : 

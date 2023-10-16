@@ -13,6 +13,7 @@ private:
     const int           gradetosign;
     const int           gradetoexec;
     Form();
+    Form& operator=(const Form& form);
 
     class GradeTooHighException : public std::exception
     {
@@ -31,7 +32,6 @@ private:
 public:
     Form(std::string name, bool issigned, const int gradetosign, const int gradetoexec);
     Form(const Form& form);
-    Form& operator=(const Form& form);
     ~Form();
 
     void beSigned(const Bureaucrat& b);
