@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/10/17 13:23:07 by hoseoson         ###   ########.fr        #
+#    Updated: 2023/10/16 21:15:48 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX			=	c++
-NAME		=	convert
+NAME		=	a.out
 RM			=	rm -rf
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
@@ -26,7 +26,7 @@ $(NAME) : $(OBJS)
 
 %.o : %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
-
+	
 clean : 
 	$(RM) $(OBJS)
 
