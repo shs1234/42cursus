@@ -18,5 +18,11 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
     float ac = getarea(a, point, c);
     float bc = getarea(point, b, c);
 
-    return (ab + ac + bc == tri);
+    if (ab + ac + bc == tri)
+    {
+        if (ab == 0 || ac == 0 || bc == 0)
+            return (0);
+        return (1);
+    }
+    return (0);
 }
