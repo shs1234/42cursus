@@ -1,17 +1,5 @@
 #include "get_next_line.h"
 
-int get_index(char *str)
-{
-    int i = 0;
-    while (str[i])
-    {
-        if (str[i] == '\n')
-            return (i);
-        i++;
-    }
-    return (-1);
-}
-
 int ft_strlen(char *str)
 {
     int i = 0;
@@ -20,38 +8,17 @@ int ft_strlen(char *str)
     return (i);
 }
 
-char *get_front(char *str, int len)
-{
-    char *ret;
-    int i;
-
-    ret = malloc(len + 2);
-    if (!ret)
-        return (0);
-    i = 0;
-    while (i < len + 1)
-    {
-        ret[i] = str[i];
-        i++;
-    }
-    ret[i] = 0;
-    return (ret);
-}
-
-void ft_free(char **str)
-{
-    free(*str);
-    *str = 0;
-}
-
-char *ft_strdup(char *str)
+char *ft_strndup(char *str, int n)  // strndup를 살짝 수정한 함수. n이 -1일 경우 strdup처럼 작동.
 {
     int i;
     int len;
     char *ret;
 
     i = 0;
-    len = ft_strlen(str);
+    if (n == -1) // n == -1, str 전체를 복사.
+        len = ft_strlen(str);
+    else
+        len = n; // n != -1, str의 n까지만 복사.
     ret = malloc(len + 1);
     if (!ret)
         return (0);
@@ -64,34 +31,22 @@ char *ft_strdup(char *str)
     return (ret);
 }
 
-char *divide(char **ret, char **save)
+int get_index(char *str) // 개행의 위치를 반환하는 함수. 개행이 없을 경우 -1 반환.
 {
-    char *front;
-    char *back;
-    int i;
+    int i = 0;
+    while (str[i])
+    {
+        if (str[i] == '\n')
+            return (i);
+        i++;
+    }
+    return (-1);
+}
 
-    front = 0;
-    back = 0;
-    i = get_index(*ret);
-    front = get_front(*ret, i);
-    if (!front)
-    {
-        ft_free(ret);
-        return (0);
-    }
-    if ((*ret)[i + 1])
-    {
-        back = ft_strdup(&(*ret)[i + 1]);
-        if (!back)
-        {   
-            ft_free(&front);
-            ft_free(ret);
-            return (0);
-        }
-    }
-    ft_free(ret);
-    *save = back;
-    return (front);
+void ft_free(char **line) // free하고 주소값을 null로 바꿔주는 함수.
+{
+    free(*line);
+    *line = 0;
 }
 
 char *ft_strjoin(char *s1, char *s2)
@@ -123,77 +78,90 @@ char *ft_strjoin(char *s1, char *s2)
     return (ret);
 }
 
+char *divide(char **line, char **remain) // 개행을 기준으로 잘라 나눠주는 함수.
+{
+    char *front; // 개행 앞부분
+    char *back; // 개행 뒷부분
+    int i;
+
+    front = 0;
+    back = 0;
+    i = get_index(*line); // 개행 위치의 인덱스
+    front = ft_strndup(*line, i + 1); // 개행 위치까지 복사. 인덱스는 0부터라서 i + 1.
+    if (!front)
+    {
+        ft_free(line);
+        return (0);
+    }
+    if ((*line)[i + 1]) // 개행 뒷부분에 추가적인 문자가 남아있는지 확인.
+    {
+        back = ft_strndup(&(*line)[i + 1], -1); // 개행 뒷부분 문자열 전체 복사.
+        if (!back)
+        {   
+            ft_free(&front);
+            ft_free(line);
+            return (0);
+        }
+    }
+    ft_free(line); // 기존의 line은 free.
+    *remain = back; // 뒷부분을 remain에 저장.
+    return (front); // 앞부분을 반환
+}
+
 char *get_next_line(int fd)
 {
-    char *ret;
-    static char *save;
+    char *line;
+    static char *remain;
     char buf[BUFFER_SIZE + 1];
     int len;
-    char *tmp;
+    char *temp;
 
     if (fd < 0 || BUFFER_SIZE < 1)
         return (NULL);
-    ret = save;
-    save = 0;
-    if (ret && get_index(ret) >= 0)
+    line = remain; // 이전 단계에서 남아있었던 remain을 line으로 옮기고, remain은 0으로 비워줌.
+    remain = 0;
+    if (line && get_index(line) >= 0) // 라인에 개행이 있을경우 나눠주고 바로 반환.
     {
-        ret = divide(&ret, &save);
-        return (ret);
+        line = divide(&line, &remain);
+        return (line);
     }
-    len = 1;
-    while (len)
+    while (1)
     {
         len = read(fd, buf, BUFFER_SIZE);
-        if (len == 0)
-            return (ret);
-        if (len == -1)
+        if (len == 0) // 0일때 예외처리
+            return (line);
+        if (len == -1) // EOF를 만났을때 예외처리.
         {
-            ft_free(&ret);
-            ft_free(&save);
-            return (0);
+            ft_free(&line);
+            ft_free(&remain);
+            return (line);
         }
-        buf[len] = 0;
-        if (!ret)
+        buf[len] = 0; // 버퍼 마지막을 0로 막아서 문자열 형태로 만들어줌.
+        if (!line) // 만약 처음으로 호출된 gnl일 경우(line == NULL), 버퍼값 전체를 line으로 복사.
         {
-            ret = ft_strdup(buf);
-            if (!ret)
+            line = ft_strndup(buf, -1);
+            if (!line)
             {
-                ft_free(&save);
+                ft_free(&remain);
                 return (0);
             }
         }
-        else
+        else // 두번째 부터 호출된 gnl일 경우(line에 문자열이 있는 상태), 새로 읽어온 buf값과 join
         {
-            tmp = ret;
-            ret = ft_strjoin(ret, buf);
-            if (!ret)
+            temp = line; // join하고 기존의 문자열은 free 시켜주기 위해 임시 포인터에 기존 문자열 저장.
+            line = ft_strjoin(line, buf);
+            if (!line)
             {
-                ft_free(&tmp);
+                ft_free(&temp);
                 return (0);
             }
-            ft_free(&tmp);
+            ft_free(&temp);
         }
-        if (get_index(ret) >= 0)
+        if (get_index(line) >= 0) // line에 개행이 있을 경우 나눠주고 반환.
         {
-            ret = divide(&ret, &save);
-            return (ret);
+            line = divide(&line, &remain);
+            return (line);
         }
     }
-    return (ret);
+    return (line);
 }
-// #include <stdio.h>
-// int main()
-// {
-//     int fd;
-//     char *str;
-
-//     fd = open("get_next_line.c", O_RDONLY);
-//     // str = get_next_line(fd);
-//     while (str = get_next_line(fd))
-//     {
-//         printf("%s", str);
-//         free(str);
-//         // str = get_next_line(fd);
-//     }
-//     return (0);
-// }

@@ -2,5 +2,6 @@
 
 int main(void)
 {
+    Array<int> a(3);
 
 }
