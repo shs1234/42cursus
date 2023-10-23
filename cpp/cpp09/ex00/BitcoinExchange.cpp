@@ -55,7 +55,7 @@ bool BitcoinExchange::errorCheck()
     _key = _line.substr(0, _pos);
     _val = _line.substr(_pos + 3);
     std::istringstream(_val) >> _val_f;
-
+    // val이 float형태인지. 소수점 하나의 모두 숫자만.
     return (1);
 }
 
