@@ -1,73 +1,43 @@
-#include<iostream>
-#include<sstream>
-#include <algorithm>
+#include <iostream>
+#include <vector>
+#include <utility>
 
-// void readData()
-// {
-//     std::string line;
-//     std::string key;
-//     std::string val;
-//     std::size_t pos;
-//     // float val_f;
-
-// //     std::getline(_datafile, line);
-//     while (getline(_datafile, line))
-//     {
-//         pos = line.find(',');
-//         key = line.substr(0, pos);
-//         val = line.substr(pos + 1);
-//         // std::istringstream(val) >> val_f;
-//         _dataMap.insert(std::make_pair(key, val));
-//     }
-//     // std::map<std::string, float>::iterator it = _dataMap.begin();
-//     // for (; it != _dataMap.end(); it++)
-//     //     std::cout << "key : " << it->first << " val : " << it->second << std::endl;
-// }
-
-float stringToFloat(const std::string& str) {
-    std::istringstream iss(str);
-    float result;
-    if (iss >> result) {
-        return result;
-    } else {
-        // 에러 처리: 올바른 형식의 숫자가 아닌 경우
-        std::cerr << "Invalid input: " << str << std::endl;
-        return 0.0; // 에러를 나타내는 값 또는 다른 적절한 처리를 수행할 수 있습니다.
-    }
-}
-// int main()
-// {
-// 	float val_f;
-// 	std::string val;
-
-// 	val = "1234-456-789";
-// 	// stringToFloat(val);
-// 	std::string a, b, c;
-// 	std::istringstream iss(val);
-// 	std::getline(iss, a, '-');
-// 	std::getline(iss, b, '-');
-// 	std::getline(iss, c);
-// 	// iss >> a >> b >> c;
-// 	std::cout << a << b << c;
-
-// 	// int co;
-// 	// co = std::count(val.begin(), val.end(), '.');
-// 	// std::cout << co;
-// 	// std::cout << stringToFloat(val);
-// 	// std::istringstream(val) >> val_f;
-// 	// std::cout << val_f;
-// }
-
-int main()
+template <typename T>
+void swap(T *a, T *b)
 {
-	float val_f;
-	std::string val;
+	T tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
 
-	val = "asd123";
-	std::cout << val[0] - '0';
-	std::cout << val[1] - '0';
-	std::cout << val[2] - '0';
-	std::cout << val[3] - '0';
-	std::cout << val[4] - '0';
-	std::cout << val[5] - '0';
+int	main(void)
+{
+	// std::vector<std::pair> data = {12, 11, 13, 5, 6, 7};
+	std::vector<std::pair<int, int>> data;
+	for (int i = 0; i < 6; i++)
+	{
+		data.push_back(std::make_pair(10, 5-i));
+		// data[i] = std::pair<int, int>(i+10, i);
+	}
+	// for (int i = 0; i < 6; i++)
+	// {
+	// 	std::cout << data[i].first << " " << data[i].second << std::endl;
+	// }
+	int tmp;
+    std::vector<std::pair<int, int>>::iterator it = data.begin();
+    for (; it != data.end(); it++)
+    {
+        std::cout << it->first << " " << it->second << std::endl;
+		swap(&it->first, &it->second);
+    }
+	it = data.begin();
+    for (; it != data.end(); it++)
+    {
+        std::cout << it->first << " " << it->second << std::endl;
+    }
+	if (data[2] < 5)
+		std::cout << "오름";
+	else
+		std::cout << "내림";
+	return (0);
 }
