@@ -1,18 +1,12 @@
 #include <iostream>
-#include <iomanip> // std::setprecision
-#include <sstream> // std::ostringstream
-
+#include <cstdlib> // For strtod
+#include <stdio.h>
 int main() {
-    float number = 42.42f;
-
-    // 방법 1: cout과 형식 지정자 사용
-    std::cout << std::fixed << std::setprecision(1) << number << std::endl;
-
-    // 방법 2: 문자열로 변환 후 출력
-    std::ostringstream ss;
-    ss << std::fixed << std::setprecision(1) << number;
-    std::string formattedNumber = ss.str();
-    std::cout << formattedNumber << std::endl;
-
-    return 0;
+    std::string n = "-340282357639528859811704183484516925445.0000000000000000";
+    char *endp;
+    float f = std::strtof(n.c_str(), 0);
+    std::cout << std::numeric_limits<float>::max() << std::endl;
+    std::cout << f << std::endl;
+    if (-f == std::numeric_limits<float>::infinity())
+        std::cout << "true";
 }
