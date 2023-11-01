@@ -35,18 +35,19 @@ BitcoinExchange::~BitcoinExchange()
 
 void BitcoinExchange::readData()
 {
-    std::ifstream _datafile;
-    _datafile.open(_data.c_str());
-    if (!_datafile.is_open())
+    std::ifstream datafile;
+    datafile.open(_data.c_str());
+    if (!datafile.is_open())
         throw DataOpenFail();
     _dataMap.clear();
-    std::getline(_datafile, _line);
-    while (std::getline(_datafile, _line))
+    std::getline(datafile, _line);
+    while (std::getline(datafile, _line))
     {
         _pos = _line.find(',');
         _dataMap.insert(std::make_pair(_line.substr(0, _pos), _line.substr(_pos + 1)));
     }
     std::istringstream(_dataMap.begin()->first) >> _firstYear;
+    datafile.close();
 }
 
 bool BitcoinExchange::isLeapYear(int year)
@@ -121,13 +122,13 @@ void BitcoinExchange::printRes()
 
 void BitcoinExchange::exchange()
 {
-    std::ifstream _inputfile;
-    _inputfile.open(_input.c_str());
-    if (!_inputfile.is_open())
+    std::ifstream inputfile;
+    inputfile.open(_input.c_str());
+    if (!inputfile.is_open())
         throw InputOpenFail();
     // std::cout << std::fixed;
     // std::cout.precision(10);
-    std::getline(_inputfile, _line);
+    std::getline(inputfile, _line);
     if (_line != "date | value")
     {
         try
@@ -140,7 +141,7 @@ void BitcoinExchange::exchange()
             std::cerr << e.what() << std::endl;
         }
     }
-    while (std::getline(_inputfile, _line))
+    while (std::getline(inputfile, _line))
     {
         try
         {
@@ -152,6 +153,7 @@ void BitcoinExchange::exchange()
             std::cerr << e.what() << std::endl;
         }
     }
+    inputfile.close();
 }
 
 const char *BitcoinExchange::DataOpenFail::what() const throw()
