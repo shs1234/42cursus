@@ -128,13 +128,12 @@ void ScalarConverter::convert(std::string n)
     {
         f = std::strtof(n.c_str(), NULL);
         // std::cout << f;
-        if (f == std::numeric_limits<float>::infinity() || -f == std::numeric_limits<float>::infinity())
-        {
+        if (f >= std::numeric_limits<float>::infinity() || -f >= std::numeric_limits<float>::infinity()) // -inf는 숫자가 다를텐데? -1 더
+        { //plus랑 minus로 나눠야하는거 아닌지?
             _charOverflow = true;
             _intOverflow = true;
             _inff = true;
             // f = static_cast<float>(f);
-            d = static_cast<double>(f);
         }
         else
         {
@@ -142,11 +141,12 @@ void ScalarConverter::convert(std::string n)
                 _charOverflow = true;
             if (f > std::numeric_limits<int>::max() || f < std::numeric_limits<int>::min())
                 _intOverflow = true;
-            // f = static_cast<float>(f);
-            c = static_cast<char>(f);
-            i = static_cast<int>(f);
-            d = static_cast<double>(f);
+            if (f >= std::numeric_limits<double>::infinity() || -f >= std::numeric_limits<double>::infinity())
+                _inf = true;
         }
+        c = static_cast<char>(f);
+        i = static_cast<int>(f);
+        d = static_cast<double>(f);
         // if (!chkOverflow(n.c_str(), std::numeric_limits<float>::max()))
         // {
         //     std::cout << "overflow f" << std::endl;
@@ -196,20 +196,18 @@ void ScalarConverter::convert(std::string n)
         std::cout << "int: " << i << std::endl;
     // float
     if (_inff)
-    {
-        std::cout << "float: " << "inff" << std::endl;
-    }
+            std::cout << "float: " << f << 'f' << std::endl;
     else
     {
         if (i == f)
             std::cout << "float: " << f << ".0f" << std::endl;
         else
             std::cout << "float: " << f << "f" << std::endl;
-        if (i == d)
-            std::cout << "double: " << d << ".0" << std::endl;
-        else
-            std::cout << "double: " << d << std::endl;
     }
+    if (i == d)
+        std::cout << "double: " << d << ".0" << std::endl;
+    else
+        std::cout << "double: " << d << std::endl;
     // double
 }
 // "convert" 메서드를 포함하는 정적 클래스 ScalarConverter를 작성합니다.
