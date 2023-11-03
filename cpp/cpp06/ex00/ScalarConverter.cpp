@@ -20,6 +20,8 @@ bool ScalarConverter::_charOverflow;
 bool ScalarConverter::_intOverflow;
 bool ScalarConverter::_inf;
 bool ScalarConverter::_inff;
+bool ScalarConverter::_nan;
+bool ScalarConverter::_nanf;
 int ScalarConverter::_dot;
 int ScalarConverter::_plus;
 int ScalarConverter::_minus;
@@ -71,6 +73,10 @@ bool ScalarConverter::chkOverflow(const char *str, long long max)
 
 std::string ScalarConverter::detectType(std::string n)
 {
+    if (n == "-inff" || n == "+inff" || n == "nanf")
+        return ("float");
+    if (n == "-inf" || n == "+inf" || n == "nan")
+        return ("double");
     if (n.size() == 3 && n[0] == '\'' && n[2] == '\'')
         return ("char");
     _dot = std::count(n.begin(), n.end(), '.');
@@ -142,6 +148,8 @@ void ScalarConverter::convert(std::string n)
             std::cout << "-inff" << std::endl;
             return;
         }
+        if (std::isnan(f))
+            _nanf = true;
         if (f > std::numeric_limits<char>::max() || f < std::numeric_limits<char>::min())
             _charOverflow = true;
         if (f > std::numeric_limits<int>::max() || f < std::numeric_limits<int>::min())
@@ -163,6 +171,8 @@ void ScalarConverter::convert(std::string n)
             std::cout << "-inf" << std::endl;
             return;
         }
+        if (std::isnan(d))
+            _nan = true;
         if (d > std::numeric_limits<char>::max() || d < std::numeric_limits<char>::min())
             _charOverflow = true;
         if (d > std::numeric_limits<int>::max() || d < std::numeric_limits<int>::min())
@@ -176,8 +186,6 @@ void ScalarConverter::convert(std::string n)
     }
     else
     {
-        // nan inf inff 여기서 처리
-        if ()
         std::cout << "Error" << std::endl;
         return;
     }
@@ -185,6 +193,8 @@ void ScalarConverter::convert(std::string n)
     // char
     if (_charOverflow)
         std::cout << "char: overflow" << std::endl;
+    else if (_nan || _nanf)
+        std::cout << "char: impossible" << std::endl;
     else
     {
         if (isprint(c))
@@ -196,6 +206,8 @@ void ScalarConverter::convert(std::string n)
     // int
     if (_intOverflow)
         std::cout << "int: overflow" << std::endl;
+    else if (_nan || _nanf)
+        std::cout << "int: impossible" << std::endl;
     else
         std::cout << "int: " << i << std::endl;
 
@@ -216,7 +228,3 @@ void ScalarConverter::convert(std::string n)
     else
         std::cout << "double: " << d << std::endl;
 }
-
-// 타입에 맞게 변환하고, 나머지 세개 변환.
-// 나머지 세개의 변환값 보고 오버플로가 발생했는지 알아내야?
-// inf -> int -음수최대값

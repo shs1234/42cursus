@@ -24,12 +24,14 @@ int main() {
     // std::cout << d << std::endl;
     // // printf("%f", f);
 
-    // std::string c = "inf";
-    std::string c = "-2147483648";
-    double d = std::strtof(c.c_str(), 0);
-    int i;
+    std::string c = "f";
+    // std::string c = "-2147483648";
+    float d = std::strtof(c.c_str(), 0);
+    double i;
     // std::istringstream(c) >> i;
-    i = static_cast<int>(d);
+    i = static_cast<double>(d);
     std::cout << d;
     std::cout << i;
+    int a = static_cast<int>(d);
+    std::cout << a;
 }
