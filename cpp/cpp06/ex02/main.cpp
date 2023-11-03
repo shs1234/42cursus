@@ -2,12 +2,10 @@
 
 int main()
 {
-    Base *bPtr;
-
-    bPtr = generate();
-    identify(bPtr);
-
+    Base *bPtr = generate();
     Base &bRef = *bPtr;
+
+    identify(bPtr);
     identify(bRef);
 
     return (0);

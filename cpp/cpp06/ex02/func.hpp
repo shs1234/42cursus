@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ctime>
+#include <cstdlib>
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
