@@ -16,10 +16,6 @@ private:
     static bool _nan;
     static bool _nanf;
 
-    static int _dot;
-    static int _plus;
-    static int _minus;
-
     static std::string detectType(std::string n);
     static bool	chkOverflow(const char *str, long long max);
     static int	numLen(long long n);

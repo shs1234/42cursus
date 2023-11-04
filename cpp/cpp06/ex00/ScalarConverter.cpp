@@ -22,9 +22,6 @@ bool ScalarConverter::_inf;
 bool ScalarConverter::_inff;
 bool ScalarConverter::_nan;
 bool ScalarConverter::_nanf;
-int ScalarConverter::_dot;
-int ScalarConverter::_plus;
-int ScalarConverter::_minus;
 
 int	ScalarConverter::numLen(long long n)
 {
@@ -79,12 +76,12 @@ std::string ScalarConverter::detectType(std::string n)
         return ("double");
     if (n.size() == 3 && n[0] == '\'' && n[2] == '\'')
         return ("char");
-    _dot = std::count(n.begin(), n.end(), '.');
-    _plus = std::count(n.begin(), n.end(), '+');
-    _minus = std::count(n.begin(), n.end(), '-');
-    if (_dot > 1 || _plus > 1 || _minus > 1)
+    int dot = std::count(n.begin(), n.end(), '.');
+    int plus = std::count(n.begin(), n.end(), '+');
+    int minus = std::count(n.begin(), n.end(), '-');
+    if (dot > 1 || plus > 1 || minus > 1)
         return ("else");
-    if ((_plus && n[0] != '+') || (_minus && n[0] != '-'))
+    if ((plus && n[0] != '+') || (minus && n[0] != '-'))
         return ("else");
     for (std::size_t i = 0; i < n.size(); i++)
     {
@@ -95,7 +92,7 @@ std::string ScalarConverter::detectType(std::string n)
         if (!isdigit(n[i]) && n[i] != '.')
             return ("else");
     }
-    if (_dot)
+    if (dot)
         return ("double");
     return ("int");
 }
