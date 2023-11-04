@@ -157,7 +157,7 @@ void ScalarConverter::convert(std::string n)
     }
     else if (detectType(n) == "double")
     {
-        d = std::strtod(n.c_str(), 0);
+        d = std::strtod(n.c_str(), NULL);
         if (d == HUGE_VAL)
         {
             std::cout << "inf" << std::endl;
