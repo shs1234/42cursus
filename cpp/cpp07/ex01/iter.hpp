@@ -9,16 +9,16 @@ void test(std::string item)
 }
 
 template <typename T>
-void print(T item)
+void print(T &item)
 {
     std::cout << item << std::endl;
 }
 
-template <typename T1, typename T2, typename func>
-void iter(T1 arr, T2 len, func printobj)
+template <typename T1, typename T2>
+void iter(T1 *arr, T2 len, void (*f)(const T1&))
 {
     for (T2 i = 0; i < len; i++)
-        printobj(arr[i]);
+        f(arr[i]);
 }
 
 #endif
