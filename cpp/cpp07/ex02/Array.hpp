@@ -39,12 +39,12 @@ Array<T>::Array(unsigned int n) : _n(n)
 }
 
 template <typename T>
-Array<T>::Array(const Array<T> &arr)
+Array<T>::Array(const Array<T> &obj)
 {
-    _n = arr._n;
+    _n = obj._n;
     _arr = new T[_n];
     for (unsigned int i = 0; i < _n; i++)
-        _arr[i] = arr[i];
+        _arr[i] = obj._arr[i];
 }
 
 template <typename T>
@@ -54,14 +54,14 @@ Array<T>::~Array()
 }
 
 template <typename T>
-Array<T> &Array<T>::operator=(const Array<T> &arr)
+Array<T> &Array<T>::operator=(const Array<T> &obj)
 {
-    if (this != &arr)
+    if (this != &obj)
     {
         delete[] _arr;
         _arr = new T[_n];
         for (unsigned int i = 0; i < _n; i++)
-            _arr[i] = arr[i];
+            _arr[i] = obj[i]._arr[i];
     }
     return (*this);
 }

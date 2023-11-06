@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    const int len = 3;
+    const std::size_t len = 3;
     std::string s[len] = {"s1", "s2", "s3"};
     int i[len] = {1, 2, 3};
 

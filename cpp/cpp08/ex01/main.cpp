@@ -19,16 +19,21 @@ int	main(void)
     {
         std::cerr << e.what() << std::endl;
     }
+    std::cout << "----------------------" << std::endl;
     try
     {
         Span sp = Span(10);
 
         sp.addNumber(6);
+        sp.addNumber(11);
         sp.addNumber(3);
-        sp.addNumbers(5, 1);
-        sp.printVec();
         std::cout << sp.shortestSpan() << std::endl;
         std::cout << sp.longestSpan() << std::endl;
+        sp.addNumbers(5, 1);
+        std::cout << sp.shortestSpan() << std::endl;
+        std::cout << sp.longestSpan() << std::endl;
+        sp.printVec();
+        sp.addNumbers(3, 1);
     }
     catch(const std::exception& e)
     {

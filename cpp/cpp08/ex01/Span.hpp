@@ -1,22 +1,22 @@
-#ifndef SPAN_HPP
-#define SPAN_HPP
+#pragma once
 
 #include <iostream>
-#include <vector>
 #include <algorithm>
+#include <list>
 
 class Span
 {
 private:
-    unsigned int _curr;
-    std::vector<int> _vec;
+    unsigned int _max;
+    std::list<int> _lst;
+
     Span();
 
 public:
     Span(unsigned int max);
-    Span(const Span& sp);
+    Span(const Span& obj);
     ~Span();
-    Span &operator=(const Span& sp);
+    Span &operator=(const Span& obj);
 
     void addNumber(int n);
     void addNumbers(unsigned int howMany, int num);
@@ -33,5 +33,3 @@ public:
         const char *what() const throw();
     };
 };
-
-#endif

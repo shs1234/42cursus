@@ -1,67 +1,70 @@
 #include "Span.hpp"
 
-Span::Span() : _curr(0)
+Span::Span()
 {}
-Span::Span(unsigned int max) : _curr(0)
-{
-    _vec.resize(max);
-}
-Span::Span(const Span& sp) : _curr(sp._curr), _vec(sp._vec)
+Span::Span(unsigned int max) : _max(max)
+{}
+Span::Span(const Span& obj) : _max(obj._max), _lst(obj._lst)
 {}
 Span::~Span()
 {}
-Span &Span::operator=(const Span& sp)
+Span &Span::operator=(const Span& obj)
 {
-    if (this != &sp)
+    if (this != &obj)
     {
-        _curr = sp._curr;
-        _vec = sp._vec;
+        _max = obj._max;
+        _lst = obj._lst;
     }
     return (*this);
 }
 
 void Span::addNumber(int n)
 {
-    if (_curr == _vec.size())
+    if (_lst.size() == _max)
         throw ContainerIsFull();
-    _vec[_curr] = n;
-    _curr++;
+    _lst.push_back(n);
 }
 void Span::addNumbers(unsigned int howMany, int num)
 {
-    if (_vec.size() < _curr + howMany)
+    long long tmp = 0;
+    tmp += _lst.size();
+    tmp += howMany;
+    if (_max < tmp)
         throw ContainerIsFull();
-    std::vector<int>::iterator it = _vec.begin() + _curr;
-    std::vector<int>::iterator it_end = it + howMany;
-    std::fill(it, it_end, num);
-    _curr += howMany;
+
+    std::list<int> toadd(howMany, num);
+    _lst.insert(_lst.end(), toadd.begin(), toadd.end());
 }
 
 unsigned int Span::shortestSpan()
 {
-    if (_curr <= 1)
+    if (_lst.size() <= 1)
         throw TooFewNumbers();
-    std::sort(_vec.begin(), _vec.begin() + _curr);
-    unsigned int span = _vec[1] - _vec[0];
-    for (unsigned int i = 1; i < _curr && span != 0; i++)
+    _lst.sort();
+    std::list<int>::iterator it = _lst.begin();
+    std::list<int>::iterator it2 = _lst.begin();
+    it2++;
+    unsigned int span = *it2 - *it;
+    for (unsigned int i = 1; i < _lst.size() && span != 0; i++)
     {
-        if (static_cast<unsigned int>(_vec[i] - _vec[i - 1]) < span)
-            span = _vec[i] - _vec[i - 1];
+        if (static_cast<unsigned int>(*it2 - *it) < span)
+            span = static_cast<unsigned int>(*it2 - *it);
+        it++;
+        it2++;
     }
     return (span);
 }
 unsigned int Span::longestSpan()
 {
-    if (_curr <= 1)
+    if (_lst.size() <= 1)
         throw TooFewNumbers();
-    std::sort(_vec.begin(), _vec.begin() + _curr);
-    return (_vec[_curr - 1] - _vec[0]);
+    _lst.sort();
+    return (_lst.back() - _lst.front());
 }
 void Span::printVec()
 {
-    std::vector<int>::iterator it = _vec.begin();
-    std::vector<int>::iterator it_end = it + _curr;
-    for (; it != it_end; ++it)
+    std::list<int>::iterator it = _lst.begin();
+    for (; it != _lst.end(); ++it)
         std::cout << *it << " ";
     std::cout << std::endl;
 }
