@@ -5,50 +5,74 @@
 #include <stack>
 
 template <typename T>
-class MutantStack : public std::deque<T>
+class MutantStack : public std::stack<T>
 {
 public:
     MutantStack();
-    MutantStack(const MutantStack<T> &ms);
+    MutantStack(const MutantStack<T> &obj);
     ~MutantStack();
-    MutantStack<T> &operator=(const MutantStack<T> &ms);
+    MutantStack<T> &operator=(const MutantStack<T> &obj);
 
-    void push(T item);
-    void pop();
-    T top();
+    class iterator
+    {
+    private:
+        T *_it;
+    public:
+        T operator++();
+        T operator--();
+        bool operator!=(const MutantStack<T>::iterator &obj);
+        T operator*();
+    };
+    typename std::deque<T>::iterator begin();
+    typename std::deque<T>::iterator end();
 };
 
 template <typename T>
-MutantStack<T>::MutantStack()
-{}
+MutantStack<T>::MutantStack() {}
 template <typename T>
-MutantStack<T>::MutantStack(const MutantStack<T> &ms) : std::deque<T>(ms)
-{}
+MutantStack<T>::MutantStack(const MutantStack<T> &obj) : std::stack<T>(obj) {}
 template <typename T>
-MutantStack<T>::~MutantStack()
-{}
+MutantStack<T>::~MutantStack() {}
 template <typename T>
-MutantStack<T> &MutantStack<T>::operator=(const MutantStack<T> &ms)
+MutantStack<T> &MutantStack<T>::operator=(const MutantStack<T> &obj)
 {
-    if (this != &ms)
-        std::deque<T>::operator=(ms);
+    if (this != &obj)
+        std::stack<T>::operator=(obj);
     return (*this);
 }
 
 template <typename T>
-void MutantStack<T>::push(T item)
+typename std::deque<T>::iterator MutantStack<T>::begin()
 {
-    std::deque<T>::push_back(item);
+    return std::deque<T>::begin();
 }
 template <typename T>
-void MutantStack<T>::pop()
+typename std::deque<T>::iterator MutantStack<T>::end()
 {
-    std::deque<T>::pop_back();
+    return std::deque<T>::end();
+}
+
+template <typename T>
+T MutantStack<T>::iterator::operator++()
+{
+    ++_it;
+    return (*_it);
 }
 template <typename T>
-T MutantStack<T>::top()
+T MutantStack<T>::iterator::operator--()
 {
-    return (std::deque<T>::back());
+    --_it;
+    return (*_it);
+}
+template <typename T>
+bool MutantStack<T>::iterator::operator!=(const MutantStack<T>::iterator &obj)
+{
+    return (_it != obj._it);
+}
+template <typename T>
+T MutantStack<T>::iterator::operator*()
+{
+    return (*_it);
 }
 
 #endif
