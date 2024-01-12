@@ -4,7 +4,7 @@ int main(int ac, char **av)
 {
     if (ac != 2)
     {
-        std::cout << "Error: ac != 2" << std::endl;
+        std::cerr << "Error: ac != 2" << std::endl;
         return (1);
     }
     try
@@ -14,7 +14,7 @@ int main(int ac, char **av)
     }
     catch(const std::exception& e)
     {
-        std::cout << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
         return (1);
     }
     return (0);

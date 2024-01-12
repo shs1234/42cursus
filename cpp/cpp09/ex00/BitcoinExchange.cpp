@@ -1,14 +1,8 @@
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange()
-{
-}
-
+BitcoinExchange::BitcoinExchange() {}
 BitcoinExchange::BitcoinExchange(std::string data, std::string input)
-: _data(data), _input(input)
-{
-}
-
+: _data(data), _input(input) {}
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& be)
 {
     _data = be._data;
@@ -16,7 +10,6 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange& be)
     _dataMap.clear();
     _dataMap = be._dataMap;
 }
-
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& be)
 {
     if (this != &be)
@@ -28,9 +21,19 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& be)
     }
     return (*this);
 }
+BitcoinExchange::~BitcoinExchange() {}
 
-BitcoinExchange::~BitcoinExchange()
+bool BitcoinExchange::isLeapYear(int year)
 {
+    return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+}
+
+int BitcoinExchange::lastDay(int year, int month)
+{
+    int m[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (isLeapYear(year))
+        m[1] = 29;
+    return (m[month - 1]);
 }
 
 void BitcoinExchange::readData()
@@ -48,19 +51,6 @@ void BitcoinExchange::readData()
     }
     std::istringstream(_dataMap.begin()->first) >> _firstYear;
     datafile.close();
-}
-
-bool BitcoinExchange::isLeapYear(int year)
-{
-    return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
-}
-
-int BitcoinExchange::lastDay(int year, int month)
-{
-    int m[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if (isLeapYear(year))
-        m[1] = 29;
-    return (m[month - 1]);
 }
 
 void BitcoinExchange::errorCheck()
@@ -126,8 +116,6 @@ void BitcoinExchange::exchange()
     inputfile.open(_input.c_str());
     if (!inputfile.is_open())
         throw InputOpenFail();
-    // std::cout << std::fixed;
-    // std::cout.precision(10);
     std::getline(inputfile, _line);
     if (_line != "date | value")
     {

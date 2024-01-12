@@ -1,5 +1,4 @@
-#ifndef BITCOINEXCHANGE_HPP
-#define BITCOINEXCHANGE_HPP
+#pragma once
 
 #include <iostream>
 #include <fstream>
@@ -34,8 +33,8 @@ private:
 public:
     BitcoinExchange(std::string data, std::string input);
     BitcoinExchange(const BitcoinExchange& be);
-    ~BitcoinExchange();
     BitcoinExchange& operator=(const BitcoinExchange& be);
+    ~BitcoinExchange();
 
     void readData();
     void exchange();
@@ -53,5 +52,3 @@ public:
         const char *what() const throw();
     };
 };
-
-#endif
