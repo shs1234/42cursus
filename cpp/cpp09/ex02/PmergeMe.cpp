@@ -79,9 +79,7 @@ static bool	isValid(int ac, char **av)
 	return (1);
 }
 
-PmergeMe::PmergeMe()
-{
-}
+PmergeMe::PmergeMe() {}
 PmergeMe::PmergeMe(int len, char **arr)
 {
     if (!isValid(len, arr))
@@ -96,9 +94,9 @@ PmergeMe::PmergeMe(int len, char **arr)
 		lst.push_back(tmp);
     }
 }
-PmergeMe::PmergeMe(const PmergeMe& pm)// : _vecA(pm._vecA), _lstA(pm._lstA)
+PmergeMe::PmergeMe(const PmergeMe& pm) // : _vecA(pm._vecA), _lstA(pm._lstA)
 { // 추가분 수정
-(void)pm;
+	(void)pm;
 }
 PmergeMe& PmergeMe::operator=(const PmergeMe& pm)
 {
@@ -110,17 +108,7 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& pm)
     }
     return (*this);
 }
-PmergeMe::~PmergeMe()
-{
-}
-
-// 분할한다.
-// 2개씩 남은 애들을 각각 정렬. 큰게 앞으로.
-// 앞 숫자를 기준으로 정렬(큰 수 기준)
-// 뒷 숫자들 이진탐색으로 삽입정렬 할 것. 순서는 1-3 2-5 4-7 6순으로.
-
-// 리스트는 해당 위치의 이터레이터 반환하는 함수 만들어서
-// 리스트 스왑함수 쓰면 순서대로 출력될까? 테스트
+PmergeMe::~PmergeMe() {}
 
 long long getJacobsthal(int n)
 {
@@ -136,8 +124,7 @@ long long getJacobsthal(int n)
 	return (arr[n]);
 }
 
-template <typename T>
-int	biSearch(std::vector<T> &v, int s, int e, const int k)
+int	biSearch(std::vector<int> &v, int s, int e, const int k)
 {
 	int m;
 
@@ -252,15 +239,12 @@ void PmergeMe::after()
 }
 // void PmergeMe::sortVec()
 // {
-
 // }
 // void PmergeMe::sortLst()
 // {
-
 // }
 void PmergeMe::printTime()
 {
-
 }
 
 const char *PmergeMe::Error::what() const throw()
