@@ -6,18 +6,13 @@
 #include <list>
 #include <exception>
 #include <sstream>
+#include <cmath>
 
 class PmergeMe
 {
 private:
-
-    std::vector<int> vec;
-    std::list<int> lst;
-    // std::vector<int> _vecA;
-    // std::vector<int> _vecB;
-    // std::list<int> _lstA;
-    // std::list<int> _lstB;
-    // int _odd;
+    std::vector<int> _vec;
+    std::list<int> _lst;
 
     std::vector<int>::iterator _itA;
     std::vector<int>::iterator _itB;
@@ -30,19 +25,21 @@ private:
     PmergeMe();
 
     void before();
-    // void sortVec();
-    // void sortLst();
     void after();
     void printTime();
-    // void mergeInsertSort(std::vector<int> &vec);
-    int getIndex();
+    int	biSearch(std::vector<int> &v, int s, int e, const int k);
+
+    void pmsort(int loop);
+
 public:
-    PmergeMe(int ac, char **av);
+    PmergeMe(int len, char **arr);
     PmergeMe(const PmergeMe& pm);
     PmergeMe& operator=(const PmergeMe& pm);
     ~PmergeMe();
 
     void exec();
+
+    void printvec();
 
     class Error : public std::exception
     {
@@ -56,6 +53,14 @@ void swap(T *a, T *b)
 	T tmp = *a;
 	*a = *b;
 	*b = tmp;
+}
+
+template <typename It1, typename It2>
+void my_swap_ranges(It1 it1_begin, It1 it1_end, It2 it2_begin) {
+    while (it1_begin != it1_end)
+    {
+        std::swap(*it1_begin++, *it2_begin++);
+    }
 }
 
 #endif
@@ -77,3 +82,13 @@ void swap(T *a, T *b)
 // 중복 오류 관리는 내맘대로.
 
 // 분할 한 다음 정렬하는 건 삽입 정렬로. 어디 위치에 삽입할지 찾는건 바이너리 서치로.
+
+
+
+// 분할한다.
+// 2개씩 남은 애들을 각각 정렬. 큰게 앞으로.
+// 앞 숫자를 기준으로 정렬(큰 수 기준) - 재귀 이용
+// 뒷 숫자들 이진탐색으로 삽입정렬 할 것. 야콥스탈 수열 이용.
+
+// 리스트는 해당 위치의 이터레이터 반환하는 함수 만들어서
+// 리스트 스왑함수 쓰면 순서대로 출력될까? 테스트

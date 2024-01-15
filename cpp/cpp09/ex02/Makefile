@@ -3,17 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 22:35:13 by hoseoson          #+#    #+#              #
-#    Updated: 2023/10/26 02:27:05 by hoseoson         ###   ########.fr        #
+#    Updated: 2024/01/14 15:11:27 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX			=	c++
 NAME		=	PmergeMe
 RM			=	rm -rf
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
+# CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
+CXXFLAGS	=	
 
 SRCS		=	$(wildcard *.cpp)
 HEADERS		=	$(wildcard *.hpp)
