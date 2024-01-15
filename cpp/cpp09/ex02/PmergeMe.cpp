@@ -88,8 +88,8 @@ PmergeMe::PmergeMe(int len, char **arr)
     for (int i = 0; i < len; i++)
     {
         std::stringstream(arr[i]) >> tmp;
-        if (tmp == 0)
-            throw Error();
+        // if (tmp == 0)
+        //     throw Error();
 		_vec.push_back(tmp);
 		_lst.push_back(tmp);
     }
@@ -120,7 +120,7 @@ long long getJacobsthal(int n)
 	return (arr[n]);
 }
 
-int	PmergeMe::biSearch(std::vector<int> &v, int s, int e, const int k)
+int	PmergeMe::biSearch(Vec &v, int s, int e, const int k)
 {
 	int m;
 
@@ -135,64 +135,79 @@ int	PmergeMe::biSearch(std::vector<int> &v, int s, int e, const int k)
 	return (e);
 }
 
-// template <typename T>
-// void merge(std::vector<std::pair<T, T>> &vec)
-// {
-// 	if (vec.size() < 2)
-// 		return;
-// 	std::vector<std::pair<T, T>> newVec;
-// 	T odd;
+// 5 9 14 2 8 3 10 1 16 7 12 15 4 13 11 17 6 18 19 21 20 0 22
+void PmergeMe::insertion(int loop)
+{
+	Vec main;
+	Vec pend;
+	Vec oddvec;
 
-// 	for (size_t i = 0; i < vec.size() / 2; i += 2)
-// 	{
-// 		newVec.push_back(std::make_pair(std::max(vec[i], vec[i + 1]), std::min(vec[i], vec[i + 1])));
-// 	}
-// 	if (vec.size() % 2 == 1)
-// 		odd = vec[vec.size() - 1];
-// 	mergeInsertSort(newVec);
-// }
-
-// template <typename T>
-// void mergeInsertSort(std::vector<T> &vec)
-// {
-// 	// (void)odd;
-// 	// vec.clear();
-// 	std::vector<T> vec_b;
-// 	for (size_t i = 0; i < vec.size() / 2; i += 2)
-// 	{
-// 		vec.push_back(newVec[i].first);
-// 		vec_b.push_back(newVec[i].second);
-// 	}
-// 	typename std::vector<T>::iterator it = vec.begin();
-// 	for (size_t i = 0; i < vec_b.size(); i++)
-//     {
-//         vec.insert(it + biSearch(vec, 0, vec.size(), vec_b[i]), vec_b[i]);
-//     }
-// }
+	int flag = 1;
+	int pair = _vec.size() / std::pow(2, loop);
+	int odd = _vec.size() % (size_t)std::pow(2, loop);
+	// std::cout << odd << std::endl;
+	Vec test1;
+	Vec test2;
+	Vec test3;
+	for (int i = 0; i < pair * 2; i++)
+	{
+		if (flag)
+		{
+			main.insert(main.end(), _vec.begin() + std::pow(2, loop - 1) * i, _vec.begin() + std::pow(2, loop - 1) * (i + 1));
+			test1.insert(test1.end(), *(_vec.begin() + std::pow(2, loop - 1) * i));
+		}
+		else
+		{
+			pend.insert(pend.end(), _vec.begin() + std::pow(2, loop - 1) * i, _vec.begin() + std::pow(2, loop - 1) * (i + 1));
+			test2.insert(test2.end(), *(_vec.begin() + std::pow(2, loop - 1) * i));
+		}
+		flag = !flag;
+		if (odd && i == pair * 2 - 1)
+		{
+			oddvec.insert(oddvec.end(), _vec.begin() + std::pow(2, loop - 1) * (i + 1), _vec.end());
+			test3.insert(test3.end(), *(_vec.begin() + std::pow(2, loop - 1) * (i + 1)));
+		}
+	}
+	printvec(test1); // main
+	printvec(test2); // pend
+	printvec(test3); // odd
+	// test를 가지고 삽입 정렬 시행. 그 순서대로 다시 정렬.
+	Vec temp(test1);
+	int index;
+	int pos;
+	for (int i = 0; i < test2.size(); i++)
+	{
+		index = std::find(temp.begin(), temp.end(), test1[i]) - temp.begin();
+		std::cout << "index : " << index << std::endl;
+		pos = biSearch(temp, 0, index, test2[i]);
+		std::cout << "pos : " << pos << std::endl;
+		temp.insert(temp.begin() + pos, *(test2.begin() + i));
+	}
+	printvec(temp);
+	// odd부분이 잘못됨.
+}
 
 void PmergeMe::pmsort(int loop)
 {
-	// int odd = _vec.size() % (loop * 2);
-	// 1. 한쌍씩 비교해서 큰거 앞으로
 	std::cout << "loop " << loop << " / " << (int)(_vec.size() / std::pow(2, loop)) << std::endl;
 	int pair = _vec.size() / std::pow(2, loop);
-	printvec();
-	std::vector<int>::iterator it = _vec.begin();
-	std::vector<int>::iterator it2 = it + std::pow(2, loop - 1);
-	while (pair--)
+	printvec(_vec);
+	Vec::iterator it = _vec.begin();
+	Vec::iterator it2 = it + std::pow(2, loop - 1);
+	for (int i = 0; i < pair; i++)
 	{
 		if (*it < *it2)
-		{
 			my_swap_ranges(it, it2, it2);
-		}
-		printvec();
+		// printvec(_vec);
 		it += std::pow(2, loop);
 		it2 += std::pow(2, loop);
 	}
+	printvec(_vec);
 	if (static_cast<int>(_vec.size() / std::pow(2, loop + 1)))
 		pmsort(loop + 1);
+	std::cout << "------------------" << std::endl;
+	insertion(loop);
 }
-// swap_ranges 사용하면 여러개 바꾸기 가능.
 
 void PmergeMe::exec()
 {
@@ -202,9 +217,9 @@ void PmergeMe::exec()
     // printTime();
 }
 
-void PmergeMe::printvec()
+void PmergeMe::printvec(Vec &v)
 {
-	for (std::vector<int>::iterator it = _vec.begin(); it != _vec.end(); it++)
+	for (Vec::iterator it = v.begin(); it != v.end(); it++)
         std::cout << *it << " ";
 	std::cout << std::endl;
 }
@@ -212,18 +227,18 @@ void PmergeMe::printvec()
 void PmergeMe::before()
 {
     // std::cout << "Before : ";
-    for (std::vector<int>::iterator it = _vec.begin(); it != _vec.end(); it++)
+    for (Vec::iterator it = _vec.begin(); it != _vec.end(); it++)
         std::cout << *it << " ";
     std::cout << std::endl;
 	// std::cout << "Before : ";
-    // for (std::vector<int>::iterator it2 = _vec.begin(); it2 != _vec.end(); it2++)
+    // for (Vec::iterator it2 = _vec.begin(); it2 != _vec.end(); it2++)
     //     std::cout << *it2 << " ";
     // std::cout << std::endl;
 }
 void PmergeMe::after()
 {
     std::cout << "After : ";
-    for (std::vector<int>::iterator it = _vec.begin(); it != _vec.end(); it++)
+    for (Vec::iterator it = _vec.begin(); it != _vec.end(); it++)
         std::cout << *it << " ";
     std::cout << std::endl;
 }

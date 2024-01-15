@@ -1,5 +1,4 @@
-#ifndef PMERGEME_HPP
-#define PMERGEME_HPP
+#pragma once
 
 #include <iostream>
 #include <vector>
@@ -8,28 +7,26 @@
 #include <sstream>
 #include <cmath>
 
+typedef std::vector<int> Vec;
+
 class PmergeMe
 {
 private:
-    std::vector<int> _vec;
+    Vec _vec;
     std::list<int> _lst;
 
-    std::vector<int>::iterator _itA;
-    std::vector<int>::iterator _itB;
-
-    int _indexA; // 넣을 위치
-	int _indexB; // 넣을 값의 위치
-	int _iter; // 자콥 매개변수로 넣을값. 1씩 증가.
-	int _num; // 넣을 값
+    Vec::iterator _itA;
+    Vec::iterator _itB;
 
     PmergeMe();
 
     void before();
     void after();
     void printTime();
-    int	biSearch(std::vector<int> &v, int s, int e, const int k);
+    int	biSearch(Vec &v, int s, int e, const int k);
 
     void pmsort(int loop);
+    void insertion(int loop);
 
 public:
     PmergeMe(int len, char **arr);
@@ -39,7 +36,7 @@ public:
 
     void exec();
 
-    void printvec();
+    void printvec(Vec &v);
 
     class Error : public std::exception
     {
@@ -62,8 +59,6 @@ void my_swap_ranges(It1 it1_begin, It1 it1_end, It2 it2_begin) {
         std::swap(*it1_begin++, *it2_begin++);
     }
 }
-
-#endif
 
 // 인트형 양의 정수 인자로 받을것. 아닐경우 에러처리.
 // 머지-인서트 정렬 알고리즘 사용할것. 포드존슨 알고리즘. Ford-Johnson
