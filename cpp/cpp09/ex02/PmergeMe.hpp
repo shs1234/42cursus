@@ -6,6 +6,7 @@
 #include <exception>
 #include <sstream>
 #include <cmath>
+#include <set>
 
 typedef std::vector<int> Vec;
 

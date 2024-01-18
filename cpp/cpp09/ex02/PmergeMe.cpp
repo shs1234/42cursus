@@ -135,11 +135,26 @@ int	PmergeMe::biSearch(Vec &v, int s, int e, const int k)
 	return (e);
 }
 
+bool doublechk(Vec numbers)
+{
+    std::set<int> uniqueNumbers;
+
+    for (std::vector<int>::iterator it = numbers.begin(); it != numbers.end(); ++it)
+	{
+        if (uniqueNumbers.find(*it) != uniqueNumbers.end())
+            return 1;
+        else
+            uniqueNumbers.insert(*it);
+    }
+	return 0;
+}
+
+
 void PmergeMe::insertion(int loop)
 {
-	int flag = 1;
 	int pair = _vec.size() / std::pow(2, loop);
 	int odd = _vec.size() % (size_t)std::pow(2, loop);
+	int flag = 1;
 	Vec main;
 	Vec pend;
 	Vec tail;
@@ -162,6 +177,7 @@ void PmergeMe::insertion(int loop)
 			tail.insert(tail.end(), *(_vec.begin() + std::pow(2, loop - 1) * (i + 1)));
 		}
 	}
+
 	Vec temp(main);
 	int index;
 	int pos;
@@ -181,14 +197,9 @@ void PmergeMe::insertion(int loop)
 	{
 		index = std::find(_vec.begin(), _vec.end(), temp[i]) - _vec.begin();
 		if (i == temp.size() - 1)
-		{
-			int l = _vec.size() - res.size();
-			res.insert(res.end(), _vec.begin() + index, _vec.begin() + index + l);
-		}
+			res.insert(res.end(), _vec.begin() + index, _vec.begin() + index + _vec.size() - res.size());
 		else
-		{
 			res.insert(res.end(), _vec.begin() + index, _vec.begin() + index + std::pow(2, loop - 1));
-		}
 	}
 	_vec.clear();
 	_vec = res;
@@ -226,6 +237,11 @@ void verify(Vec &v)
 
 void PmergeMe::exec()
 {
+	if (doublechk(_vec))
+	{
+		std::cout << "double" << std::endl;
+		return;
+	}
     std::cout << "-Before: ";
 	printvec(_vec);
 	pmsort(1);
@@ -237,8 +253,17 @@ void PmergeMe::exec()
 
 void PmergeMe::printvec(Vec &v)
 {
+	int count = 0;
 	for (Vec::iterator it = v.begin(); it != v.end(); it++)
+	{
         std::cout << *it << " ";
+		if (count > 3 && v.size() > 3)
+		{
+			std::cout << "[...]";
+			break;
+		}
+		++count;
+	}
 	std::cout << std::endl;
 }
 
