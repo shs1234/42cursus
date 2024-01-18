@@ -150,6 +150,14 @@ bool doublechk(Vec numbers)
 }
 
 
+template <typename ForwardIterator, typename T>
+ForwardIterator find(ForwardIterator first, ForwardIterator last, const T& value) {
+    while (first != last && !(*first == value)) {
+        ++first;
+    }
+    return first;
+}
+
 void PmergeMe::insertion(int loop)
 {
 	int pair = _vec.size() / std::pow(2, loop);
@@ -183,7 +191,8 @@ void PmergeMe::insertion(int loop)
 	int pos;
 	for (int i = 0; i < pend.size(); i++)
 	{
-		index = std::find(temp.begin(), temp.end(), main[i]) - temp.begin();
+		Vec::iterator where = find(temp.begin(), temp.end(), main[i]);
+		index = std::distance(temp.begin(), where);
 		if (i == pend.size() - 1 && main.size() < pend.size())
 			index = temp.size();
 		pos = biSearch(temp, 0, index, pend[i]);
@@ -195,7 +204,8 @@ void PmergeMe::insertion(int loop)
 	Vec res;
 	for (int i = 0; i < temp.size(); i++)
 	{
-		index = std::find(_vec.begin(), _vec.end(), temp[i]) - _vec.begin();
+		Vec::iterator where = find(_vec.begin(), _vec.end(), temp[i]);
+		index = std::distance(_vec.begin(), where);
 		if (i == temp.size() - 1)
 			res.insert(res.end(), _vec.begin() + index, _vec.begin() + index + _vec.size() - res.size());
 		else
