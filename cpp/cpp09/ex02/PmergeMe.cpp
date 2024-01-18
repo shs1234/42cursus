@@ -137,56 +137,44 @@ int	PmergeMe::biSearch(Vec &v, int s, int e, const int k)
 
 void PmergeMe::insertion(int loop)
 {
-	// Vec main;
-	// Vec pend;
-	// Vec oddvec;
-
 	int flag = 1;
 	int pair = _vec.size() / std::pow(2, loop);
 	int odd = _vec.size() % (size_t)std::pow(2, loop);
-	Vec test1;
-	Vec test2;
-	Vec test3;
+	Vec main;
+	Vec pend;
+	Vec tail;
 	for (int i = 0; i < pair * 2; i++)
 	{
 		if (flag)
-		{
-			// main.insert(main.end(), _vec.begin() + std::pow(2, loop - 1) * i, _vec.begin() + std::pow(2, loop - 1) * (i + 1));
-			test1.insert(test1.end(), *(_vec.begin() + std::pow(2, loop - 1) * i));
-		}
+			main.insert(main.end(), *(_vec.begin() + std::pow(2, loop - 1) * i));
 		else
-		{
-			// pend.insert(pend.end(), _vec.begin() + std::pow(2, loop - 1) * i, _vec.begin() + std::pow(2, loop - 1) * (i + 1));
-			test2.insert(test2.end(), *(_vec.begin() + std::pow(2, loop - 1) * i));
-		}
+			pend.insert(pend.end(), *(_vec.begin() + std::pow(2, loop - 1) * i));
 		flag = !flag;
 		if (odd && i == pair * 2 - 1)
 		{
 			if (odd >= std::pow(2, loop - 1))
 			{
-				// pend.insert(pend.end(), _vec.begin() + std::pow(2, loop - 1) * (i + 1), _vec.begin() + std::pow(2, loop - 1) * (i + 2));
-				test2.insert(test2.end(), *(_vec.begin() + std::pow(2, loop - 1) * (i + 1)));
+				pend.insert(pend.end(), *(_vec.begin() + std::pow(2, loop - 1) * (i + 1)));
 				if (odd == std::pow(2, loop - 1))
 					break;
 				i++;
 			}
-			// oddvec.insert(oddvec.end(), _vec.begin() + std::pow(2, loop - 1) * (i + 1), _vec.end());
-			test3.insert(test3.end(), *(_vec.begin() + std::pow(2, loop - 1) * (i + 1)));
+			tail.insert(tail.end(), *(_vec.begin() + std::pow(2, loop - 1) * (i + 1)));
 		}
 	}
-	Vec temp(test1);
+	Vec temp(main);
 	int index;
 	int pos;
-	for (int i = 0; i < test2.size(); i++)
+	for (int i = 0; i < pend.size(); i++)
 	{
-		index = std::find(temp.begin(), temp.end(), test1[i]) - temp.begin();
-		if (i == test2.size() - 1 && test1.size() < test2.size())
+		index = std::find(temp.begin(), temp.end(), main[i]) - temp.begin();
+		if (i == pend.size() - 1 && main.size() < pend.size())
 			index = temp.size();
-		pos = biSearch(temp, 0, index, test2[i]);
-		temp.insert(temp.begin() + pos, *(test2.begin() + i));
+		pos = biSearch(temp, 0, index, pend[i]);
+		temp.insert(temp.begin() + pos, *(pend.begin() + i));
 	}
-	if (test3.size() > 0)
-		temp.insert(temp.end(), test3.begin(), test3.end());
+	if (tail.size() > 0)
+		temp.insert(temp.end(), tail.begin(), tail.end());
 
 	Vec res;
 	for (int i = 0; i < temp.size(); i++)
