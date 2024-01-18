@@ -88,8 +88,8 @@ PmergeMe::PmergeMe(int len, char **arr)
     for (int i = 0; i < len; i++)
     {
         std::stringstream(arr[i]) >> tmp;
-        // if (tmp == 0)
-        //     throw Error();
+        if (tmp == 0)
+            throw Error();
 		_vec.push_back(tmp);
 		_lst.push_back(tmp);
     }
@@ -135,17 +135,15 @@ int	PmergeMe::biSearch(Vec &v, int s, int e, const int k)
 	return (e);
 }
 
-// 5 9 14 2 8 3 10 1 16 7 12 15 4 13 11 17 6 18 19 21 20 0 22
 void PmergeMe::insertion(int loop)
 {
-	Vec main;
-	Vec pend;
-	Vec oddvec;
+	// Vec main;
+	// Vec pend;
+	// Vec oddvec;
 
 	int flag = 1;
 	int pair = _vec.size() / std::pow(2, loop);
 	int odd = _vec.size() % (size_t)std::pow(2, loop);
-	// std::cout << "odd : " << odd << std::endl;
 	Vec test1;
 	Vec test2;
 	Vec test3;
@@ -153,87 +151,75 @@ void PmergeMe::insertion(int loop)
 	{
 		if (flag)
 		{
-			main.insert(main.end(), _vec.begin() + std::pow(2, loop - 1) * i, _vec.begin() + std::pow(2, loop - 1) * (i + 1));
+			// main.insert(main.end(), _vec.begin() + std::pow(2, loop - 1) * i, _vec.begin() + std::pow(2, loop - 1) * (i + 1));
 			test1.insert(test1.end(), *(_vec.begin() + std::pow(2, loop - 1) * i));
 		}
 		else
 		{
-			pend.insert(pend.end(), _vec.begin() + std::pow(2, loop - 1) * i, _vec.begin() + std::pow(2, loop - 1) * (i + 1));
+			// pend.insert(pend.end(), _vec.begin() + std::pow(2, loop - 1) * i, _vec.begin() + std::pow(2, loop - 1) * (i + 1));
 			test2.insert(test2.end(), *(_vec.begin() + std::pow(2, loop - 1) * i));
 		}
 		flag = !flag;
 		if (odd && i == pair * 2 - 1)
 		{
-			if (odd > std::pow(2, loop - 1))
+			if (odd >= std::pow(2, loop - 1))
 			{
-				pend.insert(pend.end(), _vec.begin() + std::pow(2, loop - 1) * (i + 1), _vec.begin() + std::pow(2, loop - 1) * (i + 2));
+				// pend.insert(pend.end(), _vec.begin() + std::pow(2, loop - 1) * (i + 1), _vec.begin() + std::pow(2, loop - 1) * (i + 2));
 				test2.insert(test2.end(), *(_vec.begin() + std::pow(2, loop - 1) * (i + 1)));
+				if (odd == std::pow(2, loop - 1))
+					break;
 				i++;
 			}
-			oddvec.insert(oddvec.end(), _vec.begin() + std::pow(2, loop - 1) * (i + 1), _vec.end());
+			// oddvec.insert(oddvec.end(), _vec.begin() + std::pow(2, loop - 1) * (i + 1), _vec.end());
 			test3.insert(test3.end(), *(_vec.begin() + std::pow(2, loop - 1) * (i + 1)));
 		}
 	}
-	// printvec(test1); // main
-	// printvec(test2); // pend
-	// printvec(test3); // odd
-	// printvec(main);
-	// printvec(pend);
-	// printvec(oddvec);
 	Vec temp(test1);
 	int index;
 	int pos;
 	for (int i = 0; i < test2.size(); i++)
 	{
 		index = std::find(temp.begin(), temp.end(), test1[i]) - temp.begin();
-		// std::cout << "index : " << index << std::endl;
+		if (i == test2.size() - 1 && test1.size() < test2.size())
+			index = temp.size();
 		pos = biSearch(temp, 0, index, test2[i]);
-		// std::cout << "pos : " << pos << std::endl;
 		temp.insert(temp.begin() + pos, *(test2.begin() + i));
 	}
-	temp.insert(temp.end(), test3.begin(), test3.end());
-	printvec(temp);
+	if (test3.size() > 0)
+		temp.insert(temp.end(), test3.begin(), test3.end());
 
 	Vec res;
 	for (int i = 0; i < temp.size(); i++)
 	{
 		index = std::find(_vec.begin(), _vec.end(), temp[i]) - _vec.begin();
-		// std::cout << index << " ";
 		if (i == temp.size() - 1)
 		{
-			res.insert(res.end(), _vec.begin() + index, _vec.end());
+			int l = _vec.size() - res.size();
+			res.insert(res.end(), _vec.begin() + index, _vec.begin() + index + l);
 		}
 		else
 		{
 			res.insert(res.end(), _vec.begin() + index, _vec.begin() + index + std::pow(2, loop - 1));
 		}
-		printvec(res);
 	}
-	printvec(_vec);
-	printvec(res);
 	_vec.clear();
 	_vec = res;
 }
 
 void PmergeMe::pmsort(int loop)
 {
-	// std::cout << "loop " << loop << " / " << (int)(_vec.size() / std::pow(2, loop)) << std::endl;
 	int pair = _vec.size() / std::pow(2, loop);
-	// printvec(_vec);
 	Vec::iterator it = _vec.begin();
 	Vec::iterator it2 = it + std::pow(2, loop - 1);
 	for (int i = 0; i < pair; i++)
 	{
 		if (*it < *it2)
 			my_swap_ranges(it, it2, it2);
-		printvec(_vec);
 		it += std::pow(2, loop);
 		it2 += std::pow(2, loop);
 	}
-	// printvec(_vec);
 	if (static_cast<int>(_vec.size() / std::pow(2, loop + 1)))
 		pmsort(loop + 1);
-	std::cout << "------------------" << std::endl;
 	insertion(loop);
 }
 
@@ -252,12 +238,13 @@ void verify(Vec &v)
 
 void PmergeMe::exec()
 {
-    // before();
+    std::cout << "-Before: ";
+	printvec(_vec);
 	pmsort(1);
-	// after();
+	std::cout << "-After: ";
+	printvec(_vec);
+	verify(_vec);
     // printTime();
-	// printvec(_vec);
-	// verify(_vec);
 }
 
 void PmergeMe::printvec(Vec &v)

@@ -15,9 +15,6 @@ private:
     Vec _vec;
     std::list<int> _lst;
 
-    Vec::iterator _itA;
-    Vec::iterator _itB;
-
     PmergeMe();
 
     void before();
@@ -35,7 +32,6 @@ public:
     ~PmergeMe();
 
     void exec();
-
     void printvec(Vec &v);
 
     class Error : public std::exception
@@ -43,14 +39,6 @@ public:
         const char *what() const throw();
     };
 };
-
-template <typename T>
-void swap(T *a, T *b)
-{
-	T tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
 
 template <typename It1, typename It2>
 void my_swap_ranges(It1 it1_begin, It1 it1_end, It2 it2_begin) {
