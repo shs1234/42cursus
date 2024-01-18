@@ -244,9 +244,13 @@ void PmergeMe::exec()
 	}
     std::cout << "-Before: ";
 	printvec(_vec);
+	clock_t start = clock();
 	pmsort(1);
+	clock_t stop = clock();
 	std::cout << "-After: ";
 	printvec(_vec);
+	double duration = static_cast<double>(stop - start) / CLOCKS_PER_SEC;
+    std::cout << "실행 시간: " << duration << " 초" << std::endl;
 	verify(_vec);
     // printTime();
 }
