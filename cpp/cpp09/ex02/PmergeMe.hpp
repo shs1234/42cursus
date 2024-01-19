@@ -10,12 +10,13 @@
 #include <ctime>
 
 typedef std::vector<int> Vec;
+typedef std::list<int> Lst;
 
 class PmergeMe
 {
 private:
     Vec _vec;
-    std::list<int> _lst;
+    Lst _lst;
 
     Vec _jacob;
 
@@ -24,11 +25,14 @@ private:
     void before();
     void after();
     void printTime();
-    int	biSearch(Vec &v, int s, int e, const int k);
+    // int	biSearch(Vec &v, int s, int e, const int k);
     Vec jacobArr();
 
-    void pmsort(int loop);
-    void insertion(int loop);
+    void pmsort_vec(int loop);
+    void insertion_vec(int loop);
+
+    void pmsort_lst(int loop);
+    void insertion_lst(int loop);
 
 public:
     PmergeMe(int len, char **arr);

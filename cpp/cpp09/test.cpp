@@ -18,7 +18,5 @@ std::vector<int> generateDecreasingArray(const std::vector<int>& numbers) {
 
 int main() 
 {
-    std::vector<int> numbers = {1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461};
-    std::vector<int> result = generateDecreasingArray(numbers);
-    return 0;
+    std::advance()
 }

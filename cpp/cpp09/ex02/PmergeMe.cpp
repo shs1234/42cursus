@@ -106,14 +106,23 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& pm)
 }
 PmergeMe::~PmergeMe() {}
 
-int	PmergeMe::biSearch(Vec &v, int s, int e, const int k)
+template <typename T>
+typename T::iterator moveIterator(T& myList, typename T::iterator iter, int distance) {
+    for (int i = 0; i < distance && iter != myList.end(); ++i)
+        ++iter;
+    return iter;
+}
+
+template <typename T>
+int	biSearch(T &container, int s, int e, const int k)
 {
 	int m;
 
 	while (s < e)
 	{
 		m = (s + e) / 2;
-		if (k >= v[m])
+		// if (k >= v[m])
+		if (k >= *moveIterator(container, container.begin(), m))
 			s = m + 1;
 		else
 			e = m;
@@ -152,7 +161,7 @@ Vec PmergeMe::jacobArr()
     return result;
 }
 
-void PmergeMe::insertion(int loop)
+void PmergeMe::insertion_vec(int loop)
 {
 	int pair = _vec.size() / std::pow(2, loop);
 	int odd = _vec.size() % (size_t)std::pow(2, loop);
@@ -183,51 +192,28 @@ void PmergeMe::insertion(int loop)
 	Vec temp(main);
 	int index;
 	int pos;
+	int jacob;
 	flag = 1;
 	int j = 0;
-	std::cout << pend.size() << " " << main.size() <<  " : ";
-	// for (int i = 0; i < pend.size(); i++) // 삽입 정렬 하는 과정. 야콥스탈은 아직 미적용.
-	// {
-	// 	Vec::iterator where = find(temp.begin(), temp.end(), main[i]);
-	// 	index = std::distance(temp.begin(), where);
-	// 	if (i == pend.size() - 1 && main.size() < pend.size())
-	// 		index = temp.size();
-	// 	pos = biSearch(temp, 0, index, pend[i]);
-	// 	std::cout << i << " ";
-	// 	temp.insert(temp.begin() + pos, *(pend.begin() + i));
-	// }
-
-	for (int i = 0; i < pend.size(); i++) // 삽입 정렬 하는 과정. 야콥스탈은 아직 미적용.
+	for (int i = 0; i < pend.size(); i++) // jacob 수열 순서대로 삽입 정렬
 	{
-		if (flag == 0 || _jacob[i] > pend.size()) // 야콥 이상값
+		if (flag == 0 || _jacob[i] > pend.size())
 		{
-			Vec::iterator where = find(temp.begin(), temp.end(), main[pend.size() - j - 1]);
-			index = std::distance(temp.begin(), where);
-			if (i == pend.size() - 1 && main.size() < pend.size())
-				index = temp.size();
-
-			pos = biSearch(temp, 0, index, pend[pend.size() - j - 1]);
+			jacob = pend.size() - j - 1;
 			flag = 0;
-			std::cout << pend.size() - j  - 1 << " ";
-			temp.insert(temp.begin() + pos, *(pend.begin() + pend.size() - j - 1));
 			++j;
 		}
 		else
-		{
-			Vec::iterator where = find(temp.begin(), temp.end(), main[_jacob[i] - 1]);
-			index = std::distance(temp.begin(), where);
-			if (i == pend.size() - 1 && main.size() < pend.size())
-				index = temp.size();
-
-			pos = biSearch(temp, 0, index, pend[_jacob[i] - 1]);
-			std::cout << _jacob[i] - 1 << " ";
-			temp.insert(temp.begin() + pos, *(pend.begin() + _jacob[i] - 1));
-		}
+			jacob = _jacob[i] - 1;
+		Vec::iterator where = find(temp.begin(), temp.end(), main[jacob]);
+		index = std::distance(temp.begin(), where);
+		if (i == pend.size() - 1 && main.size() < pend.size())
+			index = temp.size();
+		pos = biSearch(temp, 0, index, pend[jacob]);
+		temp.insert(temp.begin() + pos, *(pend.begin() + jacob));
 	}
-
 	if (tail.size() > 0)
 		temp.insert(temp.end(), tail.begin(), tail.end());
-	std::cout << std::endl;
 
 	Vec res;
 	for (int i = 0; i < temp.size(); i++) // 삽입 정렬된 순서대로 새 배열 생성.
@@ -243,7 +229,7 @@ void PmergeMe::insertion(int loop)
 	_vec = res;
 }
 
-void PmergeMe::pmsort(int loop)
+void PmergeMe::pmsort_vec(int loop)
 {
 	int pair = _vec.size() / std::pow(2, loop);
 	Vec::iterator it = _vec.begin();
@@ -256,15 +242,107 @@ void PmergeMe::pmsort(int loop)
 		it2 += std::pow(2, loop);
 	}
 	if (static_cast<int>(_vec.size() / std::pow(2, loop + 1)))
-		pmsort(loop + 1);
-	insertion(loop);
+		pmsort_vec(loop + 1);
+	insertion_vec(loop);
 }
 
-void verify(Vec &v)
+void PmergeMe::insertion_lst(int loop)
 {
+	int pair = _lst.size() / std::pow(2, loop);
+	int odd = _lst.size() % (size_t)std::pow(2, loop);
+	int flag = 1;
+	Lst main;
+	Lst pend;
+	Lst tail;
+	for (int i = 0; i < pair * 2; i++) // main pend tail 나누는 과정.
+	{
+		if (flag)
+			main.insert(main.end(), *moveIterator(_lst, _lst.begin(), std::pow(2, loop - 1) * i));
+		else
+			pend.insert(pend.end(), *moveIterator(_lst, _lst.begin(), std::pow(2, loop - 1) * i));
+		flag = !flag;
+		if (odd && i == pair * 2 - 1)
+		{
+			if (odd >= std::pow(2, loop - 1))
+			{
+				pend.insert(pend.end(), *moveIterator(_lst, _lst.begin(), std::pow(2, loop - 1) * (i + 1)));
+				if (odd == std::pow(2, loop - 1))
+					break;
+				i++;
+			}
+			tail.insert(tail.end(), *moveIterator(_lst, _lst.begin(), std::pow(2, loop - 1) * (i + 1)));
+		}
+	}
+
+	Lst temp(main);
+	int index;
+	int pos;
+	int jacob;
+	flag = 1;
+	int j = 0;
+	for (int i = 0; i < pend.size(); i++) // jacob 수열 순서대로 삽입 정렬
+	{
+		if (flag == 0 || _jacob[i] > pend.size())
+		{
+			jacob = pend.size() - j - 1;
+			flag = 0;
+			++j;
+		}
+		else
+			jacob = _jacob[i] - 1;
+		Lst::iterator where = find(temp.begin(), temp.end(), *moveIterator(main, main.begin(), jacob));
+		index = std::distance(temp.begin(), where);
+		if (i == pend.size() - 1 && main.size() < pend.size())
+			index = temp.size();
+		pos = biSearch(temp, 0, index, *moveIterator(pend, pend.begin(), jacob));
+		temp.insert(moveIterator(temp, temp.begin(), pos), *moveIterator(pend, pend.begin(), jacob));
+	}
+	if (tail.size() > 0)
+		temp.insert(temp.end(), tail.begin(), tail.end());
+
+	Lst res;
+	for (int i = 0; i < temp.size(); i++) // 삽입 정렬된 순서대로 새 배열 생성.
+	{//moveIterator(_lst, _lst.begin(), index + std::pow(2, loop - 1))
+		Lst::iterator where = find(_lst.begin(), _lst.end(), *moveIterator(temp, temp.begin(), i));
+		index = std::distance(_lst.begin(), where);
+		if (i == temp.size() - 1)
+			res.insert(res.end(), moveIterator(_lst, _lst.begin(), index), moveIterator(_lst, _lst.begin(), index + _lst.size() - res.size()));
+		else
+			res.insert(res.end(), moveIterator(_lst, _lst.begin(), index), moveIterator(_lst, _lst.begin(), index + std::pow(2, loop - 1)));
+	}
+	_lst.clear();
+	_lst = res;
+}
+
+void PmergeMe::pmsort_lst(int loop)
+{
+	int pair = _lst.size() / std::pow(2, loop);
+	Lst::iterator it = _lst.begin();
+	// Lst::iterator it2 = it + std::pow(2, loop - 1);
+	Lst::iterator it2 = moveIterator(_lst, it, std::pow(2, loop - 1));
+	for (int i = 0; i < pair; i++) // 두개 비교해서 큰거 앞으로 배치
+	{
+		if (*it < *it2)
+			my_swap_ranges(it, it2, it2);
+		it = moveIterator(_lst, it, std::pow(2, loop));
+		it2 = moveIterator(_lst, it2, std::pow(2, loop));
+		// it += std::pow(2, loop);
+		// it2 += std::pow(2, loop);
+	}
+	if (static_cast<int>(_lst.size() / std::pow(2, loop + 1)))
+		pmsort_lst(loop + 1);
+	insertion_lst(loop);
+}
+
+template <typename T>
+void verify(T &v)
+{
+	typename T::iterator it = v.begin();
+	typename T::iterator it2 = it;
+	++it2;
 	for (int i = 0;i < v.size() - 1; i++)
 	{
-		if (v[i] > v[i + 1])
+		if (*it++ > *it2++)
 		{
 			std::cout << "fail" << std::endl;
 			return;
@@ -284,13 +362,21 @@ void PmergeMe::exec()
     std::cout << "-Before: ";
 	printvec(_vec);
 	clock_t start = clock();
-	pmsort(1);
+	pmsort_vec(1);
 	clock_t stop = clock();
 	std::cout << "-After: ";
 	printvec(_vec);
 	double duration = static_cast<double>(stop - start) / CLOCKS_PER_SEC;
-    std::cout << "실행 시간: " << duration << " 초" << std::endl;
+    std::cout << "vector 실행 시간: " << duration << " 초" << std::endl;
+
+	start = clock();
+	pmsort_lst(1);
+	stop = clock();
+	duration = static_cast<double>(stop - start) / CLOCKS_PER_SEC;
+	std::cout << "list 실행 시간: " << duration << " 초" << std::endl;
+
 	verify(_vec);
+	verify(_lst);
     // printTime();
 }
 
@@ -300,37 +386,14 @@ void PmergeMe::printvec(Vec &v)
 	for (Vec::iterator it = v.begin(); it != v.end(); it++)
 	{
         std::cout << *it << " ";
-		if (count > 3 && v.size() > 3)
-		{
-			std::cout << "[...]";
-			break;
-		}
-		++count;
+		// if (count > 3 && v.size() > 3)
+		// {
+		// 	std::cout << "[...]";
+		// 	break;
+		// }
+		// ++count;
 	}
 	std::cout << std::endl;
-}
-
-void PmergeMe::before()
-{
-    // std::cout << "Before : ";
-    for (Vec::iterator it = _vec.begin(); it != _vec.end(); it++)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-	// std::cout << "Before : ";
-    // for (Vec::iterator it2 = _vec.begin(); it2 != _vec.end(); it2++)
-    //     std::cout << *it2 << " ";
-    // std::cout << std::endl;
-}
-void PmergeMe::after()
-{
-    std::cout << "After : ";
-    for (Vec::iterator it = _vec.begin(); it != _vec.end(); it++)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-}
-
-void PmergeMe::printTime()
-{
 }
 
 const char *PmergeMe::Error::what() const throw()
