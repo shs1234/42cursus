@@ -121,7 +121,6 @@ int	biSearch(T &container, int s, int e, const int k)
 	while (s < e)
 	{
 		m = (s + e) / 2;
-		// if (k >= v[m])
 		if (k >= *moveIterator(container, container.begin(), m))
 			s = m + 1;
 		else
@@ -209,6 +208,8 @@ void PmergeMe::insertion_vec(int loop)
 		index = std::distance(temp.begin(), where);
 		if (i == pend.size() - 1 && main.size() < pend.size())
 			index = temp.size();
+		if (_jacob[i] > pend.size())
+			index = temp.size();
 		pos = biSearch(temp, 0, index, pend[jacob]);
 		temp.insert(temp.begin() + pos, *(pend.begin() + jacob));
 	}
@@ -294,6 +295,8 @@ void PmergeMe::insertion_lst(int loop)
 		index = std::distance(temp.begin(), where);
 		if (i == pend.size() - 1 && main.size() < pend.size())
 			index = temp.size();
+		if (_jacob[i] > pend.size())
+			index = temp.size();
 		pos = biSearch(temp, 0, index, *moveIterator(pend, pend.begin(), jacob));
 		temp.insert(moveIterator(temp, temp.begin(), pos), *moveIterator(pend, pend.begin(), jacob));
 	}
@@ -302,7 +305,7 @@ void PmergeMe::insertion_lst(int loop)
 
 	Lst res;
 	for (int i = 0; i < temp.size(); i++) // 삽입 정렬된 순서대로 새 배열 생성.
-	{//moveIterator(_lst, _lst.begin(), index + std::pow(2, loop - 1))
+	{
 		Lst::iterator where = find(_lst.begin(), _lst.end(), *moveIterator(temp, temp.begin(), i));
 		index = std::distance(_lst.begin(), where);
 		if (i == temp.size() - 1)
@@ -318,7 +321,6 @@ void PmergeMe::pmsort_lst(int loop)
 {
 	int pair = _lst.size() / std::pow(2, loop);
 	Lst::iterator it = _lst.begin();
-	// Lst::iterator it2 = it + std::pow(2, loop - 1);
 	Lst::iterator it2 = moveIterator(_lst, it, std::pow(2, loop - 1));
 	for (int i = 0; i < pair; i++) // 두개 비교해서 큰거 앞으로 배치
 	{
@@ -326,8 +328,6 @@ void PmergeMe::pmsort_lst(int loop)
 			my_swap_ranges(it, it2, it2);
 		it = moveIterator(_lst, it, std::pow(2, loop));
 		it2 = moveIterator(_lst, it2, std::pow(2, loop));
-		// it += std::pow(2, loop);
-		// it2 += std::pow(2, loop);
 	}
 	if (static_cast<int>(_lst.size() / std::pow(2, loop + 1)))
 		pmsort_lst(loop + 1);
@@ -340,7 +340,7 @@ void verify(T &v)
 	typename T::iterator it = v.begin();
 	typename T::iterator it2 = it;
 	++it2;
-	for (int i = 0;i < v.size() - 1; i++)
+	while (it2 != v.end())
 	{
 		if (*it++ > *it2++)
 		{
@@ -377,7 +377,6 @@ void PmergeMe::exec()
 
 	verify(_vec);
 	verify(_lst);
-    // printTime();
 }
 
 void PmergeMe::printvec(Vec &v)
@@ -386,12 +385,12 @@ void PmergeMe::printvec(Vec &v)
 	for (Vec::iterator it = v.begin(); it != v.end(); it++)
 	{
         std::cout << *it << " ";
-		// if (count > 3 && v.size() > 3)
-		// {
-		// 	std::cout << "[...]";
-		// 	break;
-		// }
-		// ++count;
+		if (count > 20 && v.size() > 20)
+		{
+			std::cout << "[...]";
+			break;
+		}
+		++count;
 	}
 	std::cout << std::endl;
 }
