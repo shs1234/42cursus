@@ -106,20 +106,6 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& pm)
 }
 PmergeMe::~PmergeMe() {}
 
-long long getJacobsthal(int n)
-{
-	static long long arr[100];
-	if (n == 0)
-		return (0);
-	if (n == 1)
-		return (1);
-    if (arr[n] == 0)
-	{
-        arr[n] = getJacobsthal(n - 1) + getJacobsthal(n - 2) * 2;
-	}
-	return (arr[n]);
-}
-
 int	PmergeMe::biSearch(Vec &v, int s, int e, const int k)
 {
 	int m;
@@ -149,13 +135,21 @@ bool doublechk(Vec numbers)
 	return 0;
 }
 
+Vec PmergeMe::jacobArr()
+{
+	Vec numbers = {1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461};
+    Vec result;
 
-template <typename ForwardIterator, typename T>
-ForwardIterator find(ForwardIterator first, ForwardIterator last, const T& value) {
-    while (first != last && !(*first == value)) {
-        ++first;
+    for (size_t i = 0; i < numbers.size(); ++i) 
+	{
+        for (int j = numbers[i]; j >= 1; --j) 
+		{
+			if (i > 0 && j == numbers[i - 1])
+				break;
+            result.push_back(j);
+        }
     }
-    return first;
+    return result;
 }
 
 void PmergeMe::insertion(int loop)
@@ -166,7 +160,7 @@ void PmergeMe::insertion(int loop)
 	Vec main;
 	Vec pend;
 	Vec tail;
-	for (int i = 0; i < pair * 2; i++)
+	for (int i = 0; i < pair * 2; i++) // main pend tail 나누는 과정.
 	{
 		if (flag)
 			main.insert(main.end(), *(_vec.begin() + std::pow(2, loop - 1) * i));
@@ -189,20 +183,54 @@ void PmergeMe::insertion(int loop)
 	Vec temp(main);
 	int index;
 	int pos;
-	for (int i = 0; i < pend.size(); i++)
+	flag = 1;
+	int j = 0;
+	std::cout << pend.size() << " " << main.size() <<  " : ";
+	// for (int i = 0; i < pend.size(); i++) // 삽입 정렬 하는 과정. 야콥스탈은 아직 미적용.
+	// {
+	// 	Vec::iterator where = find(temp.begin(), temp.end(), main[i]);
+	// 	index = std::distance(temp.begin(), where);
+	// 	if (i == pend.size() - 1 && main.size() < pend.size())
+	// 		index = temp.size();
+	// 	pos = biSearch(temp, 0, index, pend[i]);
+	// 	std::cout << i << " ";
+	// 	temp.insert(temp.begin() + pos, *(pend.begin() + i));
+	// }
+
+	for (int i = 0; i < pend.size(); i++) // 삽입 정렬 하는 과정. 야콥스탈은 아직 미적용.
 	{
-		Vec::iterator where = find(temp.begin(), temp.end(), main[i]);
-		index = std::distance(temp.begin(), where);
-		if (i == pend.size() - 1 && main.size() < pend.size())
-			index = temp.size();
-		pos = biSearch(temp, 0, index, pend[i]);
-		temp.insert(temp.begin() + pos, *(pend.begin() + i));
+		if (flag == 0 || _jacob[i] > pend.size()) // 야콥 이상값
+		{
+			Vec::iterator where = find(temp.begin(), temp.end(), main[pend.size() - j - 1]);
+			index = std::distance(temp.begin(), where);
+			if (i == pend.size() - 1 && main.size() < pend.size())
+				index = temp.size();
+
+			pos = biSearch(temp, 0, index, pend[pend.size() - j - 1]);
+			flag = 0;
+			std::cout << pend.size() - j  - 1 << " ";
+			temp.insert(temp.begin() + pos, *(pend.begin() + pend.size() - j - 1));
+			++j;
+		}
+		else
+		{
+			Vec::iterator where = find(temp.begin(), temp.end(), main[_jacob[i] - 1]);
+			index = std::distance(temp.begin(), where);
+			if (i == pend.size() - 1 && main.size() < pend.size())
+				index = temp.size();
+
+			pos = biSearch(temp, 0, index, pend[_jacob[i] - 1]);
+			std::cout << _jacob[i] - 1 << " ";
+			temp.insert(temp.begin() + pos, *(pend.begin() + _jacob[i] - 1));
+		}
 	}
+
 	if (tail.size() > 0)
 		temp.insert(temp.end(), tail.begin(), tail.end());
+	std::cout << std::endl;
 
 	Vec res;
-	for (int i = 0; i < temp.size(); i++)
+	for (int i = 0; i < temp.size(); i++) // 삽입 정렬된 순서대로 새 배열 생성.
 	{
 		Vec::iterator where = find(_vec.begin(), _vec.end(), temp[i]);
 		index = std::distance(_vec.begin(), where);
@@ -220,7 +248,7 @@ void PmergeMe::pmsort(int loop)
 	int pair = _vec.size() / std::pow(2, loop);
 	Vec::iterator it = _vec.begin();
 	Vec::iterator it2 = it + std::pow(2, loop - 1);
-	for (int i = 0; i < pair; i++)
+	for (int i = 0; i < pair; i++) // 두개 비교해서 큰거 앞으로 배치
 	{
 		if (*it < *it2)
 			my_swap_ranges(it, it2, it2);
@@ -252,6 +280,7 @@ void PmergeMe::exec()
 		std::cout << "double" << std::endl;
 		return;
 	}
+	_jacob = jacobArr();
     std::cout << "-Before: ";
 	printvec(_vec);
 	clock_t start = clock();

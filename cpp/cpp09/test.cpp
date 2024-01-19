@@ -1,20 +1,24 @@
-long long getJacobsthal(int n)
-{
-	static long long arr[100];
-	if (n == 0)
-		return (0);
-	if (n == 1)
-		return (1);
-    if (arr[n] == 0)
-	{
-        arr[n] = getJacobsthal(n - 1) + getJacobsthal(n - 2) * 2;
-	}
-	return (arr[n]);
-}
 #include <iostream>
-int main()
+#include <vector>
+
+std::vector<int> generateDecreasingArray(const std::vector<int>& numbers) {
+    std::vector<int> result;
+
+    for (size_t i = 0; i < numbers.size(); ++i) 
+	{
+        for (int j = numbers[i]; j >= 1; --j) 
+		{
+			if (i > 0 && j == numbers[i - 1])
+				break;
+            result.push_back(j);
+        }
+    }
+    return result;
+}
+
+int main() 
 {
-    // for(int i = 0;i < 20;i++)
-    //     std::cout << getJacobsthal(i) << " ";
-    std::cout << getJacobsthal(3) << " ";
+    std::vector<int> numbers = {1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461};
+    std::vector<int> result = generateDecreasingArray(numbers);
+    return 0;
 }

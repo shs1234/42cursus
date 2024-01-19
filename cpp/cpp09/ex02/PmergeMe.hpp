@@ -17,12 +17,15 @@ private:
     Vec _vec;
     std::list<int> _lst;
 
+    Vec _jacob;
+
     PmergeMe();
 
     void before();
     void after();
     void printTime();
     int	biSearch(Vec &v, int s, int e, const int k);
+    Vec jacobArr();
 
     void pmsort(int loop);
     void insertion(int loop);
@@ -48,6 +51,13 @@ void my_swap_ranges(It1 it1_begin, It1 it1_end, It2 it2_begin) {
     {
         std::swap(*it1_begin++, *it2_begin++);
     }
+}
+
+template <typename Iter, typename T>
+Iter find(Iter first, Iter last, const T& value) {
+    while (first != last && !(*first == value))
+        ++first;
+    return first;
 }
 
 // 인트형 양의 정수 인자로 받을것. 아닐경우 에러처리.
