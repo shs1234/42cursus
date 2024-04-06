@@ -10,30 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-CXX			=	c++
-NAME		=	PmergeMe
-RM			=	rm -rf
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
-CXXFLAGS	=	
+up : 
+	docker-compose -f ./srcs/docker-compose.yml up -d
 
-SRCS		=	$(wildcard *.cpp)
-HEADERS		=	$(wildcard *.hpp)
-OBJS		=	$(SRCS:.cpp=.o)
+down :
+	docker-compose -f ./srcs/docker-compose.yml down
 
-all : $(NAME)
+clean_images :
+	docker rmi $(docker images -q)
 
-$(NAME) : $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
-
-%.o : %.cpp $(HEADERS)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-	
-clean : 
-	$(RM) $(OBJS)
-
-fclean : clean
-	$(RM) $(NAME)
-
-re : fclean all
-
-.PHONY: all clean fclean re
+re : down up
