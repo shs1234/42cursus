@@ -2,10 +2,9 @@
 FROM debian:bullseye
 
 # Update package lists and install required packages
-RUN apt-get update && apt-get install -y wordpress php-fpm
+RUN apt-get update && apt-get install -y curl php-fpm
 
-# # Copy php.ini configuration file
-# COPY php.ini /etc/php/7.4/fpm/php.ini
+COPY ./conf/wp-config.php /
+COPY ./tools/script.sh /
 
-# # Start PHP-FPM service
-# CMD ["php-fpm", "-F"]
+CMD [ "/script.sh" ]
