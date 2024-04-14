@@ -7,4 +7,4 @@ COPY ./conf/default.conf /
 
 COPY ./tools/script.sh /
 
-CMD [ "/script.sh" ]
+CMD [ "sh", "/script.sh" ]

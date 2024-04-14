@@ -9,3 +9,7 @@ cd /var/www/html
 wp core download --allow-root
 
 mv /wp-config.php /var/www/html/wp-config.php
+
+mkdir /run/php
+
+php-fpm7.4 -F
