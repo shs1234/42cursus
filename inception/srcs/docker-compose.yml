@@ -7,6 +7,10 @@ services:
     build: ./requirements/nginx
     ports:
       - "443:443"
+    env_file:
+      - .env
+    volumes:
+      - /home/hoseoson/data/WordPress:/var/www/html
     depends_on:
       - wordpress
     networks:

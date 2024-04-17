@@ -2,7 +2,7 @@
 FROM debian:bullseye
 
 # Update package lists and install required packages
-RUN apt-get update && apt-get install -y curl php-fpm
+RUN apt-get update && apt-get install -y curl php-fpm php-mysql
 
 COPY ./conf/wp-config.php /
 COPY ./tools/script.sh /
