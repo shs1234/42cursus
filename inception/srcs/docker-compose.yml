@@ -3,49 +3,44 @@ version: '3'
 services:
   nginx:
     container_name: nginx
-    # image: nginx:42
+    image: nginx:42
     build: ./requirements/nginx
     ports:
       - "443:443"
     depends_on:
       - wordpress
     networks:
-      - docker_network
+      - docker-network
+    restart: always
 
   mariadb:
     container_name: mariadb
-    # image: mariadb:42
+    image: mariadb:42
     build: ./requirements/mariadb
     expose:
       - "3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: wordpress
+    env_file:
+      - .env
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - /home/hoseoson/data/DB:/var/lib/mysql
     networks:
-      - docker_network
+      - docker-network
+    restart: always
 
   wordpress:
     container_name: wordpress
-    # image: wordpress:42
+    image: wordpress:42
     build: ./requirements/wordpress
     expose: 
       - "9000"
-    environment:
-      WORDPRESS_DB_HOST: mariadb
-      WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_DB_USER: root
-      WORDPRESS_DB_PASSWORD: example
+    env_file:
+      - .env
     volumes:
-      - wordpress_data:/var/www/html
+      - /home/hoseoson/data/WordPress:/var/www/html
     networks:
-      - docker_network
-
-volumes:
-  mariadb_data:
-  wordpress_data:
+      - docker-network
+    restart: always
 
 networks:
-  docker_network:
+  docker-network:
     driver: bridge
