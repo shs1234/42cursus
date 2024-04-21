@@ -1,4 +1,8 @@
-#!/bin/bash
+# !/bin/bash
+
+# export DB_NAME=wordpress
+# export DB_USER=user
+# export DB_PASSWORD=password
 
 service mariadb start
 
@@ -8,4 +12,5 @@ echo "GRANT ALL PRIVILEGES ON $DB_NAME.* TO $DB_USER@'%';" | mysql
 echo "FLUSH PRIVILEGES;" | mysql
 
 service mariadb stop
+
 mysqld

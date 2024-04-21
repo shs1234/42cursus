@@ -1,21 +1,21 @@
 version: '3'
 
 services:
-  nginx:
-    container_name: nginx
-    image: nginx:42
-    build: ./requirements/nginx
-    ports:
-      - "443:443"
-    env_file:
-      - .env
-    volumes:
-      - /home/hoseoson/data/WordPress:/var/www/html
-    depends_on:
-      - wordpress
-    networks:
-      - docker-network
-    restart: always
+  # nginx:
+  #   container_name: nginx
+  #   image: nginx:42
+  #   build: ./requirements/nginx
+  #   ports:
+  #     - "443:443"
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - /home/hoseoson/data/WordPress:/var/www/html
+  #   depends_on:
+  #     - wordpress
+  #   networks:
+  #     - docker-network
+  #   restart: always
 
   mariadb:
     container_name: mariadb
@@ -31,12 +31,32 @@ services:
       - docker-network
     restart: always
 
+  # wordpress:
+  #   container_name: wordpress
+  #   image: wordpress:latest
+  #   # build: ./requirements/wordpress
+  #   # expose: 
+  #   #   - "9000"
+  #   ports:
+  #     - 80:80
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - /home/hoseoson/data/WordPress:/var/www/html
+  #   networks:
+  #     - docker-network
+  #   restart: always
+  #   depends_on:
+  #     - mariadb
+
   wordpress:
     container_name: wordpress
     image: wordpress:42
     build: ./requirements/wordpress
-    expose: 
-      - "9000"
+    # expose: 
+    #   - "9000"
+    ports:
+      - 80:80
     env_file:
       - .env
     volumes:
@@ -44,7 +64,8 @@ services:
     networks:
       - docker-network
     restart: always
-
+    depends_on:
+      - mariadb
 networks:
   docker-network:
     driver: bridge
