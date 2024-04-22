@@ -31,28 +31,10 @@ services:
       - docker-network
     restart: always
 
-  # wordpress:
-  #   container_name: wordpress
-  #   image: wordpress:latest
-  #   # build: ./requirements/wordpress
-  #   # expose: 
-  #   #   - "9000"
-  #   ports:
-  #     - 80:80
-  #   env_file:
-  #     - .env
-  #   volumes:
-  #     - /home/hoseoson/data/WordPress:/var/www/html
-  #   networks:
-  #     - docker-network
-  #   restart: always
-  #   depends_on:
-  #     - mariadb
-
   wordpress:
     container_name: wordpress
-    image: wordpress:42
-    build: ./requirements/wordpress
+    image: wordpress:latest
+    # build: ./requirements/wordpress
     # expose: 
     #   - "9000"
     ports:
@@ -66,6 +48,24 @@ services:
     restart: always
     depends_on:
       - mariadb
+
+  # wordpress:
+  #   container_name: wordpress
+  #   image: wordpress:42
+  #   build: ./requirements/wordpress
+  #   # expose: 
+  #   #   - "9000"
+  #   ports:
+  #     - 80:80
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - /home/hoseoson/data/WordPress:/var/www/html
+  #   networks:
+  #     - docker-network
+  #   restart: always
+  #   depends_on:
+  #     - mariadb
 networks:
   docker-network:
     driver: bridge
