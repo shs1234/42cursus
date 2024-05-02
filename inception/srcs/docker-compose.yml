@@ -6,7 +6,7 @@ services:
     image: mariadb:hoseoson
     build: ./requirements/mariadb
     expose:
-      - 3306
+      - "3306"
     env_file:
       - .env
     volumes:
@@ -15,32 +15,37 @@ services:
       - docker-network
     restart: always
 
-  debian:
-    container_name: debian
-    image: debian:bullseye
-    ports:
-      - "80:80"
+  wordpress:
+    container_name: wordpress
+    image: wordpress:hoseoson
+    build: ./requirements/wordpress
+    expose:
+      - "9000"
+    env_file:
+      - .env
+    volumes:
+      - /home/hoseoson/data/wordpress:/var/www/html
     networks:
       - docker-network
     restart: always
-    command: tail -F anything
+    depends_on:
+      - mariadb
 
-
-  # wordpress:
-  #   container_name: wordpress
-  #   image: wordpress:hoseoson
-  #   build: ./requirements/wordpress
-  #   # expose:
-  #   #   - 80
-  #   ports:
-  #     - "80:80"
-  #   env_file:
-  #     - .env
-  #   volumes:
-  #     - /home/hoseoson/data/wordpress:/var/www/html
-  #   networks:
-  #     - docker-network
-  #   restart: always
+  nginx:
+    container_name: nginx
+    image: nginx:hoseoson
+    build: ./requirements/nginx
+    ports:
+      - "443:443"
+    env_file:
+      - .env
+    networks:
+      - docker-network
+    volumes:
+      - /home/hoseoson/data/wordpress:/var/www/html
+    restart: always
+    depends_on:
+      - wordpress
 
 networks:
   docker-network:

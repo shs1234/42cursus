@@ -1,6 +1,5 @@
 server {
     ssl_protocols TLSv1.3;
-    ssl_prefer_server_ciphers on;
 
     listen 443 ssl;
     listen [::]:443 ssl;
@@ -9,17 +8,14 @@ server {
     ssl_certificate_key /etc/ssl/private/server.key;
 
     root /var/www/html;
-
     index index.php;
 
     server_name hoseoson.42.kr;
 
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-
-    location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass wordpress:9000;
-    }
+    location ~ \.php$ { 
+            try_files $uri =404;
+            include fastcgi_params;
+            fastcgi_pass wordpress:9000;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
 }
