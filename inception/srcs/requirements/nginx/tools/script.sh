@@ -1,4 +1,4 @@
-mv /nginx.conf /etc/nginx/
+# mv /nginx.conf /etc/nginx/
 mv /default /etc/nginx/sites-available/
 
 openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr -subj "/C=KR/L=SEOUL/O=42seoul"

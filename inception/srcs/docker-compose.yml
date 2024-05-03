@@ -3,37 +3,33 @@ version: '3'
 services:
   mariadb:
     container_name: mariadb
-    image: mariadb:hoseoson
+    # image: mariadb:hoseoson
     build: ./requirements/mariadb
-    expose:
-      - "3306"
     env_file:
       - .env
     volumes:
       - /home/hoseoson/data/DB:/var/lib/mysql
     networks:
       - docker-network
-    restart: always
+    restart: on-failure
 
   wordpress:
     container_name: wordpress
-    image: wordpress:hoseoson
+    # image: wordpress:hoseoson
     build: ./requirements/wordpress
-    expose:
-      - "9000"
     env_file:
       - .env
     volumes:
       - /home/hoseoson/data/wordpress:/var/www/html
     networks:
       - docker-network
-    restart: always
+    restart: on-failure
     depends_on:
       - mariadb
 
   nginx:
     container_name: nginx
-    image: nginx:hoseoson
+    # image: nginx:hoseoson
     build: ./requirements/nginx
     ports:
       - "443:443"
@@ -43,7 +39,7 @@ services:
       - docker-network
     volumes:
       - /home/hoseoson/data/wordpress:/var/www/html
-    restart: always
+    restart: on-failure
     depends_on:
       - wordpress
 
