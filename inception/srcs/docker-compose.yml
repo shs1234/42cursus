@@ -3,46 +3,59 @@ version: '3'
 services:
   mariadb:
     container_name: mariadb
-    # image: mariadb:hoseoson
+    image: mariadb:hoseoson
     build: ./requirements/mariadb
     env_file:
       - .env
     volumes:
-      - /home/hoseoson/data/DB:/var/lib/mysql
+      - db:/var/lib/mysql
     networks:
-      - docker-network
+      - inception
     restart: on-failure
 
   wordpress:
     container_name: wordpress
-    # image: wordpress:hoseoson
+    image: wordpress:hoseoson
     build: ./requirements/wordpress
     env_file:
       - .env
     volumes:
-      - /home/hoseoson/data/wordpress:/var/www/html
+      - wp:/var/www/html
     networks:
-      - docker-network
+      - inception
     restart: on-failure
     depends_on:
       - mariadb
 
   nginx:
     container_name: nginx
-    # image: nginx:hoseoson
+    image: nginx:hoseoson
     build: ./requirements/nginx
     ports:
       - "443:443"
     env_file:
       - .env
     networks:
-      - docker-network
+      - inception
     volumes:
-      - /home/hoseoson/data/wordpress:/var/www/html
+      - wp:/var/www/html
     restart: on-failure
     depends_on:
       - wordpress
 
 networks:
-  docker-network:
-    driver: bridge
+  inception:
+
+volumes:
+  wp:
+    driver: local
+    driver_opts:
+      device: /home/hoseoson/data/wp
+      o: bind
+      type: none
+  db:
+    driver: local
+    driver_opts:
+      device: /home/hoseoson/data/db
+      o: bind
+      type: none

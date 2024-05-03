@@ -16,4 +16,4 @@ if [ ! -d "/var/lib/mysql/$DB_NAME" ]; then
     mysqladmin shutdown
 fi
 
-mysqld_safe
+exec mysqld_safe
