@@ -1,6 +1,7 @@
 #!/bin/bash
 
 if [ ! -d "/var/lib/mysql/$DB_NAME" ]; then
+    echo "Installing MariaDB"
     mysql_install_db
     mysqld_safe &
     RET=1
@@ -14,6 +15,8 @@ if [ ! -d "/var/lib/mysql/$DB_NAME" ]; then
     mysql -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';"
     mysql -e "FLUSH PRIVILEGES;"
     mysqladmin shutdown
+else
+    echo "MariaDB already installed"
 fi
 
 exec mysqld_safe

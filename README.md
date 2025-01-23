@@ -17,7 +17,7 @@
 - [**Push_swap**](./push_swap): 두 개의 스택을 이용해 정렬 알고리즘 구현.
 - [**Philosophers**](./philosophers): 멀티스레딩과 동기화 문제(철학자 문제) 해결.
 - [**CPP**](./cpp): C++ 언어를 통한 객체 지향 프로그래밍 관련 과제.
-- [**Cub3D**](./cub3D): 간단한 3D 렌더링 엔진 개발.
+- [**Cub3D**](./cub3d): 간단한 3D 렌더링 엔진 개발.
 - [**NetPractice**](./net_practice): 네트워크 프로토콜과 IP 라우팅 이해.
 - [**Minishell**](./minishell): 간단한 쉘 환경 개발(명령 실행, 환경 변수 관리 등).
 - [**IRC**](./irc): 인터넷 릴레이 채팅(IRC) 서버 구현.

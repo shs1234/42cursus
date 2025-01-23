@@ -6,7 +6,7 @@
 /*   By: hoseoson <hoseoson@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:35:50 by hoseoson          #+#    #+#             */
-/*   Updated: 2023/08/29 06:18:34 by hoseoson         ###   ########.fr       */
+/*   Updated: 2023/04/02 17:13:10 by hoseoson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ char	*get_next_line(int fd)
 		len = read(fd, buf, BUFFER_SIZE);
 		if (len == -1)
 			return (ft_free(&save), ft_free(&ret), NULL);
-		if (len == 0)
-			break;
 		buf[len] = '\0';
 		if (len && ft_ln_in_buf(buf, &save, &ret))
 			break ;

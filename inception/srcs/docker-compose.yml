@@ -10,7 +10,7 @@ services:
     volumes:
       - db:/var/lib/mysql
     networks:
-      - inception
+      - docker-network
     restart: on-failure
 
   wordpress:
@@ -22,7 +22,7 @@ services:
     volumes:
       - wp:/var/www/html
     networks:
-      - inception
+      - docker-network
     restart: on-failure
     depends_on:
       - mariadb
@@ -36,7 +36,7 @@ services:
     env_file:
       - .env
     networks:
-      - inception
+      - docker-network
     volumes:
       - wp:/var/www/html
     restart: on-failure
@@ -44,7 +44,7 @@ services:
       - wordpress
 
 networks:
-  inception:
+  docker-network:
 
 volumes:
   wp:

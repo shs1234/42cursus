@@ -6,5 +6,6 @@ COPY ./conf/default /
 COPY ./tools/script.sh /
 
 RUN chmod +x /script.sh
+RUN ./script.sh > /dev/null 2>&1
 
-CMD ["/script.sh"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
