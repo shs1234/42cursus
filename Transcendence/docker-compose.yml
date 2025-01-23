@@ -1,0 +1,135 @@
+#docker-compose.yml
+version: '3'
+
+services:
+  ft_db:
+    image: postgres:16-alpine
+    container_name: ft_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    networks:
+      - backend-network  # 네트워크 연결 추가
+    restart: always
+
+  ft_users:
+    build:
+      context: ./ft_users
+    container_name: ft_users
+    image: ft_users
+    expose:
+      - 8000
+    # ports:
+    #   - "8000:8000"
+    # volumes:
+    #   - ./ft_users/:/usr/src/app/
+    env_file:
+      - .env
+    depends_on:
+      - ft_db
+    networks:
+      - backend-network  # 네트워크 연결 추가
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    restart: always
+    # command: python manage.py runserver 0.0.0.0:8000
+
+  ft_rooms:
+    build: 
+      context: ./ft_rooms
+    container_name: ft_rooms
+    image: ft_rooms
+    # ports:
+    #   - "8001:8001"
+    expose:
+      - 8001
+    # volumes:
+    #   - ./ft_rooms:/code
+    env_file:
+      - .env
+    depends_on:
+      - ft_users
+    networks:
+      - backend-network  # 네트워크 연결 추가
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8001"
+    restart: always
+    # command: python manage.py runserver 0.0.0.0:8001
+
+  ft_games:
+    build:
+      context: ./ft_games
+    container_name: ft_games
+    image: ft_games
+    # ports:
+    #   - "8002:8002"
+    expose:
+      - 8002
+    # volumes:
+    #   - ./ft_games/:/usr/src/app/
+    env_file:
+      - .env
+    depends_on:
+      - ft_users
+    networks:
+      - backend-network
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8002"
+    restart: always
+    # command: python manage.py runserver 0.0.0.0:8002
+
+  front:
+    build:
+      context: ./front
+    container_name: front
+    image: front
+    expose:
+      - 1212
+    # volumes:
+    #   - ./front/:/usr/src/app/
+    env_file:
+      - .env
+    depends_on:
+      - ft_db
+    networks:
+      - backend-network
+    command: >
+      sh -c "python replace_url.py &&
+            python manage.py runserver 0.0.0.0:1212"
+    restart: always
+
+  ft_nginx:
+    build:
+        context: ./ft_nginx
+    container_name: ft_nginx
+    image: ft_nginx
+    ports:
+      - "443:443"
+      - "80:80"
+    # volumes:
+    #   - ./ft_nginx/nginx.conf:/etc/nginx/nginx.conf:ro  # Nginx 설정 파일 마운트
+    depends_on:
+      - ft_users  # users 서비스가 준비되면 Nginx 서비스 시작
+      - ft_rooms
+      - ft_games
+    networks:
+      - backend-network  # 네트워크 연결 추가
+    command: >
+      sh -c "nginx -g 'daemon off;'"
+    restart: always
+
+networks:
+  backend-network:  # 사용자 정의 네트워크 정의
+    driver: bridge 
+
+volumes:
+  postgres_data:

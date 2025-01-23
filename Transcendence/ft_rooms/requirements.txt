@@ -1,0 +1,9 @@
+Django
+djangorestframework
+psycopg
+drf-yasg
+channels[daphne]
+PyJWT==2.9.0
+django-cors-headers
+pillow==10.4.0
+aiohttp
