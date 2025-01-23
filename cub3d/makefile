@@ -5,40 +5,41 @@
 #                                                     +:+ +:+         +:+      #
 #    By: hoseoson <hoseoson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/18 00:56:33 by hoseoson          #+#    #+#              #
-#    Updated: 2023/09/23 16:25:55 by hoseoson         ###   ########.fr        #
+#    Created: 2023/10/05 23:12:02 by hoseoson          #+#    #+#              #
+#    Updated: 2023/10/06 00:22:54 by hoseoson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME        = cup3d
-CFLAGS      = -Wall -Wextra -Werror
-RM          = rm -rf
-FRAMEWORK	= -framework OpenGL -framework AppKit
+NAME		=	cub3D
+RM			=	rm -rf
+CFLAGS		=	-Wall -Wextra -Werror
+LIB			= 	./libft/libft.a libmlx.dylib
+FRAMEWORK	=	-framework OpenGL -framework AppKit
+INCLUDES 	=	-Iincludes -Ilibft/header -Iminilibx_mms
 
-SRC_DIR 	= 	srcs
-OBJ_DIR 	= 	objs
-SRCS 		= 	$(wildcard $(SRC_DIR)/*.c)
-OBJS 		= 	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
-HEADER      =   $(SRC_DIR)/cup3d.h
+SOURCES		=	srcs/main.c \
+				srcs/exec/move.c srcs/exec/raycasting.c srcs/exec/rotate.c \
+				srcs/exec/run.c srcs/exec/util.c \
+				srcs/parse/checker.c srcs/parse/error.c srcs/parse/parse.c \
+				srcs/parse/setter_id.c srcs/parse/setter_map.c srcs/parse/util.c
+OBJECTS 	=	$(SOURCES:.c=.o)
+HEADERS		=	includes/cub3d.h
 
-all : $(OBJ_DIR) $(NAME)
+all : $(NAME)
 
-$(OBJ_DIR) :
-	mkdir -p $@
-
-$(NAME) : $(OBJ_DIR)
+$(NAME): $(OBJECTS)
 	$(MAKE) -C libft
-	$(MAKE) -C minilibx_mms_20200219
-	mv ./minilibx_mms_20200219/libmlx.dylib ./
-	$(CC) $(CFLAGS) -o $@ $^ ./libft/libft.a libmlx.dylib $(FRAMEWORK)
+	$(MAKE) -C minilibx_mms
+	mv ./minilibx_mms/libmlx.dylib ./
+	$(CC) $(CFLAGS) $(LIB) $(INCLUDES) -o $@ $^
 
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o : %.c $(HEADERS)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean : 
 	$(MAKE) -C libft $@
-	$(MAKE) -C minilibx_mac $@
-	$(RM) $(OBJS) $(OBJS_B)
+	$(MAKE) -C minilibx_mms $@
+	$(RM) $(OBJECTS)
 
 fclean : clean
 	$(MAKE) -C libft $@
