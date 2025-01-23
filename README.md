@@ -8,21 +8,21 @@
 ---
 
 ### 2. **42 Core Curriculum**
-- [**Libft**](./Libft): C 표준 라이브러리 함수들을 직접 구현.
-- [**Get Next Line**](./Get_Next_Line): 파일 읽기 관련 함수를 구현하여 한 줄씩 읽어들이는 기능 개발.
-- [**Printf**](./Printf): `printf` 함수의 동작을 모방한 함수 구현.
-- [**Born2BeRoot**](./Born2BeRoot): 가상 머신을 활용하여 서버 구성 및 시스템 관리 학습.
-- [**Pipex**](./Pipex): 리눅스의 파이프(`|`)와 리다이렉션(`>`, `<`) 기능을 구현.
-- [**So_long**](./So_long): 2D 게임 개발(맵 파일 파싱, 플레이어 이동 등).
-- [**Push_swap**](./Push_swap): 두 개의 스택을 이용해 정렬 알고리즘 구현.
-- [**Philosophers**](./Philosophers): 멀티스레딩과 동기화 문제(철학자 문제) 해결.
-- [**CPP**](./CPP): C++ 언어를 통한 객체 지향 프로그래밍 관련 과제.
-- [**Cub3D**](./Cub3D): 간단한 3D 렌더링 엔진 개발.
-- [**NetPractice**](./Net_Practice): 네트워크 프로토콜과 IP 라우팅 이해.
-- [**Minishell**](./Minishell): 간단한 쉘 환경 개발(명령 실행, 환경 변수 관리 등).
-- [**IRC**](./IRC): 인터넷 릴레이 채팅(IRC) 서버 구현.
-- [**Inception**](./Inception): Docker를 활용한 컨테이너 오케스트레이션 및 애플리케이션 배포.
-- [**Transcendence**](./Transcendence): 풀스택 웹 애플리케이션 제작(로그인, 실시간 게임 등).
+- [**Libft**](./libft): C 표준 라이브러리 함수들을 직접 구현.
+- [**Get Next Line**](./get_next_line): 파일 읽기 관련 함수를 구현하여 한 줄씩 읽어들이는 기능 개발.
+- [**Printf**](./printf): `printf` 함수의 동작을 모방한 함수 구현.
+- [**Born2BeRoot**](./born2beroot): 가상 머신을 활용하여 서버 구성 및 시스템 관리 학습.
+- [**Pipex**](./pipex): 리눅스의 파이프(`|`)와 리다이렉션(`>`, `<`) 기능을 구현.
+- [**So_long**](./so_long): 2D 게임 개발(맵 파일 파싱, 플레이어 이동 등).
+- [**Push_swap**](./push_swap): 두 개의 스택을 이용해 정렬 알고리즘 구현.
+- [**Philosophers**](./philosophers): 멀티스레딩과 동기화 문제(철학자 문제) 해결.
+- [**CPP**](./cpp): C++ 언어를 통한 객체 지향 프로그래밍 관련 과제.
+- [**Cub3D**](./cub3D): 간단한 3D 렌더링 엔진 개발.
+- [**NetPractice**](./net_practice): 네트워크 프로토콜과 IP 라우팅 이해.
+- [**Minishell**](./minishell): 간단한 쉘 환경 개발(명령 실행, 환경 변수 관리 등).
+- [**IRC**](./irc): 인터넷 릴레이 채팅(IRC) 서버 구현.
+- [**Inception**](./inception): Docker를 활용한 컨테이너 오케스트레이션 및 애플리케이션 배포.
+- [**Transcendence**](./transcendence): 풀스택 웹 애플리케이션 제작(로그인, 실시간 게임 등).
 
 ---
 
